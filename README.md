@@ -10,9 +10,10 @@ Gaia is an iOS application that acts as a catalogue of wildlife. Using the Clari
 * Setup the camera capture view enabling user to snap photos of subjects, this can be accessed from the landing view
 * Create view for users' catalogue of taken images, this would be the landing view
 * Create view for users' score
-* Create view for geographic tracking of photo locations, displayed on a map view
+
 
 ### Optional Features
 * Custom API training for the network to better identify the animals
 * Crowdsource the tag training for more accurate selection
-* Scoreboard for tracking other users 
+* Scoreboard for tracking other users
+* Create view for geographic tracking of photo locations, displayed on a map view
