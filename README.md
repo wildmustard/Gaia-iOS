@@ -21,4 +21,12 @@ Gaia is an iOS application that acts as a catalogue of wildlife. Using the custo
 
 ### API Endpoints Used
 * [The Unofficial Wikipedia API](http://www.programmableweb.com/api/wikipedia)
+* [Google Maps API](https://developers.google.com/maps/)
+
+### External Libraries Used
+* [CameraManager Cocoapod](https://cocoapods.org/pods/CameraManager)
+
+### Resources
+* [CodePath Guide To Creating Custom Camera View](http://guides.codepath.com/ios/Creating-a-Custom-Camera-View)
+
 
