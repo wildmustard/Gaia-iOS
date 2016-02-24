@@ -20,5 +20,5 @@ Gaia is an iOS application that acts as a catalogue of wildlife. Using the custo
 * Create view for geographic tracking of photo locations, displayed on a map view
 
 ### API Endpoints Used
-* ![The Unofficial Wikipedia API](http://www.programmableweb.com/api/wikipedia)`
+* [The Unofficial Wikipedia API](http://www.programmableweb.com/api/wikipedia)
 
