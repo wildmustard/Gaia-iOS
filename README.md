@@ -12,12 +12,30 @@ Gaia is an iOS application that acts as a catalogue of wildlife. Using the custo
 * Create view for users' score, this would be a pulldown from the landing view
 * Create view for handling the post image capture event, which appears once the user takes an image using the capture button on the landing view
 
-
 ### Optional Features
 * Custom API training for the network to better identify the animals
 * Crowdsource the tag training for more accurate selection
 * Scoreboard for tracking other users
 * Create view for geographic tracking of photo locations, displayed on a map view
+
+### Database Models
+We will be using Parse for our database server, using hosting from MongoLab.
+
+__Database Structure__
+* User Table
+  * Username
+  * Email
+  * Password
+  * Total Score from Captured Entries
+* Entry Table
+  * Google Coordinates of Capture
+  * Image Link
+  * Species (FK to Animal.Species)
+  * Extinction Status
+  * Score For Entry
+* Animal Table
+  * Species
+  * Extinction Status
 
 ### API Endpoints Used
 * [The Unofficial Wikipedia API](http://www.programmableweb.com/api/wikipedia)
