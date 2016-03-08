@@ -46,5 +46,6 @@ __Database Structure__
 
 ### Resources
 * [CodePath Guide To Creating Custom Camera View](http://guides.codepath.com/ios/Creating-a-Custom-Camera-View)
+* [Swift Swipe View for Home Screen](https://github.com/lbrendanl/SwiftSwipeView)
 
 
