@@ -9,13 +9,15 @@ Gaia is an iOS application that acts as a catalogue of wildlife. Using the custo
 * Setup the neural network API to communicate with Gaia and classify images
 * Setup the camera capture view enabling user to snap photos of subjects, this acts as the landing view for the application
 * Create view for users' catalogue of taken images, this would be accessed from the landing view
-* Create view for users' score, this would be a pulldown from the landing view
 * Create view for handling the post image capture event, which appears once the user takes an image using the capture button on the landing view
 
 ### Optional Features
+* Create view for users' score, this would be a pulldown from the landing view
+* Log In & Sign Up Screens for tracking unique users
+* Users can import images from their own camera roll into Gaia
 * Custom API training for the network to better identify the animals
 * Crowdsource the tag training for more accurate selection
-* Scoreboard for tracking other users
+* Leaderboard for tracking other users scores based on logged in username
 * Create view for geographic tracking of photo locations, displayed on a map view
 
 ### Database Models
@@ -33,9 +35,7 @@ __Database Structure__
   * Species (FK to Animal.Species)
   * Extinction Status
   * Score For Entry
-* Animal Table
-  * Species
-  * Extinction Status
+  * Attached User (FK to User.Username)
 
 ### API Endpoints Used
 * [The Unofficial Wikipedia API](http://www.programmableweb.com/api/wikipedia)
