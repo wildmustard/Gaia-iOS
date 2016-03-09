@@ -47,7 +47,16 @@ class ContainerViewController: UIViewController {
         let scrollWidth :CGFloat = 3 * self.view.frame.width
         let scrollHeight : CGFloat = self.view.frame.size.width
         self.scrollView!.contentSize = CGSizeMake(scrollWidth, scrollHeight)
+
+    }
+    
+    
+    override func viewWillAppear(animated: Bool) {
         
+        // Setup origin for container view to appear on the Home View
+        var frame :CGRect = scrollView.frame
+        frame.origin.x = frame.size.width
+        scrollView.scrollRectToVisible(frame, animated: false)
         
     }
 
