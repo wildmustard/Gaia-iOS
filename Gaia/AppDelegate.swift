@@ -7,15 +7,27 @@
 //
 
 import UIKit
+import Parse
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+    
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        Parse.initializeWithConfiguration(
+            ParseClientConfiguration(block: { (configuration:ParseMutableClientConfiguration) -> Void in
+                configuration.applicationId = "Gaia-iOS"
+                configuration.clientKey = "aSGdoijavm[oaiejtno[qijD-98135812oiijadoij2309uklwjadfj:;DLKJFSOi"
+                configuration.server = "https://stark-falls-28866.herokuapp.com/parse"
+            })
+        )
+        
+        
         return true
     }
 
