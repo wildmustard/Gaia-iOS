@@ -12,6 +12,7 @@ import AVFoundation
 class HomeViewController: UIViewController {
     
     //Outlet for camera preview
+    @IBOutlet weak var takePictureButton: UIButton!
     @IBOutlet weak var cameraView: UIView!
     
     var session: AVCaptureSession?
@@ -77,6 +78,11 @@ class HomeViewController: UIViewController {
                 videoPreviewLayer?.connection.videoOrientation = AVCaptureVideoOrientation.Portrait
                 cameraView.layer.addSublayer(videoPreviewLayer!)
                 
+                //Overlay button to eake picture on top of UIView
+                
+                cameraView?.layer.addSublayer(takePictureButton.layer)
+
+                
                 //Initiate session
                 session?.startRunning()
                 
@@ -84,7 +90,35 @@ class HomeViewController: UIViewController {
         }
       }
     
+    //Tap action to take a picture
+   
 
+        
+        
+    
+
+    @IBAction func onPictureTaken(sender: AnyObject) {
+        //Get the connection from the stillImageOutput
+        if let videoConnection = stillImageOutput?.connectionWithMediaType(AVMediaTypeVideo){
+            
+            stillImageOutput?.captureStillImageAsynchronouslyFromConnection(videoConnection, completionHandler: { (sampleBuffer, error) -> Void in
+                
+                
+                // process the image data found in sampleBuffer in order to end up with a UIImage
+                if sampleBuffer != nil{
+                    
+                    let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sampleBuffer)
+                    let dataProvider = CGDataProviderCreateWithCFData(imageData)
+                    let cgImageRef = CGImageCreateWithJPEGDataProvider(dataProvider, nil, true, CGColorRenderingIntent.RenderingIntentDefault)
+                    //Get an UIImage
+                     let image = UIImage(CGImage: cgImageRef!,scale: 1.0,orientation: UIImageOrientation.Right)
+                    
+                        NSLog("GOT IMAGE")
+                }
+            })
+        }
+
+    }
     /*
     // MARK: - Navigation
 
