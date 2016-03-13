@@ -49,4 +49,11 @@ __Database Structure__
 * [CodePath Guide To Creating Custom Camera View](http://guides.codepath.com/ios/Creating-a-Custom-Camera-View)
 * [Swift Swipe View for Home Screen](https://github.com/lbrendanl/SwiftSwipeView)
 
+* * *
+
+## Submission Checkpoints
+
+### Submission 1 (3/10/16) - 33% of User Stories
+![Gaia-iOS-Submission-1](https://cloud.githubusercontent.com/assets/6467543/13731804/127d51be-e949-11e5-9029-146e871b5b9b.gif)
+
 
