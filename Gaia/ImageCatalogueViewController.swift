@@ -49,12 +49,10 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
         navigationItem.title = "Title"
         
         // Create left and right button for navigation item
-        let leftButton =  UIBarButtonItem(title: "Save", style:   UIBarButtonItemStyle.Plain, target: self, action: "btn_clicked:")
-        let rightButton = UIBarButtonItem(title: "Right", style: UIBarButtonItemStyle.Plain, target: self, action: nil)
+        let leftButton =  UIBarButtonItem(title: "Map", style:   UIBarButtonItemStyle.Plain, target: self, action: "btn_clicked:")
         
         // Create two buttons for the navigation item
         navigationItem.leftBarButtonItem = leftButton
-        navigationItem.rightBarButtonItem = rightButton
         
         // Assign the navigation item to the navigation bar
         navigationBar.items = [navigationItem]
@@ -102,8 +100,11 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
         
         return cell!
     }
+    //Programatically created function to segue into MapViewController
     func btn_clicked(sender: UIBarButtonItem) {
         print("Button clicked")
+        presentViewController((MapViewController() as? UIViewController)!, animated: true, completion: nil)
+       // segueForUnwindingToViewController((MapViewController() as? UIViewController)!, fromViewController: self, identifier: "Map")
     }
 
 }
