@@ -12,6 +12,7 @@ Gaia is an iOS application that acts as a catalogue of wildlife. Using the custo
 - [ ] Create view for handling the post image capture event, which appears once the user takes an image using the capture button on the landing view
 
 ### Optional Features
+- [x] Create application icon and launchscreen assets
 - [ ] Create view for users' score, this would be a pulldown from the landing view
 - [ ] Log In & Sign Up Screens for tracking unique users
 - [ ] Users can import images from their own camera roll into Gaia
