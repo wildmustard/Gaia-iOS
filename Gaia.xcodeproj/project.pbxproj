@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0158D1EF1C952A6200CC3B88 /* CustomCellCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0158D1ED1C952A6200CC3B88 /* CustomCellCollectionViewCell.swift */; };
+		0158D1F01C952A6200CC3B88 /* CustomCellCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0158D1EE1C952A6200CC3B88 /* CustomCellCollectionViewCell.xib */; };
 		B07DF8671C62E20500DEA760 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07DF8661C62E20500DEA760 /* AppDelegate.swift */; };
 		B07DF86C1C62E20500DEA760 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B07DF86A1C62E20500DEA760 /* Main.storyboard */; };
 		B07DF86E1C62E20500DEA760 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B07DF86D1C62E20500DEA760 /* Assets.xcassets */; };
@@ -22,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0158D1ED1C952A6200CC3B88 /* CustomCellCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellCollectionViewCell.swift; sourceTree = "<group>"; };
+		0158D1EE1C952A6200CC3B88 /* CustomCellCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCellCollectionViewCell.xib; sourceTree = "<group>"; };
 		1AA8BCE1E8E6648420495AAF /* Pods-Gaia.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gaia.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Gaia/Pods-Gaia.debug.xcconfig"; sourceTree = "<group>"; };
 		1E6A5E7AB7382F82E8EEB1C9 /* Pods_Gaia.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gaia.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B07DF8631C62E20500DEA760 /* Gaia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gaia.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -133,6 +137,8 @@
 			children = (
 				FA5539401C8F9BC3005591A0 /* ImageCatalogueViewController.swift */,
 				FA5539411C8F9BC3005591A0 /* ImageCatalogueViewController.xib */,
+				0158D1ED1C952A6200CC3B88 /* CustomCellCollectionViewCell.swift */,
+				0158D1EE1C952A6200CC3B88 /* CustomCellCollectionViewCell.xib */,
 			);
 			name = "Image Catalogue";
 			sourceTree = "<group>";
@@ -213,6 +219,7 @@
 				B07DF86E1C62E20500DEA760 /* Assets.xcassets in Resources */,
 				FA5539431C8F9BC3005591A0 /* ImageCatalogueViewController.xib in Resources */,
 				B07DF86C1C62E20500DEA760 /* Main.storyboard in Resources */,
+				0158D1F01C952A6200CC3B88 /* CustomCellCollectionViewCell.xib in Resources */,
 				FA55393D1C8F9B00005591A0 /* HomeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -276,6 +283,7 @@
 				FA5539391C8F9A88005591A0 /* ContainerViewController.swift in Sources */,
 				FA5539471C8F9D1A005591A0 /* ScoreViewController.swift in Sources */,
 				B07DF8671C62E20500DEA760 /* AppDelegate.swift in Sources */,
+				0158D1EF1C952A6200CC3B88 /* CustomCellCollectionViewCell.swift in Sources */,
 				FA55393C1C8F9B00005591A0 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -394,7 +402,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Gaia/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jlh.Gaia;
+				PRODUCT_BUNDLE_IDENTIFIER = com.my.app.Gaia;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -409,7 +417,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Gaia/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jlh.Gaia;
+				PRODUCT_BUNDLE_IDENTIFIER = com.my.app.Gaia;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
