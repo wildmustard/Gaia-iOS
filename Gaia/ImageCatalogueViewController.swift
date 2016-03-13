@@ -36,6 +36,31 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
        
 
         // Do any additional setup after loading the view.
+        
+        // Create the navigation bar
+        let navigationBar = UINavigationBar(frame: CGRectMake(0, 0, self.view.frame.size.width, 47)) // Offset by 20 pixels vertically to take the status bar into account
+        
+        navigationBar.backgroundColor = UIColor.whiteColor()
+        //navigationBar.delegate = self;
+        navigationBar.translucent = true
+        
+        // Create a navigation item with a title
+        let navigationItem = UINavigationItem()
+        navigationItem.title = "Title"
+        
+        // Create left and right button for navigation item
+        let leftButton =  UIBarButtonItem(title: "Save", style:   UIBarButtonItemStyle.Plain, target: self, action: "btn_clicked:")
+        let rightButton = UIBarButtonItem(title: "Right", style: UIBarButtonItemStyle.Plain, target: self, action: nil)
+        
+        // Create two buttons for the navigation item
+        navigationItem.leftBarButtonItem = leftButton
+        navigationItem.rightBarButtonItem = rightButton
+        
+        // Assign the navigation item to the navigation bar
+        navigationBar.items = [navigationItem]
+        
+        // Make the navigation bar a subview of the current view controller
+        self.view.addSubview(navigationBar)
     }
 
     override func didReceiveMemoryWarning() {
@@ -77,7 +102,9 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
         
         return cell!
     }
-    
+    func btn_clicked(sender: UIBarButtonItem) {
+        print("Button clicked")
+    }
 
 }
 
