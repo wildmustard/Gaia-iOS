@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '31B6E6A1CC23BDA49F560807'
+               BlueprintIdentifier = '9CD24DF0313D118B278CF830'
                BlueprintName = 'Pods-Gaia'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Pods_Gaia.framework'>

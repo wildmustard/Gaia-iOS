@@ -1,0 +1,6 @@
+framework module DKCircleButton {
+  umbrella header "DKCircleButton-umbrella.h"
+
+  export *
+  module * { export * }
+}

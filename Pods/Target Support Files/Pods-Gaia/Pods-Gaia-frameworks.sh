@@ -84,10 +84,16 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "Pods-Gaia/AFNetworking.framework"
+  install_framework "Pods-Gaia/BDBOAuth1Manager.framework"
   install_framework "Pods-Gaia/Bolts.framework"
+  install_framework "Pods-Gaia/DKCircleButton.framework"
   install_framework "Pods-Gaia/Parse.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "Pods-Gaia/AFNetworking.framework"
+  install_framework "Pods-Gaia/BDBOAuth1Manager.framework"
   install_framework "Pods-Gaia/Bolts.framework"
+  install_framework "Pods-Gaia/DKCircleButton.framework"
   install_framework "Pods-Gaia/Parse.framework"
 fi
