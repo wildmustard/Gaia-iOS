@@ -8,7 +8,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="Gaia" customModuleProvider="target">
             <connections>
                 <outlet property="cameraView" destination="Hr0-kV-sjj" id="0Np-ea-3Nv"/>
-                <outlet property="takePictureButton" destination="UaJ-by-ZZ1" id="wzN-Dm-5n0"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,15 +18,6 @@
             <subviews>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hr0-kV-sjj">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="567"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UaJ-by-ZZ1">
-                            <rect key="frame" x="137" y="517" width="46" height="30"/>
-                            <state key="normal" title="Button"/>
-                            <connections>
-                                <action selector="onPictureTaken:" destination="-1" eventType="touchUpInside" id="Un0-fE-qHT"/>
-                            </connections>
-                        </button>
-                    </subviews>
                     <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                     <gestureRecognizers/>
                 </view>

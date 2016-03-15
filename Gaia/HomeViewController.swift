@@ -8,13 +8,14 @@
 
 import UIKit
 import AVFoundation
+import DKCircleButton
 
 class HomeViewController: UIViewController {
     
     //Outlet for camera preview
-    @IBOutlet weak var takePictureButton: UIButton!
     @IBOutlet weak var cameraView: UIView!
     
+    let cameraButton = DKCircleButton.init(type: .Custom)
     var session: AVCaptureSession?
     var stillImageOutput : AVCaptureStillImageOutput?
     var videoPreviewLayer : AVCaptureVideoPreviewLayer?
@@ -22,7 +23,15 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        // Setup Camera Button
+
+        cameraButton.frame = CGRectMake(160, 100, 75, 75)
+        cameraButton.center = CGPointMake(160, 510)
+        cameraButton.titleLabel!.font = UIFont.systemFontOfSize(16)
+        cameraButton.addTarget(self,  action: "onPictureTaken", forControlEvents: .TouchUpInside)
+        cameraButton.animateTap = false
+        self.view.addSubview(cameraButton)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -80,7 +89,7 @@ class HomeViewController: UIViewController {
                 
                 //Overlay button to eake picture on top of UIView
                 
-                cameraView?.layer.addSublayer(takePictureButton.layer)
+                cameraView?.layer.addSublayer(cameraButton.layer)
 
                 
                 //Initiate session
@@ -97,7 +106,7 @@ class HomeViewController: UIViewController {
         
     
 
-    @IBAction func onPictureTaken(sender: AnyObject) {
+    func onPictureTaken() {
         //Get the connection from the stillImageOutput
         if let videoConnection = stillImageOutput?.connectionWithMediaType(AVMediaTypeVideo){
             
