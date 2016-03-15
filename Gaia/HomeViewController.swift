@@ -12,6 +12,8 @@ import DKCircleButton
 
 class HomeViewController: UIViewController {
     
+    @IBOutlet weak var takenPicture: UIImageView!
+    @IBOutlet weak var pictureDisplayView: UIView!
     //Outlet for camera preview
     @IBOutlet weak var cameraView: UIView!
     
@@ -31,6 +33,10 @@ class HomeViewController: UIViewController {
         cameraButton.addTarget(self,  action: "onPictureTaken", forControlEvents: .TouchUpInside)
         cameraButton.animateTap = false
         self.view.addSubview(cameraButton)
+        
+        //Set up picture views
+        pictureDisplayView.hidden = true
+        takenPicture.hidden = true
         
     }
 
@@ -90,6 +96,10 @@ class HomeViewController: UIViewController {
                 //Overlay button to eake picture on top of UIView
                 
                 cameraView?.layer.addSublayer(cameraButton.layer)
+            cameraView.layer.addSublayer(takenPicture.layer)
+                
+                cameraView.layer.addSublayer(pictureDisplayView.layer)
+                
 
                 
                 //Initiate session
@@ -121,6 +131,12 @@ class HomeViewController: UIViewController {
                     let cgImageRef = CGImageCreateWithJPEGDataProvider(dataProvider, nil, true, CGColorRenderingIntent.RenderingIntentDefault)
                     //Get an UIImage
                      let image = UIImage(CGImage: cgImageRef!,scale: 1.0,orientation: UIImageOrientation.Right)
+                    //
+                    self.takenPicture.image = image
+                    self.takenPicture.hidden = false
+                    self.pictureDisplayView.alpha = 0.8
+                    self.pictureDisplayView.hidden = false
+                    
                     
                         NSLog("GOT IMAGE")
                 }
