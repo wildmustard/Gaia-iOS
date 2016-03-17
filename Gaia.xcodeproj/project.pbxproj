@@ -16,6 +16,7 @@
 		B07DF86E1C62E20500DEA760 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B07DF86D1C62E20500DEA760 /* Assets.xcassets */; };
 		B07DF8711C62E20500DEA760 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B07DF86F1C62E20500DEA760 /* LaunchScreen.storyboard */; };
 		BAB377A35FEE6106789F9B6B /* Pods_Gaia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E6A5E7AB7382F82E8EEB1C9 /* Pods_Gaia.framework */; };
+		FA1672421C9A810B00453432 /* CaptureMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1672411C9A810B00453432 /* CaptureMedia.swift */; };
 		FA5539391C8F9A88005591A0 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5539381C8F9A88005591A0 /* ContainerViewController.swift */; };
 		FA55393C1C8F9B00005591A0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA55393A1C8F9B00005591A0 /* HomeViewController.swift */; };
 		FA55393D1C8F9B00005591A0 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA55393B1C8F9B00005591A0 /* HomeViewController.xib */; };
@@ -38,6 +39,7 @@
 		B07DF86D1C62E20500DEA760 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B07DF8701C62E20500DEA760 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B07DF8721C62E20500DEA760 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA1672411C9A810B00453432 /* CaptureMedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureMedia.swift; sourceTree = "<group>"; };
 		FA5539381C8F9A88005591A0 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		FA55393A1C8F9B00005591A0 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		FA55393B1C8F9B00005591A0 /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 		B07DF8651C62E20500DEA760 /* Gaia */ = {
 			isa = PBXGroup;
 			children = (
+				FA1672431C9A811100453432 /* Models */,
 				FA5539371C8F9A4A005591A0 /* View Controllers */,
 				FA5539361C8F9A42005591A0 /* Views */,
 				B07DF8661C62E20500DEA760 /* AppDelegate.swift */,
@@ -116,6 +119,14 @@
 				FAE183AF83225F09FF8AC4F8 /* Pods-Gaia.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		FA1672431C9A811100453432 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FA1672411C9A810B00453432 /* CaptureMedia.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		FA5539361C8F9A42005591A0 /* Views */ = {
@@ -295,6 +306,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA5539421C8F9BC3005591A0 /* ImageCatalogueViewController.swift in Sources */,
+				FA1672421C9A810B00453432 /* CaptureMedia.swift in Sources */,
 				FA5539391C8F9A88005591A0 /* ContainerViewController.swift in Sources */,
 				FA5539471C8F9D1A005591A0 /* ScoreViewController.swift in Sources */,
 				B07DF8671C62E20500DEA760 /* AppDelegate.swift in Sources */,
