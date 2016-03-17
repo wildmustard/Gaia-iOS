@@ -17,6 +17,8 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var takenPicture: UIImageView!
     @IBOutlet weak var pictureOverlayView: UIView!
     @IBOutlet weak var cameraView: UIView!
+    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
     
     
     // Variables
