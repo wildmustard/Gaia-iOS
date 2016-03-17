@@ -17,6 +17,8 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var takenPicture: UIImageView!
     @IBOutlet weak var pictureOverlayView: UIView!
     @IBOutlet weak var cameraView: UIView!
+    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
     
     
     // Variables
@@ -24,6 +26,9 @@ class HomeViewController: UIViewController {
     var session: AVCaptureSession!
     var stillImageOutput : AVCaptureStillImageOutput!
     var videoPreviewLayer : AVCaptureVideoPreviewLayer!
+    
+    // CaptureMedia Object instance to submit to server
+    let capture = CaptureMedia()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,9 +45,8 @@ class HomeViewController: UIViewController {
         // Add button to the subview
         self.view.addSubview(cameraButton)
         
-        // Hide overlay and view for captured image unless there is a set image
-        pictureOverlayView.hidden = true
-        takenPicture.hidden = true
+        // Hide captured image controls and views until needed
+        turnOffCapturedImageControlSettings()
         
     }
 
@@ -116,7 +120,7 @@ class HomeViewController: UIViewController {
                 cameraView.layer.addSublayer(cameraButton.layer)
                 
                 //Initiate session
-                session!.startRunning()
+                session.startRunning()
                 
             }
             else {
@@ -131,14 +135,15 @@ class HomeViewController: UIViewController {
     //Tap action to take a picture
     func onPictureTaken() {
         //Get the connection from the stillImageOutput
-        if let videoConnection = stillImageOutput?.connectionWithMediaType(AVMediaTypeVideo){
+        if (stillImageOutput != nil) {
             
-            stillImageOutput?.captureStillImageAsynchronouslyFromConnection(videoConnection, completionHandler: { (sampleBuffer, error) -> Void in
+            let videoConnection = stillImageOutput.connectionWithMediaType(AVMediaTypeVideo)
+            stillImageOutput.captureStillImageAsynchronouslyFromConnection(videoConnection, completionHandler: { (sampleBuffer, error) -> Void in
                 
                 if (error != nil) {
                     
                     // Log Error
-                    NSLog("Could not get still image output: \(error!.localizedDescription)")
+                    NSLog("Could not capture still image output async from location: \(error!.localizedDescription)\n")
                     
                 }
                 else { // Process the image data found in sampleBuffer in order to end up with a UIImage
@@ -150,21 +155,141 @@ class HomeViewController: UIViewController {
                     //Get an UIImage
                     let image = UIImage(CGImage: cgImageRef!,scale: 1.0,orientation: UIImageOrientation.Right)
                     
-                    // Show the captured image on screen
+                    // Set the taken image property
                     self.takenPicture.image = image
-                    self.takenPicture.hidden = false
                     
-                    // Show the overlay on the image
-                    self.pictureOverlayView.alpha = 0.4
-                    self.pictureOverlayView.hidden = false
+                    // Enable controls for captured image
+                    self.turnOnCapturedImageControlSettings()
                     
                     // Log capture
                     NSLog("Successfully captured image\n")
+                    
                 }
             })
         }
+        else {
+            
+            // Log error
+            NSLog("Could not get still image output\n")
+            
+        }
 
     }
+    
+    
+    @IBAction func onSavePhoto(sender: AnyObject) {
+        
+        // Log action
+        NSLog("Save photo button pressed\n")
+        
+        // Disable buttons until ready
+        disableSaveCancelButtons()
+        
+        capture.postCapturedImage(takenPicture.image, withCompletion:
+            { (success: Bool, error: NSError?) -> Void in
+                
+                // Check if successful post of image to server
+                if let error = error {
+                
+                    // Log error
+                    NSLog("Error posting capture image content: \(error.localizedDescription)\n")
+                    
+                    // Alert user to post failure
+                    let alert = UIAlertController(title: "Error Uploading Image", message: "", preferredStyle: .Alert)
+                    let dismissAction = UIAlertAction(title: "OK", style: .Default) { (action) in }
+                    alert.addAction(dismissAction)
+                    self.presentViewController(alert, animated: true) {}
+                    
+                    // Turn back on save & cancel buttons, failure to post means user may want to keep image and try again after alerted to issue
+                    self.enableSaveCancelButtons()
+                    
+                }
+                else {
+                    
+                    // Log success post
+                    NSLog("Image capture successfully posted to parse server\n")
+                    
+                    // Turn off captured image controls & resume default state function
+                    self.turnOffCapturedImageControlSettings()
+                    
+                }
+            })
+        
+    }
+    
+    
+    @IBAction func onCancelPhoto(sender: AnyObject) {
+        
+        // Log action
+        NSLog("Cancel button pressed\n")
+        
+        // Turn off captured image controls
+        turnOffCapturedImageControlSettings()
+        
+    }
+    
+    // Turn on controls & views for captured image
+    func turnOnCapturedImageControlSettings() {
+        
+        // Show the captured image on screen
+        self.takenPicture.hidden = false
+        
+        // Show the overlay on the image
+        self.pictureOverlayView.alpha = 0.4
+        self.pictureOverlayView.hidden = false
+        
+        // Show save and cancel buttons
+        enableSaveCancelButtons()
+        self.saveButton.hidden = false
+        self.cancelButton.hidden = false
+
+        
+        // Disable video and capture button
+        self.cameraButton.enabled = false
+        
+        // Log control state
+        NSLog("Turned on image capture controls & views\n")
+    
+    }
+    
+    // Turn off controls & views for captured image
+    func turnOffCapturedImageControlSettings() {
+        
+        takenPicture.image = nil  // Clear image
+        takenPicture.hidden = true
+        
+        pictureOverlayView.hidden = true
+        
+        // Reset & hide views, save, cancel buttons
+        disableSaveCancelButtons()
+        cancelButton.hidden = true
+        saveButton.hidden = true
+        
+        // Enable & display camera button
+        cameraButton.enabled = true
+
+        // Log control state
+        NSLog("Turned off image capture controls & views\n")
+    
+    }
+    
+    
+    // Turn off cancel save buttons
+    func disableSaveCancelButtons() {
+        
+        saveButton.userInteractionEnabled = false
+        cancelButton.userInteractionEnabled = false
+        
+    }
+    
+    // Turn on cancel save buttons
+    func enableSaveCancelButtons() {
+        
+        self.saveButton.userInteractionEnabled = true
+        self.cancelButton.userInteractionEnabled = true
+        
+    }
+    
     /*
     // MARK: - Navigation
 
