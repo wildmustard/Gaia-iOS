@@ -12,30 +12,35 @@ import DKCircleButton
 
 class HomeViewController: UIViewController {
     
+    
+    // Outlets
     @IBOutlet weak var takenPicture: UIImageView!
     @IBOutlet weak var pictureOverlayView: UIView!
-    //Outlet for camera preview
     @IBOutlet weak var cameraView: UIView!
     
-    let cameraButton = DKCircleButton.init(type: .Custom)
-    var session: AVCaptureSession?
-    var stillImageOutput : AVCaptureStillImageOutput?
-    var videoPreviewLayer : AVCaptureVideoPreviewLayer?
+    
+    // Variables
+    let cameraButton = DKCircleButton.init(type: .Custom) // Capture Button for Camera using DK Pod
+    var session: AVCaptureSession!
+    var stillImageOutput : AVCaptureStillImageOutput!
+    var videoPreviewLayer : AVCaptureVideoPreviewLayer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Setup Camera Button
-
+        
+        // Setup Camera Button Size, Position, Label Font-Size, Turn off Animation of Press
         cameraButton.frame = CGRectMake(160, 100, 75, 75)
         cameraButton.center = CGPointMake(160, 510)
         cameraButton.titleLabel!.font = UIFont.systemFontOfSize(16)
-        cameraButton.addTarget(self,  action: "onPictureTaken", forControlEvents: .TouchUpInside)
         cameraButton.animateTap = false
-        cameraButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Setup the call action for camera capture
+        cameraButton.addTarget(self,  action: "onPictureTaken", forControlEvents: .TouchUpInside)
+        
+        // Add button to the subview
         self.view.addSubview(cameraButton)
         
-        //Set up picture views
+        // Hide overlay and view for captured image unless there is a set image
         pictureOverlayView.hidden = true
         takenPicture.hidden = true
         
@@ -50,82 +55,100 @@ class HomeViewController: UIViewController {
         super.viewDidAppear(animated)
         
         //Resize preview layer
-        videoPreviewLayer?.frame = cameraView.bounds
+        if videoPreviewLayer != nil {
+            videoPreviewLayer.frame = cameraView.bounds
+        }
+        
     }
     
     override func viewWillAppear(animated: Bool) {
+        
+
         super.viewWillAppear(animated)
         
+        // Setup Session Var for AVCapture
         session = AVCaptureSession()
-        session!.sessionPreset = AVCaptureSessionPresetHigh
-        var error: NSError?
+        session.sessionPreset = AVCaptureSessionPresetHigh
+        
+        // Instantiate vars for error and input
+        var inputError: NSError!
         var input: AVCaptureDeviceInput!
+        
         //Set capture device to be back camera
         let backCamera = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
         
         do{
-            //try to access back camera
+            //Try to access back camera
             input = try AVCaptureDeviceInput(device: backCamera)
             
-        }catch let error1 as NSError{
-            error = error1
+        } catch {
+            
+            // Catch Error & Nil Input
+            inputError = error as NSError
             input = nil
-            //print error code
-            print(error?.localizedDescription)
-            
+
+            // Log Error
+            NSLog("Could not start AVCapture: \(inputError.localizedDescription)\n")
         }
-        //if no error ocurred and there is an input device accesible add inbput to current session
-        if error == nil && session!.canAddInput(input) {
+        
+        // If no error occurred and there is an input device accessible, add input to current session
+        if (inputError == nil && session.canAddInput(input)) {
             
-            session?.addInput(input)
+            session.addInput(input)
             
             //Set output to be a jpeg
             stillImageOutput = AVCaptureStillImageOutput()
-            stillImageOutput?.outputSettings = [AVVideoCodecKey: AVVideoCodecJPEG]
+            stillImageOutput.outputSettings = [AVVideoCodecKey: AVVideoCodecJPEG]
             
             //If session accepts output
-            if session!.canAddOutput(stillImageOutput){
-                session!.addOutput(stillImageOutput)
+            if session.canAddOutput(stillImageOutput){
+
+                // Add still image to output
+                session.addOutput(stillImageOutput)
                 
                 //Set up video preview from camera into the view
                 videoPreviewLayer = AVCaptureVideoPreviewLayer(session: session)
-                videoPreviewLayer?.videoGravity = AVLayerVideoGravityResizeAspect
-                
-                videoPreviewLayer?.connection.videoOrientation = AVCaptureVideoOrientation.Portrait
-                cameraView.layer.addSublayer(videoPreviewLayer!)
+                videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspect
+                videoPreviewLayer.connection.videoOrientation = AVCaptureVideoOrientation.Portrait
+                cameraView.layer.addSublayer(videoPreviewLayer)
                 
                 //Overlay button to eake picture on top of UIView
-                cameraView!.layer.addSublayer(cameraButton.layer)
+                cameraView.layer.addSublayer(cameraButton.layer)
                 
                 //Initiate session
-                session?.startRunning()
+                session!.startRunning()
+                
+            }
+            else {
+                
+                // Log error for failure to output
+                NSLog("Cannot add output to session\n")
                 
             }
         }
       }
     
     //Tap action to take a picture
-   
-
-        
-        
-    
-
     func onPictureTaken() {
         //Get the connection from the stillImageOutput
         if let videoConnection = stillImageOutput?.connectionWithMediaType(AVMediaTypeVideo){
             
             stillImageOutput?.captureStillImageAsynchronouslyFromConnection(videoConnection, completionHandler: { (sampleBuffer, error) -> Void in
                 
-                
-                // process the image data found in sampleBuffer in order to end up with a UIImage
-                if sampleBuffer != nil{
+                if (error != nil) {
+                    
+                    // Log Error
+                    NSLog("Could not get still image output: \(error!.localizedDescription)")
+                    
+                }
+                else { // Process the image data found in sampleBuffer in order to end up with a UIImage
                     
                     let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sampleBuffer)
                     let dataProvider = CGDataProviderCreateWithCFData(imageData)
                     let cgImageRef = CGImageCreateWithJPEGDataProvider(dataProvider, nil, true, CGColorRenderingIntent.RenderingIntentDefault)
+                    
                     //Get an UIImage
-                     let image = UIImage(CGImage: cgImageRef!,scale: 1.0,orientation: UIImageOrientation.Right)
+                    let image = UIImage(CGImage: cgImageRef!,scale: 1.0,orientation: UIImageOrientation.Right)
                     
                     // Show the captured image on screen
                     self.takenPicture.image = image
@@ -135,7 +158,8 @@ class HomeViewController: UIViewController {
                     self.pictureOverlayView.alpha = 0.4
                     self.pictureOverlayView.hidden = false
                     
-                    NSLog("GOT IMAGE")
+                    // Log capture
+                    NSLog("Successfully captured image\n")
                 }
             })
         }
