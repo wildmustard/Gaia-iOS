@@ -13,7 +13,7 @@ import DKCircleButton
 class HomeViewController: UIViewController {
     
     @IBOutlet weak var takenPicture: UIImageView!
-    @IBOutlet weak var pictureDisplayView: UIView!
+    @IBOutlet weak var pictureOverlayView: UIView!
     //Outlet for camera preview
     @IBOutlet weak var cameraView: UIView!
     
@@ -32,10 +32,11 @@ class HomeViewController: UIViewController {
         cameraButton.titleLabel!.font = UIFont.systemFontOfSize(16)
         cameraButton.addTarget(self,  action: "onPictureTaken", forControlEvents: .TouchUpInside)
         cameraButton.animateTap = false
+        cameraButton.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(cameraButton)
         
         //Set up picture views
-        pictureDisplayView.hidden = true
+        pictureOverlayView.hidden = true
         takenPicture.hidden = true
         
     }
@@ -94,13 +95,7 @@ class HomeViewController: UIViewController {
                 cameraView.layer.addSublayer(videoPreviewLayer!)
                 
                 //Overlay button to eake picture on top of UIView
-                
-                cameraView?.layer.addSublayer(cameraButton.layer)
-            cameraView.layer.addSublayer(takenPicture.layer)
-                
-                cameraView.layer.addSublayer(pictureDisplayView.layer)
-                
-
+                cameraView!.layer.addSublayer(cameraButton.layer)
                 
                 //Initiate session
                 session?.startRunning()
@@ -131,14 +126,16 @@ class HomeViewController: UIViewController {
                     let cgImageRef = CGImageCreateWithJPEGDataProvider(dataProvider, nil, true, CGColorRenderingIntent.RenderingIntentDefault)
                     //Get an UIImage
                      let image = UIImage(CGImage: cgImageRef!,scale: 1.0,orientation: UIImageOrientation.Right)
-                    //
+                    
+                    // Show the captured image on screen
                     self.takenPicture.image = image
                     self.takenPicture.hidden = false
-                    self.pictureDisplayView.alpha = 0.8
-                    self.pictureDisplayView.hidden = false
                     
+                    // Show the overlay on the image
+                    self.pictureOverlayView.alpha = 0.4
+                    self.pictureOverlayView.hidden = false
                     
-                        NSLog("GOT IMAGE")
+                    NSLog("GOT IMAGE")
                 }
             })
         }

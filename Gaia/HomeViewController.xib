@@ -8,7 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="Gaia" customModuleProvider="target">
             <connections>
                 <outlet property="cameraView" destination="Hr0-kV-sjj" id="0Np-ea-3Nv"/>
-                <outlet property="pictureDisplayView" destination="Em3-HZ-Vgf" id="6Fj-vh-IAu"/>
+                <outlet property="pictureOverlayView" destination="Em3-HZ-Vgf" id="4OG-8i-vyi"/>
                 <outlet property="takenPicture" destination="RfR-IW-fLq" id="t1U-aI-dwC"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -20,19 +20,15 @@
             <subviews>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hr0-kV-sjj">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="567"/>
-                    <subviews>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Em3-HZ-Vgf">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="567"/>
-                            <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RfR-IW-fLq">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="567"/>
-                                </imageView>
-                            </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </view>
-                    </subviews>
                     <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                     <gestureRecognizers/>
+                </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RfR-IW-fLq">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                </imageView>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Em3-HZ-Vgf">
+                    <rect key="frame" x="0.0" y="18" width="320" height="63"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
