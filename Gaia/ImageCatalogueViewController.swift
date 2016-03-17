@@ -144,7 +144,12 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
                 else {
                     // Get image and set to cell's content
                     let image = UIImage(data: data!)
-                    cell?.cellImageView.image = image
+                    
+                    //let image = UIImage(CGImage: cgImageRef!,scale: 1.0,orientation: UIImageOrientation.Right)
+                    let portraitImage = UIImage(CGImage: (image?.CGImage)!,scale: 1.0,orientation: UIImageOrientation.Right)
+                    
+                    cell?.cellImageView.image = portraitImage
+                   // UIImage(CGImage: cgImageRef!,scale: 1.0,orientation: UIImageOrientation.Right)
                 }
             })
         }
