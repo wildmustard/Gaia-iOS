@@ -51,7 +51,7 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
         
         // Create a navigation item with a title
         let navigationItem = UINavigationItem()
-        navigationItem.title = "Title"
+        navigationItem.title = "Collected Wildlife"
         
         // Create left and right button for navigation item
         let leftButton =  UIBarButtonItem(title: "Map", style:   UIBarButtonItemStyle.Plain, target: self, action: "btn_clicked:")
