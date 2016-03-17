@@ -35,10 +35,16 @@
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cRY-YK-KMB">
                     <rect key="frame" x="7" y="530" width="48" height="30"/>
                     <state key="normal" title="Cancel"/>
+                    <connections>
+                        <action selector="onCancelPhoto:" destination="-1" eventType="touchUpInside" id="G0E-v9-NkL"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aOx-bA-IsI">
                     <rect key="frame" x="266" y="530" width="46" height="30"/>
                     <state key="normal" title="Save"/>
+                    <connections>
+                        <action selector="onSavePhoto:" destination="-1" eventType="touchUpInside" id="JZH-jK-VfU"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

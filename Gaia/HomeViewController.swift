@@ -46,6 +46,10 @@ class HomeViewController: UIViewController {
         pictureOverlayView.hidden = true
         takenPicture.hidden = true
         
+        // Hide buttons for save / cancel of image capture
+        saveButton.hidden = true
+        cancelButton.hidden = true
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -118,7 +122,7 @@ class HomeViewController: UIViewController {
                 cameraView.layer.addSublayer(cameraButton.layer)
                 
                 //Initiate session
-                session!.startRunning()
+                session.startRunning()
                 
             }
             else {
@@ -133,14 +137,15 @@ class HomeViewController: UIViewController {
     //Tap action to take a picture
     func onPictureTaken() {
         //Get the connection from the stillImageOutput
-        if let videoConnection = stillImageOutput?.connectionWithMediaType(AVMediaTypeVideo){
+        if (stillImageOutput != nil) {
             
-            stillImageOutput?.captureStillImageAsynchronouslyFromConnection(videoConnection, completionHandler: { (sampleBuffer, error) -> Void in
+            let videoConnection = stillImageOutput.connectionWithMediaType(AVMediaTypeVideo)
+            stillImageOutput.captureStillImageAsynchronouslyFromConnection(videoConnection, completionHandler: { (sampleBuffer, error) -> Void in
                 
                 if (error != nil) {
                     
                     // Log Error
-                    NSLog("Could not get still image output: \(error!.localizedDescription)")
+                    NSLog("Could not capture still image output async from location: \(error!.localizedDescription)\n")
                     
                 }
                 else { // Process the image data found in sampleBuffer in order to end up with a UIImage
@@ -152,21 +157,96 @@ class HomeViewController: UIViewController {
                     //Get an UIImage
                     let image = UIImage(CGImage: cgImageRef!,scale: 1.0,orientation: UIImageOrientation.Right)
                     
-                    // Show the captured image on screen
+                    // Set the taken image property
                     self.takenPicture.image = image
-                    self.takenPicture.hidden = false
                     
-                    // Show the overlay on the image
-                    self.pictureOverlayView.alpha = 0.4
-                    self.pictureOverlayView.hidden = false
+                    // Enable controls for captured image
+                    self.turnOnCapturedImageControlSettings()
                     
                     // Log capture
                     NSLog("Successfully captured image\n")
                 }
             })
         }
+        else {
+            
+            // Log error
+            NSLog("Could not get still image output\n")
+        }
 
     }
+    
+    
+    @IBAction func onSavePhoto(sender: AnyObject) {
+        
+        // Log action
+        NSLog("Save photo button pressed\n")
+        
+        // Turn off captured image controls
+        turnOffCapturedImageControlSettings()
+        
+    }
+    
+    
+    @IBAction func onCancelPhoto(sender: AnyObject) {
+        
+        // Log action
+        NSLog("Cancel button pressed\n")
+        
+        // Turn off captured image controls
+        turnOffCapturedImageControlSettings()
+        
+    }
+    
+    // Turn on controls & views for captured image
+    func turnOnCapturedImageControlSettings() {
+        
+        // Show the captured image on screen
+        self.takenPicture.hidden = false
+        
+        // Show the overlay on the image
+        self.pictureOverlayView.alpha = 0.4
+        self.pictureOverlayView.hidden = false
+        
+        // Show save and cancel buttons
+        self.saveButton.hidden = false
+        self.saveButton.enabled = true
+        self.cancelButton.hidden = false
+        self.cancelButton.enabled = true
+        
+        // Disable video and capture button
+        self.cameraButton.enabled = false
+        self.cameraButton.hidden = true
+        
+        // Log control state
+        NSLog("Turned on image capture controls & views\n")
+    
+    }
+    
+    // Turn off controls & views for captured image
+    func turnOffCapturedImageControlSettings() {
+        
+        // Enable & display camera button
+        cameraButton.enabled = true
+        cameraButton.hidden = false
+        
+        // Reset & hide views, save, cancel buttons
+        cancelButton.enabled = false
+        cancelButton.hidden = true
+        
+        saveButton.enabled = false
+        saveButton.hidden = true
+        
+        takenPicture.image = nil  // Clear image
+        takenPicture.hidden = true
+        
+        pictureOverlayView.hidden = true
+
+        // Log control state
+        NSLog("Turned off image capture controls & views\n")
+    
+    }
+    
     /*
     // MARK: - Navigation
 
