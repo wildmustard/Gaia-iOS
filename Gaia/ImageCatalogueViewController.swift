@@ -108,37 +108,33 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
     }
 
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        //#warning Incomplete method implementation -- Return the number of sections
-        return 1
-    }
-    
     //Number of pictures going to be displayed in catalogue
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-       //Returns Items in server
-        
-        if (media != nil) {
-            return media!.count
+
+        //Returns Items in server
+        if let media = media {
+            return media.count
         }
         else {
             return 0
         }
+        
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         // 3
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MyCell", forIndexPath: indexPath) as? CustomCellCollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MyCell", forIndexPath: indexPath) as! CustomCellCollectionViewCell
         
         // If the media content for this cell exists, set it
-        if (media?[indexPath.section]["image"] != nil) {
-            let imageFile = media?[indexPath.section]["image"] as! PFFile
+        if (media?[indexPath.row]["image"] != nil) {
+            let imageFile = media?[indexPath.row]["image"] as! PFFile
             imageFile.getDataInBackgroundWithBlock({ (data: NSData?, error: NSError?) ->
                 Void in
                 
                 // Failure to get image
                 if let error = error {
                     // Log Failure
-                    NSLog("Unable to get image data for table cell \(indexPath.section)\nError: \(error)")
+                    NSLog("Unable to get image data for table cell \(indexPath.row)\nError: \(error)")
                 }
                     // Success getting image
                 else {
@@ -148,14 +144,14 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
                     //let image = UIImage(CGImage: cgImageRef!,scale: 1.0,orientation: UIImageOrientation.Right)
                     let portraitImage = UIImage(CGImage: (image?.CGImage)!,scale: 1.0,orientation: UIImageOrientation.Right)
                     
-                    cell?.cellImageView.image = portraitImage
+                    cell.cellImageView.image = portraitImage
                    // UIImage(CGImage: cgImageRef!,scale: 1.0,orientation: UIImageOrientation.Right)
                 }
             })
         }
         
         
-        return cell!
+        return cell
     }
     func collectionView(collectionView: UICollectionView!,
         layout collectionViewLayout: UICollectionViewLayout!,
