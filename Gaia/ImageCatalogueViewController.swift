@@ -15,6 +15,7 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
     let sectionInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
     
     var media: [PFObject]?
+    var refreshControl: UIRefreshControl!
     
     
     @IBOutlet var CatalogueCollectionView: UICollectionView!
@@ -37,7 +38,11 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
         
         // self.CatalogueCollectionView.backgroundColor = UIColor(red: 1, green: 165/255, blue: 0, alpha: 1)
         
-        
+        // PullDown Refresh control setup
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "onRefresh", forControlEvents: UIControlEvents.ValueChanged)
+        CatalogueCollectionView.insertSubview(refreshControl, atIndex: 0)
+        CatalogueCollectionView.allowsMultipleSelection = false
         
         
         // Do any additional setup after loading the view.
@@ -172,6 +177,26 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
     func btn_clicked(sender: UIBarButtonItem) {
         print("Button clicked")
         presentViewController((MapViewController() as? UIViewController)!, animated: true, completion: nil)
+        
+    }
+    
+    // Set Our Delay
+    func delay(delay:Double, closure:()->()) {
+        dispatch_after(
+            dispatch_time(
+                DISPATCH_TIME_NOW,
+                Int64(delay * Double(NSEC_PER_SEC))
+            ),
+            dispatch_get_main_queue(), closure)
+    }
+    
+    // Call the PullDown Refresh on user gesture
+    func onRefresh() {
+        delay(2, closure: {
+            self.refreshControl.endRefreshing()
+        })
+        
+        callServerForUserMedia()
         
     }
     
