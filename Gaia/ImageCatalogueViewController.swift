@@ -87,6 +87,8 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
         // Setup a PFQuery object to handle collection of the user's images
         let query = PFQuery(className: "CaptureMedia")
         
+        query.orderByDescending("createdAt")
+
         
         query.findObjectsInBackgroundWithBlock { (media: [PFObject]?, error: NSError?) ->
             Void in
