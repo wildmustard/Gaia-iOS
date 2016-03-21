@@ -8,19 +8,21 @@
 
 import UIKit
 
-class ContainerViewController: UIViewController {
+class ContainerViewController: UIViewController, UIScrollViewDelegate {
 
     // Scroll View
     @IBOutlet weak var scrollView: UIScrollView!
     
+    
+    // Setup Views for Scroll View Container Swipe
+    let ScoreVC :ScoreViewController = ScoreViewController(nibName: "ScoreViewController", bundle: nil)
+    let CatalogueVC :ImageCatalogueViewController = ImageCatalogueViewController(nibName: "ImageCatalogueViewController", bundle: nil)
+    let HomeVC :HomeViewController = HomeViewController(nibName: "HomeViewController", bundle: nil)
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Setup Views for Scroll View Container Swipe
-        let ScoreVC :ScoreViewController = ScoreViewController(nibName: "ScoreViewController", bundle: nil)
-        let CatalogueVC :ImageCatalogueViewController = ImageCatalogueViewController(nibName: "ImageCatalogueViewController", bundle: nil)
-        let HomeVC :HomeViewController = HomeViewController(nibName: "HomeViewController", bundle: nil)
-
+        
         // Add Child Views to Container View Hierarchy
         self.addChildViewController(ScoreVC)
         self.scrollView!.addSubview(ScoreVC.view)
@@ -47,7 +49,26 @@ class ContainerViewController: UIViewController {
         let scrollWidth :CGFloat = 3 * self.view.frame.width
         let scrollHeight : CGFloat = self.view.frame.size.width
         self.scrollView!.contentSize = CGSizeMake(scrollWidth, scrollHeight)
+        
+        scrollView.delegate = self
+        
+    }
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        
+       let scrollContentOffset = scrollView.contentOffset
+        if(scrollContentOffset.x == 0){
+        
+            HomeVC.session.stopRunning()
+            print("Stopped running session")
+        }else if(scrollContentOffset.x == 322){
+            HomeVC.session.startRunning()
+            print("Session is running")
 
+        }
+        
+        
+        print(scrollContentOffset)
+        
     }
     
     
@@ -57,6 +78,7 @@ class ContainerViewController: UIViewController {
         var frame :CGRect = scrollView.frame
         frame.origin.x = frame.size.width
         scrollView.scrollRectToVisible(frame, animated: false)
+
         
     }
 

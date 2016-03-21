@@ -150,6 +150,8 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
                     let portraitImage = UIImage(CGImage: (image?.CGImage)!,scale: 1.0,orientation: UIImageOrientation.Right)
                     
                     cell.cellImageView.image = portraitImage
+                    
+                   
                    // UIImage(CGImage: cgImageRef!,scale: 1.0,orientation: UIImageOrientation.Right)
                 }
             })
