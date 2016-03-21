@@ -53,14 +53,14 @@ class ContainerViewController: UIViewController, UIScrollViewDelegate {
         scrollView.delegate = self
         
     }
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         
        let scrollContentOffset = scrollView.contentOffset
         if(scrollContentOffset.x == 0){
         
             HomeVC.session.stopRunning()
             print("Stopped running session")
-        }else if(scrollContentOffset.x == 322){
+        }else if(scrollContentOffset.x == 320 && HomeVC.session.isAccessibilityElement){
             HomeVC.session.startRunning()
             print("Session is running")
 
