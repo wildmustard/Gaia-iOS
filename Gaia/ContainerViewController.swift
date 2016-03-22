@@ -13,15 +13,16 @@ class ContainerViewController: UIViewController, UIScrollViewDelegate {
     // Scroll View
     @IBOutlet weak var scrollView: UIScrollView!
     
-    
     // Setup Views for Scroll View Container Swipe
     let ScoreVC :ScoreViewController = ScoreViewController(nibName: "ScoreViewController", bundle: nil)
     let CatalogueVC :ImageCatalogueViewController = ImageCatalogueViewController(nibName: "ImageCatalogueViewController", bundle: nil)
     let HomeVC :HomeViewController = HomeViewController(nibName: "HomeViewController", bundle: nil)
+    
+    // Variables
+    var sessionRunning = false // Flag test for the session running
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         // Add Child Views to Container View Hierarchy
         self.addChildViewController(ScoreVC)
@@ -50,24 +51,34 @@ class ContainerViewController: UIViewController, UIScrollViewDelegate {
         let scrollHeight : CGFloat = self.view.frame.size.width
         self.scrollView!.contentSize = CGSizeMake(scrollWidth, scrollHeight)
         
+        // Delegate control of the scrollview
         scrollView.delegate = self
+        
+        // Set session flag
+        sessionRunning = true
         
     }
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         
        let scrollContentOffset = scrollView.contentOffset
-        if(scrollContentOffset.x == 0){
         
+        if((sessionRunning && scrollContentOffset.x == 0) || (sessionRunning && scrollContentOffset.x == 640)) {
+            // View has left the homeview, stop the camera session
             HomeVC.session.stopRunning()
-            print("Stopped running session")
-        }else if(scrollContentOffset.x == 320 && HomeVC.session.isAccessibilityElement){
+            // Broadcast stop of camera
+            self.sessionRunning = false
+            NSLog("Stopped running session\n")
+        }
+        else if(!sessionRunning && scrollContentOffset.x == 320) {
+            // View has returned to homeview, start the camera session
             HomeVC.session.startRunning()
-            print("Session is running")
-
+            // Broadcast start of camera
+            self.sessionRunning = true
+            NSLog("Session is running\n")
         }
         
-        
-        print(scrollContentOffset)
+        // Log position of scrollview window at x
+        NSLog("\(scrollContentOffset)")
         
     }
     
