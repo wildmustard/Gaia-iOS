@@ -20,6 +20,7 @@ Gaia is an iOS application that acts as a catalogue of wildlife. Using the custo
 - [ ] Crowdsource the tag training for more accurate selection
 - [ ] Leaderboard for tracking other users scores based on logged in username
 - [ ] Create view for geographic tracking of photo locations, displayed on a map view
+- [ ] Allow users to delete images from their gallery of photos
 
 ### Database Models
 We will be using Parse for our database server, using hosting from MongoLab.
