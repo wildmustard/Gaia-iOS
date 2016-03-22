@@ -165,7 +165,31 @@ class HomeViewController: UIViewController {
                     // Set the taken image property
                     self.takenPicture.image = image
                     
-
+                    // Display progress wheel during POST to server
+                    
+                    // Send capture to AI server for identification
+                    self.capture.postImageToAI(self.takenPicture.image) { (success:Bool, error: NSError?) -> Void in
+                        
+                        // Check if successful post of image to server
+                        if let error = error {
+                            
+                            // Log error
+                            NSLog("Error posting capture image content: \(error.localizedDescription)\n")
+                            
+                            // Alert user to post failure
+                            let alert = UIAlertController(title: "Error Uploading Image to NeuralNet", message: "", preferredStyle: .Alert)
+                            let dismissAction = UIAlertAction(title: "OK", style: .Default) { (action) in }
+                            alert.addAction(dismissAction)
+                            self.presentViewController(alert, animated: true) {}
+                            
+                        }
+                        else {
+                            
+                            // Log success post
+                            NSLog("Image sent to AI server succesfully\n")
+                            
+                        }
+                    }
                     
                     // Enable controls for captured image
                     self.turnOnCapturedImageControlSettings()
@@ -196,40 +220,6 @@ class HomeViewController: UIViewController {
         
         // Disable buttons until ready
         disableSaveCancelButtons()
-        
-        
-        capture.postImageToAI(takenPicture.image) { (success:Bool, error: NSError?) -> Void in
-            
-            // Stop progressHUD after network task done
-            SVProgressHUD.dismiss()
-            
-            // Check if successful post of image to server
-            if let error = error {
-                
-                // Log error
-                NSLog("Error posting capture image content: \(error.localizedDescription)\n")
-                
-                
-                // Alert user to post failure
-                let alert = UIAlertController(title: "Error Uploading Image to NeuralNet", message: "", preferredStyle: .Alert)
-                let dismissAction = UIAlertAction(title: "OK", style: .Default) { (action) in }
-                alert.addAction(dismissAction)
-                self.presentViewController(alert, animated: true) {}
-                
-                
-            }else {
-                
-                // Log success post
-                NSLog("Image sent to AI server succesfully\n")
-                
-                
-            }
-        }
-
-        
-        
-    
-
         
         capture.postCapturedImage(takenPicture.image, withCompletion:
             { (success: Bool, error: NSError?) -> Void in
@@ -264,8 +254,6 @@ class HomeViewController: UIViewController {
                     
                 }
             })
-        
-        
         
     }
     

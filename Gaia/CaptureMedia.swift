@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import BDBOAuth1Manager
 
 // Class for the content of the captured image
 class CaptureMedia: NSObject {
@@ -26,27 +27,55 @@ class CaptureMedia: NSObject {
         capture.saveInBackgroundWithBlock(completion)
     }
     
-    
-    func postImageToAI(image: UIImage?, withCompletion completion: PFBooleanResultBlock?){
-    
-    
-        let imageNsData = UIImagePNGRepresentation(image!)
+    // Function to send the taken image to the AI for tag recognition
+    func postImageToAI(image: UIImage?, withCompletion completion: PFBooleanResultBlock?) {
         
-        let base64String = imageNsData!.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)
-        
-        let imageDic = ["image":base64String] as NSDictionary
-        
-        do {
-            let jsonData = try NSJSONSerialization.dataWithJSONObject(imageDic, options: NSJSONWritingOptions.PrettyPrinted)
+        // Test if image exists
+        if (image != nil) {
             
+            // Set image as png representation for 64bit encode
+            let imageNsData = UIImagePNGRepresentation(image!)
+            let base64String = imageNsData!.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)
             
+            // Create object for the base64 encode of the image to send to server
+            let imageDic = ["base64":base64String] as NSDictionary
             
-            // here "jsonData" is the dictionary encoded in JSON data
+            // Create jsonData
+            var jsonData: NSData!
             
-        } catch let error as NSError {
-            print(error)
-        }
-
+            do {
+            
+            // Create json data serialization of imageDic, output it as object notation w/ writing options
+            jsonData = try NSJSONSerialization.dataWithJSONObject(imageDic, options: NSJSONWritingOptions.PrettyPrinted)
+                
+            } catch let error as NSError? {
+                
+                // Log serialization error
+                NSLog("Failed to serialize jsonData\nError: \(error)")
+                
+            }
+            
+            // Post the jsonData from the imageDic to the server to be read
+//            POST("https://radiant-coast-25783.herokuapp.com/gaia/api/v1.0/imagePOST", parameters: jsonData, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
+//                    
+//                    // Log success of jsonData submission
+//                    NSLog("Successfully sent jsonData to server\n")
+//                    
+//                })
+//                // Error handling
+//                { (operation: NSURLSessionDataTask?, error: NSError) -> Void in
+//                
+//                    // Log failure for attempting to submit the jsonData
+//                    NSLog("Failed to send jsonData to server\nError: \(error)")
+//                
+//                }
+//            }
+//            else {
+//        
+//                // Log failure due to nil image
+//                NSLog("Failed to read image on attempt to postImageToAI\n")
+//            
+//            }
     
     }
     
