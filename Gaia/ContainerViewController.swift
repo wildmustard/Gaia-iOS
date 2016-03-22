@@ -57,8 +57,15 @@ class ContainerViewController: UIViewController, UIScrollViewDelegate {
         // Set session flag
         sessionRunning = true
         
+        //Check if a picture has been taken and lock scrollView
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "scrollViewDidScroll", name: userDidTakePictureNotification, object: nil)
+        
+        //Check if picture has been uploaded and unlock scrollView
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "scrollViewDidScroll", name: userUploadedImageNotification, object: nil)
+        
+        
     }
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         
        let scrollContentOffset = scrollView.contentOffset
         
@@ -81,6 +88,20 @@ class ContainerViewController: UIViewController, UIScrollViewDelegate {
         NSLog("\(scrollContentOffset)")
         
     }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if scrollView.contentOffset.x>0 {
+            scrollView.contentOffset.x = 0
+            scrollView.contentOffset.y = 0
+        }
+    }
+    
+    func unlockScrollView(){
+    
+    
+    }
+    
+    
     
     
     override func viewWillAppear(animated: Bool) {

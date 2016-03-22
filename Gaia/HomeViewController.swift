@@ -11,6 +11,10 @@ import AVFoundation
 import DKCircleButton
 import SVProgressHUD
 
+let userDidTakePictureNotification = "User Took Picture\n"
+let userUploadedImageNotification = "User Uploaded Picture\n"
+
+
 class HomeViewController: UIViewController {
     
     
@@ -30,6 +34,7 @@ class HomeViewController: UIViewController {
     
     // CaptureMedia Object instance to submit to server
     let capture = CaptureMedia()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -159,6 +164,8 @@ class HomeViewController: UIViewController {
                     
                     // Set the taken image property
                     self.takenPicture.image = image
+                    NSNotificationCenter.defaultCenter().postNotificationName(userDidTakePictureNotification, object: nil)
+
                     
                     // Enable controls for captured image
                     self.turnOnCapturedImageControlSettings()
@@ -217,6 +224,7 @@ class HomeViewController: UIViewController {
                     
                     // Log success post
                     NSLog("Image capture successfully posted to parse server\n")
+                    NSNotificationCenter.defaultCenter().postNotificationName(userUploadedImageNotification, object: nil)
                     
                     // Turn off captured image controls & resume default state function
                     self.turnOffCapturedImageControlSettings()
