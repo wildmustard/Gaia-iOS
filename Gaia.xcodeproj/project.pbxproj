@@ -24,6 +24,7 @@
 		FA5539431C8F9BC3005591A0 /* ImageCatalogueViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA5539411C8F9BC3005591A0 /* ImageCatalogueViewController.xib */; };
 		FA5539471C8F9D1A005591A0 /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5539451C8F9D1A005591A0 /* ScoreViewController.swift */; };
 		FA5539481C8F9D1A005591A0 /* ScoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA5539461C8F9D1A005591A0 /* ScoreViewController.xib */; };
+		FAB86A211CA2047C009347C8 /* ClarifaiClient.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB86A201CA2047C009347C8 /* ClarifaiClient.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,9 @@
 		FA5539411C8F9BC3005591A0 /* ImageCatalogueViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageCatalogueViewController.xib; sourceTree = "<group>"; };
 		FA5539451C8F9D1A005591A0 /* ScoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
 		FA5539461C8F9D1A005591A0 /* ScoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScoreViewController.xib; sourceTree = "<group>"; };
+		FAB86A1E1CA2047C009347C8 /* Gaia-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Gaia-Bridging-Header.h"; sourceTree = "<group>"; };
+		FAB86A1F1CA2047C009347C8 /* ClarifaiClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClarifaiClient.h; sourceTree = "<group>"; };
+		FAB86A201CA2047C009347C8 /* ClarifaiClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClarifaiClient.m; sourceTree = "<group>"; };
 		FAE183AF83225F09FF8AC4F8 /* Pods-Gaia.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gaia.release.xcconfig"; path = "Pods/Target Support Files/Pods-Gaia/Pods-Gaia.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,6 +96,7 @@
 		B07DF8651C62E20500DEA760 /* Gaia */ = {
 			isa = PBXGroup;
 			children = (
+				FAB86A1D1CA20467009347C8 /* Clarifai */,
 				FA1672431C9A811100453432 /* Models */,
 				FA5539371C8F9A4A005591A0 /* View Controllers */,
 				FA5539361C8F9A42005591A0 /* Views */,
@@ -177,6 +182,16 @@
 			name = Score;
 			sourceTree = "<group>";
 		};
+		FAB86A1D1CA20467009347C8 /* Clarifai */ = {
+			isa = PBXGroup;
+			children = (
+				FAB86A1F1CA2047C009347C8 /* ClarifaiClient.h */,
+				FAB86A201CA2047C009347C8 /* ClarifaiClient.m */,
+				FAB86A1E1CA2047C009347C8 /* Gaia-Bridging-Header.h */,
+			);
+			name = Clarifai;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -206,13 +221,13 @@
 		B07DF85B1C62E20500DEA760 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0720;
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "John Henning";
 				TargetAttributes = {
 					B07DF8621C62E20500DEA760 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 7Y4B7DLW5N;
+						DevelopmentTeam = 3R735PE73A;
 					};
 				};
 			};
@@ -309,6 +324,7 @@
 				FA1672421C9A810B00453432 /* CaptureMedia.swift in Sources */,
 				FA5539391C8F9A88005591A0 /* ContainerViewController.swift in Sources */,
 				FA5539471C8F9D1A005591A0 /* ScoreViewController.swift in Sources */,
+				FAB86A211CA2047C009347C8 /* ClarifaiClient.m in Sources */,
 				B07DF8671C62E20500DEA760 /* AppDelegate.swift in Sources */,
 				0158D1EF1C952A6200CC3B88 /* CustomCellCollectionViewCell.swift in Sources */,
 				FA55393C1C8F9B00005591A0 /* HomeViewController.swift in Sources */,
@@ -426,13 +442,16 @@
 			baseConfigurationReference = 1AA8BCE1E8E6648420495AAF /* Pods-Gaia.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Gaia/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.my.app.Gaia;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Alex.Gaia;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Gaia/Gaia-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -441,13 +460,15 @@
 			baseConfigurationReference = FAE183AF83225F09FF8AC4F8 /* Pods-Gaia.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Gaia/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.my.app.Gaia;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Alex.Gaia;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Gaia/Gaia-Bridging-Header.h";
 			};
 			name = Release;
 		};

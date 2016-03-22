@@ -8,7 +8,6 @@
 
 import UIKit
 import Parse
-import BDBOAuth1Manager
 
 // Class for the content of the captured image
 class CaptureMedia: NSObject {
@@ -77,6 +76,7 @@ class CaptureMedia: NSObject {
 //            
 //            }
     
+    }
     }
     
     func getPFFileUsingImage(image: UIImage?) -> PFFile? {
