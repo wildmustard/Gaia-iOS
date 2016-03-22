@@ -57,7 +57,13 @@ class ContainerViewController: UIViewController, UIScrollViewDelegate {
         // Set session flag
         sessionRunning = true
         
+        // Broadcast listeners checking is Homeview needs to cancel scrolling for a user capturing an image
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "lockScrollView", name: userCapturedImage, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "unlockScrollView", name: userReleasedImage, object: nil)
+        
+        
     }
+    
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         
        let scrollContentOffset = scrollView.contentOffset
@@ -82,6 +88,16 @@ class ContainerViewController: UIViewController, UIScrollViewDelegate {
         
     }
     
+    
+    // Disable scrolling
+    func lockScrollView() {
+        scrollView.scrollEnabled = false
+    }
+    
+    // Enable scrolling
+    func unlockScrollView() {
+        scrollView.scrollEnabled = true
+    }
     
     override func viewWillAppear(animated: Bool) {
         

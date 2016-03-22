@@ -11,6 +11,10 @@ import AVFoundation
 import DKCircleButton
 import SVProgressHUD
 
+let userCapturedImage = "User Captured Image\n"
+let userReleasedImage = "User Released Image\n"
+
+
 class HomeViewController: UIViewController {
     
     
@@ -30,6 +34,7 @@ class HomeViewController: UIViewController {
     
     // CaptureMedia Object instance to submit to server
     let capture = CaptureMedia()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -160,6 +165,8 @@ class HomeViewController: UIViewController {
                     // Set the taken image property
                     self.takenPicture.image = image
                     
+
+                    
                     // Enable controls for captured image
                     self.turnOnCapturedImageControlSettings()
                     
@@ -256,6 +263,8 @@ class HomeViewController: UIViewController {
         // Disable video and capture button
         self.cameraButton.enabled = false
         
+        NSNotificationCenter.defaultCenter().postNotificationName(userCapturedImage, object: nil)
+        
         // Log control state
         NSLog("Turned on image capture controls & views\n")
     
@@ -276,6 +285,8 @@ class HomeViewController: UIViewController {
         
         // Enable & display camera button
         cameraButton.enabled = true
+        
+        NSNotificationCenter.defaultCenter().postNotificationName(userReleasedImage, object: nil)
 
         // Log control state
         NSLog("Turned off image capture controls & views\n")
