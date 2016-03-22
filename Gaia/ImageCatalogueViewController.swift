@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import SVProgressHUD
 
 class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
     
@@ -186,20 +187,31 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
     
     // Set Our Delay
     func delay(delay:Double, closure:()->()) {
+        
         dispatch_after(
             dispatch_time(
                 DISPATCH_TIME_NOW,
                 Int64(delay * Double(NSEC_PER_SEC))
             ),
             dispatch_get_main_queue(), closure)
+        
     }
     
     // Call the PullDown Refresh on user gesture
     func onRefresh() {
+        
+        // Start SVProgressHUD
+        SVProgressHUD.show()
+        
+        // Timer for refresh to be shown
         delay(2, closure: {
             self.refreshControl.endRefreshing()
+            
+            // Dismiss SVProgressHUD
+            SVProgressHUD.dismiss()
         })
         
+        // Call server for content
         callServerForUserMedia()
         
     }
