@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 import DKCircleButton
+import SVProgressHUD
 
 class HomeViewController: UIViewController {
     
@@ -183,17 +184,24 @@ class HomeViewController: UIViewController {
         // Log action
         NSLog("Save photo button pressed\n")
         
+        //Start progressHUD
+        SVProgressHUD.show()
+        
         // Disable buttons until ready
         disableSaveCancelButtons()
         
         capture.postCapturedImage(takenPicture.image, withCompletion:
             { (success: Bool, error: NSError?) -> Void in
                 
+                // Stop progressHUD after network task done
+                SVProgressHUD.dismiss()
+                
                 // Check if successful post of image to server
                 if let error = error {
                 
                     // Log error
                     NSLog("Error posting capture image content: \(error.localizedDescription)\n")
+            
                     
                     // Alert user to post failure
                     let alert = UIAlertController(title: "Error Uploading Image", message: "", preferredStyle: .Alert)

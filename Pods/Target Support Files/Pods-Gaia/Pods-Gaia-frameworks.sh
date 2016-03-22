@@ -89,6 +89,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-Gaia/Bolts.framework"
   install_framework "Pods-Gaia/DKCircleButton.framework"
   install_framework "Pods-Gaia/Parse.framework"
+  install_framework "Pods-Gaia/SVProgressHUD.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-Gaia/AFNetworking.framework"
@@ -96,4 +97,5 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-Gaia/Bolts.framework"
   install_framework "Pods-Gaia/DKCircleButton.framework"
   install_framework "Pods-Gaia/Parse.framework"
+  install_framework "Pods-Gaia/SVProgressHUD.framework"
 fi
