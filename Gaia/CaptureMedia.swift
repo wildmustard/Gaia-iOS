@@ -26,6 +26,30 @@ class CaptureMedia: NSObject {
         capture.saveInBackgroundWithBlock(completion)
     }
     
+    
+    func postImageToAI(image: UIImage?, withCompletion completion: PFBooleanResultBlock?){
+    
+    
+        let imageNsData = UIImagePNGRepresentation(image!)
+        
+        let base64String = imageNsData!.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)
+        
+        let imageDic = ["image":base64String] as NSDictionary
+        
+        do {
+            let jsonData = try NSJSONSerialization.dataWithJSONObject(imageDic, options: NSJSONWritingOptions.PrettyPrinted)
+            
+            
+            
+            // here "jsonData" is the dictionary encoded in JSON data
+            
+        } catch let error as NSError {
+            print(error)
+        }
+
+    
+    }
+    
     func getPFFileUsingImage(image: UIImage?) -> PFFile? {
         
         // If image content exists
