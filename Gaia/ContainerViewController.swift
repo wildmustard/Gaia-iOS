@@ -8,19 +8,22 @@
 
 import UIKit
 
-class ContainerViewController: UIViewController {
+class ContainerViewController: UIViewController, UIScrollViewDelegate {
 
     // Scroll View
     @IBOutlet weak var scrollView: UIScrollView!
     
+    // Setup Views for Scroll View Container Swipe
+    let ScoreVC :ScoreViewController = ScoreViewController(nibName: "ScoreViewController", bundle: nil)
+    let CatalogueVC :ImageCatalogueViewController = ImageCatalogueViewController(nibName: "ImageCatalogueViewController", bundle: nil)
+    let HomeVC :HomeViewController = HomeViewController(nibName: "HomeViewController", bundle: nil)
+    
+    // Variables
+    var sessionRunning = false // Flag test for the session running
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Setup Views for Scroll View Container Swipe
-        let ScoreVC :ScoreViewController = ScoreViewController(nibName: "ScoreViewController", bundle: nil)
-        let CatalogueVC :ImageCatalogueViewController = ImageCatalogueViewController(nibName: "ImageCatalogueViewController", bundle: nil)
-        let HomeVC :HomeViewController = HomeViewController(nibName: "HomeViewController", bundle: nil)
-
         // Add Child Views to Container View Hierarchy
         self.addChildViewController(ScoreVC)
         self.scrollView!.addSubview(ScoreVC.view)
@@ -47,7 +50,36 @@ class ContainerViewController: UIViewController {
         let scrollWidth :CGFloat = 3 * self.view.frame.width
         let scrollHeight : CGFloat = self.view.frame.size.width
         self.scrollView!.contentSize = CGSizeMake(scrollWidth, scrollHeight)
-
+        
+        // Delegate control of the scrollview
+        scrollView.delegate = self
+        
+        // Set session flag
+        sessionRunning = true
+        
+    }
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        
+       let scrollContentOffset = scrollView.contentOffset
+        
+        if((sessionRunning && scrollContentOffset.x == 0) || (sessionRunning && scrollContentOffset.x == 640)) {
+            // View has left the homeview, stop the camera session
+            HomeVC.session.stopRunning()
+            // Broadcast stop of camera
+            self.sessionRunning = false
+            NSLog("Stopped running session\n")
+        }
+        else if(!sessionRunning && scrollContentOffset.x == 320) {
+            // View has returned to homeview, start the camera session
+            HomeVC.session.startRunning()
+            // Broadcast start of camera
+            self.sessionRunning = true
+            NSLog("Session is running\n")
+        }
+        
+        // Log position of scrollview window at x
+        NSLog("\(scrollContentOffset)")
+        
     }
     
     
@@ -57,6 +89,7 @@ class ContainerViewController: UIViewController {
         var frame :CGRect = scrollView.frame
         frame.origin.x = frame.size.width
         scrollView.scrollRectToVisible(frame, animated: false)
+
         
     }
 

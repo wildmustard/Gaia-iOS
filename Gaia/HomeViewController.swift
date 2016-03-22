@@ -121,6 +121,7 @@ class HomeViewController: UIViewController {
                 
                 //Initiate session
                 session.startRunning()
+            
                 
             }
             else {
