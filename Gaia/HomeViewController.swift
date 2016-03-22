@@ -164,7 +164,7 @@ class HomeViewController: UIViewController {
                     
                     // Set the taken image property
                     self.takenPicture.image = image
-                    NSNotificationCenter.defaultCenter().postNotificationName(userDidTakePictureNotification, object: nil)
+                    
 
                     
                     // Enable controls for captured image
@@ -247,6 +247,8 @@ class HomeViewController: UIViewController {
     
     // Turn on controls & views for captured image
     func turnOnCapturedImageControlSettings() {
+        
+        NSNotificationCenter.defaultCenter().postNotificationName(userDidTakePictureNotification, object: nil)
         
         // Show the captured image on screen
         self.takenPicture.hidden = false

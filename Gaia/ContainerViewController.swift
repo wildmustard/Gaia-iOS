@@ -91,8 +91,8 @@ class ContainerViewController: UIViewController, UIScrollViewDelegate {
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if scrollView.contentOffset.x>0 {
-            scrollView.contentOffset.x = 0
-            scrollView.contentOffset.y = 0
+            scrollView.contentOffset.x = 320
+            scrollView.contentOffset.y = 320
         }
     }
     
