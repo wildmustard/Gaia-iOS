@@ -8,5 +8,6 @@ target 'Gaia' do
     pod 'BDBOAuth1Manager', '~> 2.0'
     pod 'DKCircleButton'
     pod 'AFNetworking'
+    pod 'SVProgressHUD'
 end
 
