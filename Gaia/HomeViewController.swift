@@ -28,20 +28,21 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var cameraView: UIView!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
-    var success: Bool!
-    var match: String!
-    
     
     // Variables
-    let myWildlife = Wildlife()
-    private lazy var client : ClarifaiClient = ClarifaiClient(appID: clarifaiClientID, appSecret: clarifaiClientSecret)
-    let cameraButton = DKCircleButton.init(type: .Custom) // Capture Button for Camera using DK Pod
     var session: AVCaptureSession!
     var stillImageOutput : AVCaptureStillImageOutput!
     var videoPreviewLayer : AVCaptureVideoPreviewLayer!
+    var savedTagMatch: String!
     
     // CaptureMedia Object instance to submit to server
     let capture = CaptureMedia()
+    // Wildlife Dictionary
+    let myWildlife = Wildlife()
+    // Clarifai Session
+    private lazy var client : ClarifaiClient = ClarifaiClient(appID: clarifaiClientID, appSecret: clarifaiClientSecret)
+    // Camera Button
+    let cameraButton = DKCircleButton.init(type: .Custom) // Capture Button for Camera using DK Pod
 
     
     override func viewDidLoad() {
@@ -176,11 +177,33 @@ class HomeViewController: UIViewController {
                     // Display progress wheel during POST to server
                     
                     // Send capture to AI server for identification
-                    self.recognizeImage(image)
+                    self.recognizeImage(image, completion: { (success, match, error) -> () in
+                        
+                        if let error = error {
+                        
+                            // Log error
+                            NSLog("Failure recognizing image\nError: \(error)")
+                            
+                        }
+                        else {
+                            
+                            if (success == true) {
+                                //Set the tag retrieved
+                                self.wildLifeTagHomeView.text = match
+                                self.savedTagMatch = match
+                            }
+                            else {
+                            
+                                // Log error
+                                NSLog("Couldn't recognize image content!\n")
+                            
+                            }
+                            
+                        }
+
+                    })
                     
-                    //Set the tag retrieved
                     
-                    self.wildLifeTagHomeView.text = self.match
                     
                     // Enable controls for captured image
                     self.turnOnCapturedImageControlSettings()
@@ -212,7 +235,7 @@ class HomeViewController: UIViewController {
         // Disable buttons until ready
         disableSaveCancelButtons()
         
-        capture.postCapturedImage(takenPicture.image,tag: self.match, withCompletion:
+        capture.postCapturedImage(takenPicture.image, tag: self.savedTagMatch, withCompletion:
             { (success: Bool, error: NSError?) -> Void in
                 
                 // Stop progressHUD after network task done
@@ -242,6 +265,8 @@ class HomeViewController: UIViewController {
                     
                     // Turn off captured image controls & resume default state function
                     self.turnOffCapturedImageControlSettings()
+                    self.savedTagMatch = ""
+                    self.wildLifeTagHomeView.text = self.savedTagMatch
                     
                 }
             })
@@ -249,7 +274,7 @@ class HomeViewController: UIViewController {
     }
     
     // Function to send the taken image to the AI for tag recognition
-    private func recognizeImage(image: UIImage!) {
+    private func recognizeImage(image: UIImage!, completion: (success: Bool!, match: String!, error: NSError?) -> ()) {
         // Scale down the image. This step is optional. However, sending large images over the
         // network is slow and does not significantly improve recognition performance.
         let size = CGSizeMake(320, 320 * image.size.height / image.size.width)
@@ -268,6 +293,7 @@ class HomeViewController: UIViewController {
                 
                 // Log failure to connect
                 NSLog("Unable to send Clarifai client jpeg image\nError: \(error)\n")
+                completion(success: false, match: nil, error: error)
 
             }
             else {
@@ -281,10 +307,11 @@ class HomeViewController: UIViewController {
                 NSLog("Tag content: \(results![0].tags.joinWithSeparator(", "))")
                 
                 // Collect the matched tag if it exists from wildlife dictionary
-                var (success , match) = self.myWildlife.matchWildlife(tags)
-                self.success = success
-                self.match = match
-                
+                let (success , match) = self.myWildlife.matchWildlife(tags)
+               
+                // Set return values
+                completion(success: success, match: match, error: nil)
+    
                 // Log status & match result
                 NSLog("Match successful: \(success)\n")
                 NSLog("Matched wildlife: \(match)\n")
