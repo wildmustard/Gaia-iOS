@@ -9,12 +9,12 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>BDBOAuth1Manager.xcscheme</key>
+		<key>Bolts.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Bolts.xcscheme</key>
+		<key>ChameleonFramework.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -39,6 +39,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>pop.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -52,32 +57,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>2759BD572495E0DDC4490A9BEDBA533C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>2C8AA1BAF35413BDB954A1DF93576ED1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2F8FA7333536218C026AC0FBD6EE4ED3</key>
+		<key>5172ACAB7FEA22813859DC97CA0AA16F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3DE72B0ACC58783815115855FB48BDAE</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>445B3D47256376A8FB06D383FDBEA0C4</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B0214E86E9E229E292863BC821997C4D</key>
+		<key>5B5B04653E95E418DAC83DF6AA4B729E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>BCA053B6430690326435042FEB61B458</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E0C82E3A13A356FAB0C2981CA5EE42E8</key>
 		<dict>
 			<key>primary</key>
 			<true/>

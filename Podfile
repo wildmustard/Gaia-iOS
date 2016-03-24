@@ -5,9 +5,10 @@ use_frameworks!
 
 target 'Gaia' do
     pod 'Parse'
-    pod 'BDBOAuth1Manager', '~> 2.0'
     pod 'DKCircleButton'
     pod 'SVProgressHUD'
     pod 'AFNetworking'
+    pod 'ChameleonFramework/Swift'
+    pod 'pop', '~> 1.0'
 end
 
