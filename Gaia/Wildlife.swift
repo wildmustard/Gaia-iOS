@@ -16,4 +16,17 @@ class Wildlife: NSObject {
     public func getWildlife() -> [String] {
         return wildlife
     }
+    
+    public func matchWildlife(tags: [String]) -> (Bool, String) {
+        var match :Bool
+        for tag in tags {
+            for wild in wildlife {
+                if (tag == wild) {
+                    return (true,tag)
+                }
+            }
+        }
+        return (false,"")
+    }
+    
 }

@@ -59,18 +59,6 @@ class CaptureMedia: NSObject {
                 var wild = myWildlife.getWildlife()
                 NSLog("Tag content: \(results![0].tags.joinWithSeparator(", "))")
                 
-                var match = ""
-                for tag in tags {
-                    for wildlife in wild {
-                        if (tag == wildlife) {
-                            match = tag
-                            break
-                        }
-                    }
-                    if (match != "") {
-                        break
-                    }
-                }
             }
             //self.button.enabled = true
         }
