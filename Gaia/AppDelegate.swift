@@ -32,29 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             })
         )
         
-       // window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        //setting the initial screen bounds of the view
-     //   self.tabViewController1 = MapViewController()
-     //   self.tabViewController2 = ImageCatalogueViewController()
-        //creating object of TabViewController[1,2,3] class
-     //   var tabBarController = UITabBarController()
-        //creating object of UITabBarController class
-    //    tabBarController.viewControllers = [tabViewController1! , tabViewController2!]
-        //adding all three views to the TabBarView
-      //  var item1 = UITabBarItem(title: "1st Tab", image: nil, tag: 0)
-    //    var item2 = UITabBarItem(title: "2nd Tab", image: nil, tag: 1)
-        //defining the items of the TabBar corresponding to three views
-   //     tabViewController1?.tabBarItem = item1
-    //    tabViewController2?.tabBarItem = item2
-        //setting TabBarItems corresponding to each view in TabBarController
-        
-        //self.window?.rootViewController = containerViewController
-        //setting the initial VieController as tabBarController
-        
-       // window?.makeKeyAndVisible()
-        
-        
-        
         return true
     }
 
