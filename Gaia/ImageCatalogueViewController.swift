@@ -89,7 +89,7 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
         let query = PFQuery(className: "CaptureMedia")
         
         query.orderByDescending("createdAt")
-
+        
         
         query.findObjectsInBackgroundWithBlock { (media: [PFObject]?, error: NSError?) ->
             Void in
@@ -114,11 +114,11 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
         
         
     }
-
+    
     
     //Number of pictures going to be displayed in catalogue
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-
+        
         //Returns Items in server
         if let media = media {
             return media.count
@@ -134,8 +134,11 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MyCell", forIndexPath: indexPath) as! CustomCellCollectionViewCell
         
         // If the media content for this cell exists, set it
-        if (media?[indexPath.row]["image"] != nil) {
+        if (media?[indexPath.row]["image"] != nil && media?[indexPath.row]["tag"] != nil) {
+            
             let imageFile = media?[indexPath.row]["image"] as! PFFile
+            let imageTag = media?[indexPath.row]["tag"] as! String
+            
             imageFile.getDataInBackgroundWithBlock({ (data: NSData?, error: NSError?) ->
                 Void in
                 
@@ -154,10 +157,17 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
                     
                     cell.cellImageView.image = portraitImage
                     
-                   
-                   // UIImage(CGImage: cgImageRef!,scale: 1.0,orientation: UIImageOrientation.Right)
+                    cell.wildLifeTagCell.text = imageTag
+                    
+                    
+                    // UIImage(CGImage: cgImageRef!,scale: 1.0,orientation: UIImageOrientation.Right)
                 }
             })
+        }
+            
+        else{
+            NSLog("Unable to get image data or tag data")
+            
         }
         
         
@@ -166,7 +176,7 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
     func collectionView(collectionView: UICollectionView!,
         layout collectionViewLayout: UICollectionViewLayout!,
         sizeForItemAtIndexPath indexPath: NSIndexPath!) -> CGSize {
-            return CGSize(width: 130, height: 200)
+            return CGSize(width: 130, height: 229)
     }
     
     
@@ -221,18 +231,18 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
 
 
 
-    
-    /*
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
-    }
-    */
-    // func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-    // 1
-    // Return the number of sections
-    //   return 1
-    // }
+
+/*
+// MARK: - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+// Get the new view controller using segue.destinationViewController.
+// Pass the selected object to the new view controller.
+}
+*/
+// func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+// 1
+// Return the number of sections
+//   return 1
+// }

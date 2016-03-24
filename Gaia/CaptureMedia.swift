@@ -13,16 +13,16 @@ import Parse
 class CaptureMedia: NSObject {
     
     // Function to post the captured image to Parse Server
-    func postCapturedImage(image: UIImage?, withCompletion completion: PFBooleanResultBlock?) {
-    
+    func postCapturedImage(image: UIImage?,tag: String?,withCompletion completion: PFBooleanResultBlock?) {
+        
         // Setup Parse Object
         let capture = PFObject(className: "CaptureMedia")
         
-
+        
         // Encode image using Parse into 64-bit text
         capture["image"] = getPFFileUsingImage(image)
-        //capture["tag"] = tag
         capture["username"] = "Gaia Dummy User"
+        capture["tag"] = tag
         
         // Save capture media to server
         capture.saveInBackgroundWithBlock(completion)

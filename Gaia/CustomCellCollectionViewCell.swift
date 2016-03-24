@@ -10,6 +10,8 @@ import UIKit
 
 class CustomCellCollectionViewCell: UICollectionViewCell {
 
+   
+    @IBOutlet weak var wildLifeTagCell: UILabel!
     @IBOutlet weak var cellImageView: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()

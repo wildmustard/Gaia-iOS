@@ -22,11 +22,14 @@ class HomeViewController: UIViewController {
     
     
     // Outlets
+    @IBOutlet weak var wildLifeTagHomeView: UILabel!
     @IBOutlet weak var takenPicture: UIImageView!
     @IBOutlet weak var pictureOverlayView: UIView!
     @IBOutlet weak var cameraView: UIView!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
+    var success: Bool!
+    var match: String!
     
     
     // Variables
@@ -175,6 +178,10 @@ class HomeViewController: UIViewController {
                     // Send capture to AI server for identification
                     self.recognizeImage(image)
                     
+                    //Set the tag retrieved
+                    
+                    self.wildLifeTagHomeView.text = self.match
+                    
                     // Enable controls for captured image
                     self.turnOnCapturedImageControlSettings()
                     
@@ -205,7 +212,7 @@ class HomeViewController: UIViewController {
         // Disable buttons until ready
         disableSaveCancelButtons()
         
-        capture.postCapturedImage(takenPicture.image, withCompletion:
+        capture.postCapturedImage(takenPicture.image,tag: self.match, withCompletion:
             { (success: Bool, error: NSError?) -> Void in
                 
                 // Stop progressHUD after network task done
@@ -275,6 +282,8 @@ class HomeViewController: UIViewController {
                 
                 // Collect the matched tag if it exists from wildlife dictionary
                 var (success , match) = self.myWildlife.matchWildlife(tags)
+                self.success = success
+                self.match = match
                 
                 // Log status & match result
                 NSLog("Match successful: \(success)\n")
