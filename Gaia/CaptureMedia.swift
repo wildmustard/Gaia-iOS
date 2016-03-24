@@ -14,7 +14,7 @@ let clarifaiClientSecret = "8lPWDBKJDIDNlnrBEiKjqnfWYlqJ8JEOGH76oseS"
 
 // Class for the content of the captured image
 class CaptureMedia: NSObject {
-    
+    var myWildlife: Wildlife
     private lazy var client : ClarifaiClient = ClarifaiClient(appID: clarifaiClientID, appSecret: clarifaiClientSecret)
     
     // Function to post the captured image to Parse Server
@@ -55,7 +55,22 @@ class CaptureMedia: NSObject {
             else {
               //  self.textView.text = "Tags:\n" + results![0].tags.joinWithSeparator(", ")
                 NSLog("Sent Clarifai client jpeg image successfully\n")
+                let tags = results![0].tags
+                var wild = myWildlife.getWildlife()
                 NSLog("Tag content: \(results![0].tags.joinWithSeparator(", "))")
+                
+                var match = ""
+                for tag in tags {
+                    for wildlife in wild {
+                        if (tag == wildlife) {
+                            match = tag
+                            break
+                        }
+                    }
+                    if (match != "") {
+                        break
+                    }
+                }
             }
             //self.button.enabled = true
         }
