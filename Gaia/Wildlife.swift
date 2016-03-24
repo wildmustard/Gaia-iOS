@@ -6,21 +6,19 @@
 //  Copyright © 2016 John Henning. All rights reserved.
 //
 
-import Cocoa
 import UIKit
 
 class Wildlife: NSObject {
     
-    let wildlife: [String] = ["lion","tiger","bear","dog","cat","alligator","squirrel","beetle","snail","ant","butterfly","duck","crow","horse","deer","monkey","gorilla","elephant","giraffe","swan"]
+    let wildlife: [String] = ["lion","tiger","alligator","squirrel", "tarantula", "snail","beetle","butterfly","duck","crow","horse","deer","gorilla","monkey","elephant","giraffe","swan","eagle","rose","dandelion","marijuana","spider","sunflower","mushroom","wolf","beagle","retriever","dog","zebra"]
     
     public func getWildlife() -> [String] {
         return wildlife
     }
     
     public func matchWildlife(tags: [String]) -> (Bool, String) {
-        var match :Bool
-        for tag in tags {
-            for wild in wildlife {
+        for wild in wildlife {
+            for tag in tags {
                 if (tag == wild) {
                     return (true,tag)
                 }
