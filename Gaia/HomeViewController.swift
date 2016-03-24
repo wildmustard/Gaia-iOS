@@ -266,7 +266,7 @@ class HomeViewController: UIViewController {
                     // Turn off captured image controls & resume default state function
                     self.turnOffCapturedImageControlSettings()
                     self.savedTagMatch = ""
-                    self.wildLifeTagHomeView.text = self.savedTagMatch
+                    self.wildLifeTagHomeView.text = ""
                     
                 }
             })
@@ -331,6 +331,8 @@ class HomeViewController: UIViewController {
         
         // Turn off captured image controls
         turnOffCapturedImageControlSettings()
+        self.savedTagMatch = ""
+        self.wildLifeTagHomeView.text = ""
         
     }
     
