@@ -14,6 +14,9 @@ import SVProgressHUD
 let userCapturedImage = "User Captured Image\n"
 let userReleasedImage = "User Released Image\n"
 
+let clarifaiClientID = "WMZrJ33oE9fISVNAPLZNVtnMhXIC9reQ9YGtAuV2"
+let clarifaiClientSecret = "8lPWDBKJDIDNlnrBEiKjqnfWYlqJ8JEOGH76oseS"
+
 
 class HomeViewController: UIViewController {
     
@@ -27,6 +30,8 @@ class HomeViewController: UIViewController {
     
     
     // Variables
+    let myWildlife = Wildlife()
+    private lazy var client : ClarifaiClient = ClarifaiClient(appID: clarifaiClientID, appSecret: clarifaiClientSecret)
     let cameraButton = DKCircleButton.init(type: .Custom) // Capture Button for Camera using DK Pod
     var session: AVCaptureSession!
     var stillImageOutput : AVCaptureStillImageOutput!
@@ -168,7 +173,7 @@ class HomeViewController: UIViewController {
                     // Display progress wheel during POST to server
                     
                     // Send capture to AI server for identification
-                    self.capture.recognizeImage(image)
+                    self.recognizeImage(image)
                     
                     // Enable controls for captured image
                     self.turnOnCapturedImageControlSettings()
@@ -234,6 +239,52 @@ class HomeViewController: UIViewController {
                 }
             })
         
+    }
+    
+    // Function to send the taken image to the AI for tag recognition
+    private func recognizeImage(image: UIImage!) {
+        // Scale down the image. This step is optional. However, sending large images over the
+        // network is slow and does not significantly improve recognition performance.
+        let size = CGSizeMake(320, 320 * image.size.height / image.size.width)
+        UIGraphicsBeginImageContext(size)
+        image.drawInRect(CGRectMake(0, 0, size.width, size.height))
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        // Encode as a JPEG.
+        let jpeg = UIImageJPEGRepresentation(scaledImage, 0.9)!
+        
+        // Send the JPEG to Clarifai for standard image tagging.
+        client.recognizeJpegs([jpeg]) {
+            (results: [ClarifaiResult]?, error: NSError?) in
+            if (error != nil) {
+                
+                // Log failure to connect
+                NSLog("Unable to send Clarifai client jpeg image\nError: \(error)\n")
+
+            }
+            else {
+                
+                // Log success of connecting to Clarifai
+                NSLog("Sent Clarifai client jpeg image successfully\n")
+                
+                // Set tags object
+                let tags = results![0].tags
+                // Log tags
+                NSLog("Tag content: \(results![0].tags.joinWithSeparator(", "))")
+                
+                // Collect the matched tag if it exists from wildlife dictionary
+                var (success , match) = self.myWildlife.matchWildlife(tags)
+                
+                // Log status & match result
+                NSLog("Match successful: \(success)\n")
+                NSLog("Matched wildlife: \(match)\n")
+                
+                // Set image tag here
+                
+            }
+            
+        }
     }
     
     
