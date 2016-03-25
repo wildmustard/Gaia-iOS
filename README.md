@@ -10,16 +10,19 @@ Gaia is an iOS application that acts as a catalogue of wildlife. Using the custo
 - [x] Setup Clarifai API 
 - [x] Setup the camera capture view enabling user to snap photos of subjects, this acts as the landing view for the application
 - [x] Create view for users' catalogue of taken images, this would be accessed from the landing view
-- [ ] Create view for handling the post image capture event, which appears once the user takes an image using the capture button on the landing view
+- [x] Create view for handling the post image capture event, which appears once the user takes an image using the capture button on the landing view
 
 ### Optional Features
 - [x] Create application icon and launchscreen assets
 - [ ] Create view for users' score, this would be a pulldown from the landing view
 - [ ] Log In & Sign Up Screens for tracking unique users
 - [ ] Users can import images from their own camera roll into Gaia
-- [ ] Custom API training for the network to better identify the animals
-- [ ] Crowdsource the tag training for more accurate selection
+- [ ] ~~Custom API training for the network to better identify the animals~~
+- [ ] ~~Crowdsource the tag training for more accurate selection~~ Clarifai deprecated their user tag submission feature :(
 - [ ] Leaderboard for tracking other users scores based on logged in username
+- [ ] Use chameleon framework for UI color and design
+- [ ] Use pop for animations
+- [ ] Setup autolayout for application's views and the scrollview container
 - [ ] Create view for geographic tracking of photo locations, displayed on a map view
 - [ ] Allow users to delete images from their gallery of photos
 
@@ -58,5 +61,8 @@ __Database Structure__
 
 ### Submission 1 (3/10/16) - 33% of User Stories
 ![Gaia-iOS-Submission-1](https://cloud.githubusercontent.com/assets/6467543/13731804/127d51be-e949-11e5-9029-146e871b5b9b.gif)
+
+### Submission 2 (3/17/16) - 66% of User Stories
+[Submission Gif (was too large)](http://i.imgur.com/ZLAekpN.gifv)
 
 
