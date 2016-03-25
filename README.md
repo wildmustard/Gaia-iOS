@@ -71,7 +71,7 @@ __Basic Flow of Application__
 ![gaia-submission-3](https://cloud.githubusercontent.com/assets/6467543/14035691/7b5e14d6-f207-11e5-960a-1b2642d3b349.gif)
 
 __Tagging Accuracy__  
-![gaia-submission-3-tagging](https://cloud.githubusercontent.com/assets/6467543/14035690/7b4e0db6-f207-11e5-8e05-60bd646e6fe7.gif)
+![gaia-submission-3-tagging](https://cloud.githubusercontent.com/assets/6467543/14035753/2521e5b0-f208-11e5-87c5-1da8165bd7ae.gif)
 
 
 
