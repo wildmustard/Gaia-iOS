@@ -12,13 +12,15 @@ import SVProgressHUD
 
 class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
     
-    //Set insets for collection
+    // Set insets for collection cell, size of cell inset separation
     let sectionInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
     
+    // Parse media object
     var media: [PFObject]?
+    // Refresh controller
     var refreshControl: UIRefreshControl!
     
-    
+    // Catalogue collection view
     @IBOutlet var CatalogueCollectionView: UICollectionView!
     
     convenience init() {
@@ -71,6 +73,7 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
         // Make the navigation bar a subview of the current view controller
         self.view.addSubview(navigationBar)
         
+        // Set source & delegate
         CatalogueCollectionView.delegate = self
         CatalogueCollectionView.dataSource = self
         
@@ -136,6 +139,7 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
         // If the media content for this cell exists, set it
         if (media?[indexPath.row]["image"] != nil && media?[indexPath.row]["tag"] != nil) {
             
+            // Create image and tag properties
             let imageFile = media?[indexPath.row]["image"] as! PFFile
             let imageTag = media?[indexPath.row]["tag"] as! String
             
@@ -144,19 +148,22 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
                 
                 // Failure to get image
                 if let error = error {
+                    
                     // Log Failure
                     NSLog("Unable to get image data for table cell \(indexPath.row)\nError: \(error)")
+                    
                 }
                     // Success getting image
                 else {
+                    
                     // Get image and set to cell's content
                     let image = UIImage(data: data!)
                     
                     //let image = UIImage(CGImage: cgImageRef!,scale: 1.0,orientation: UIImageOrientation.Right)
                     let portraitImage = UIImage(CGImage: (image?.CGImage)!,scale: 1.0,orientation: UIImageOrientation.Right)
                     
+                    // Set image and tag for cell
                     cell.cellImageView.image = portraitImage
-                    
                     cell.wildLifeTagCell.text = imageTag
                     
                     
@@ -165,7 +172,9 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
             })
         }
             
-        else{
+        else {
+            
+            // Log Failure
             NSLog("Unable to get image data or tag data")
             
         }
@@ -174,23 +183,32 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
         return cell
     }
     func collectionView(collectionView: UICollectionView!,
-        layout collectionViewLayout: UICollectionViewLayout!,
-        sizeForItemAtIndexPath indexPath: NSIndexPath!) -> CGSize {
-            return CGSize(width: 130, height: 229)
+                        layout collectionViewLayout: UICollectionViewLayout!,
+                               sizeForItemAtIndexPath indexPath: NSIndexPath!) -> CGSize {
+        
+        // Return layout
+        return CGSize(width: 130, height: 229)
+        
     }
     
     
     
     
     func collectionView(collectionView: UICollectionView!,
-        layout collectionViewLayout: UICollectionViewLayout!,
-        insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-            return sectionInsets
+                        layout collectionViewLayout: UICollectionViewLayout!,
+                               insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+        
+        // Set separation between collection images
+        return sectionInsets
+        
     }
     
     //Programatically created function to segue into MapViewController
     func btn_clicked(sender: UIBarButtonItem) {
-        print("Button clicked")
+        
+        NSLog("Map button clicked, transition started to map")
+        
+        // Present MapView Controller
         presentViewController((MapViewController() as? UIViewController)!, animated: true, completion: nil)
         
     }
@@ -233,14 +251,14 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
 
 
 /*
-// MARK: - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-// Get the new view controller using segue.destinationViewController.
-// Pass the selected object to the new view controller.
-}
-*/
+ // MARK: - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+ // Get the new view controller using segue.destinationViewController.
+ // Pass the selected object to the new view controller.
+ }
+ */
 // func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
 // 1
 // Return the number of sections
