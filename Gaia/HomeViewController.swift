@@ -10,9 +10,11 @@ import UIKit
 import AVFoundation
 import DKCircleButton
 import SVProgressHUD
+import Parse
 
 let userCapturedImage = "User Captured Image\n"
 let userReleasedImage = "User Released Image\n"
+let reloadCatalogue = "Calling Parse to reload images"
 
 let clarifaiClientID = "WMZrJ33oE9fISVNAPLZNVtnMhXIC9reQ9YGtAuV2"
 let clarifaiClientSecret = "8lPWDBKJDIDNlnrBEiKjqnfWYlqJ8JEOGH76oseS"
@@ -39,6 +41,8 @@ class HomeViewController: UIViewController {
     let capture = CaptureMedia()
     // Wildlife Dictionary
     let myWildlife = Wildlife()
+    //ImageCatalogue functions
+    let imageCatalogue = ImageCatalogueViewController()
     // Clarifai Session
     private lazy var client : ClarifaiClient = ClarifaiClient(appID: clarifaiClientID, appSecret: clarifaiClientSecret)
     // Camera Button
@@ -191,6 +195,7 @@ class HomeViewController: UIViewController {
                                 //Set the tag retrieved
                                 self.wildLifeTagHomeView.text = match
                                 self.savedTagMatch = match
+
                             }
                             else {
                             
@@ -262,7 +267,8 @@ class HomeViewController: UIViewController {
                     
                     // Log success post
                     NSLog("Image capture successfully posted to parse server\n")
-                    
+                    //Call function callServerForUserMedia in ImageCatalogue to reload images being displayed in collection view 
+                    NSNotificationCenter.defaultCenter().postNotificationName(reloadCatalogue, object: nil)
                     // Turn off captured image controls & resume default state function
                     self.turnOffCapturedImageControlSettings()
                     self.savedTagMatch = ""

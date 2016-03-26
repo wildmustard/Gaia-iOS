@@ -17,8 +17,6 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
     
     // Parse media object
     var media: [PFObject]?
-    // Refresh controller
-    var refreshControl: UIRefreshControl!
     
     // Catalogue collection view
     @IBOutlet var CatalogueCollectionView: UICollectionView!
@@ -38,14 +36,7 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
         
         //Associate cell with CollectionViewController
         self.CatalogueCollectionView.registerNib(nibName, forCellWithReuseIdentifier: "MyCell")
-        
-        // self.CatalogueCollectionView.backgroundColor = UIColor(red: 1, green: 165/255, blue: 0, alpha: 1)
-        
-        // PullDown Refresh control setup
-        refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: "onRefresh", forControlEvents: UIControlEvents.ValueChanged)
-        CatalogueCollectionView.insertSubview(refreshControl, atIndex: 0)
-        CatalogueCollectionView.allowsMultipleSelection = false
+            
         
         
         // Do any additional setup after loading the view.
@@ -77,6 +68,8 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
         CatalogueCollectionView.delegate = self
         CatalogueCollectionView.dataSource = self
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "callServerForUserMedia", name: reloadCatalogue, object: nil)
+        
         callServerForUserMedia()
     }
     
@@ -102,6 +95,7 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
                 // Reset user media object for the tableview data, reload table to display it
                 self.media = media
                 self.CatalogueCollectionView.reloadData()
+                NSLog("Queried data successfully")
                 
                 
             }
@@ -225,24 +219,6 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
         
     }
     
-    // Call the PullDown Refresh on user gesture
-    func onRefresh() {
-        
-        // Start SVProgressHUD
-        SVProgressHUD.show()
-        
-        // Timer for refresh to be shown
-        delay(2, closure: {
-            self.refreshControl.endRefreshing()
-            
-            // Dismiss SVProgressHUD
-            SVProgressHUD.dismiss()
-        })
-        
-        // Call server for content
-        callServerForUserMedia()
-        
-    }
     
 }
 
