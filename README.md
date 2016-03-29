@@ -15,10 +15,14 @@ Gaia is an iOS application that acts as a catalogue of wildlife. Using the custo
 ### Optional Features
 - [x] Create application icon and launchscreen assets
 - [ ] Create view for users' score, this would be a pulldown from the landing view
+- [ ] Modal view of cell picture w/ content about animal & capture details
 - [ ] Log In & Sign Up Screens for tracking unique users
-- [ ] Users can import images from their own camera roll into Gaia
-- [ ] ~~Custom API training for the network to better identify the animals~~
-- [ ] ~~Crowdsource the tag training for more accurate selection~~ Clarifai deprecated their user tag submission feature :(
+- [ ] Users can delete previously taken photos
+- [ ] Overlay cell details onto cell & modal photo rather than as labels
+- [ ] Button for more tags on successful photo capture
+- [ ] Animation for successful / failure to capture
+- [ ] Custom transitions to score & map
+- [ ] Specific tags, as well as 'Generic' tags for family/species (would be shown in button or if no specfic match found)
 - [ ] Leaderboard for tracking other users scores based on logged in username
 - [ ] Use chameleon framework for UI color and design
 - [ ] Use pop for animations
