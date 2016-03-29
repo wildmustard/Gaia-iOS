@@ -17,6 +17,8 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
     
     // Parse media object
     var media: [PFObject]?
+    var images: [UIImage]?
+    
     
     // Catalogue collection view
     @IBOutlet var CatalogueCollectionView: UICollectionView!
@@ -111,6 +113,41 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
                 
             }
         }
+        var counter = 0
+        for entry in self.media! {
+            
+            let imageFile = entry["image"] as! PFFile
+            
+            imageFile.getDataInBackgroundWithBlock({ (data: NSData?, error: NSError?) ->
+                Void in
+                
+                // Failure to get image
+                if let error = error {
+                    
+                    // Log Failure
+                    NSLog("Unable to get image data for table cell \(counter)\nError: \(error)")
+                    
+                }
+                    // Success getting image
+                else {
+                    
+                    // Get image and set to cell's content
+                    let image = UIImage(data: data!)
+                    
+                    //let image = UIImage(CGImage: cgImageRef!,scale: 1.0,orientation: UIImageOrientation.Right)
+                    let portraitImage = UIImage(CGImage: (image?.CGImage)!,scale: 1.0,orientation: UIImageOrientation.Right)
+                    
+                    // Set image and tag for cell
+                    self.images?.append(portraitImage)
+                    
+                    // UIImage(CGImage: cgImageRef!,scale: 1.0,orientation: UIImageOrientation.Right)
+                }
+            })
+            
+            counter += 1
+        }
+        
+        
         
         
     }
@@ -137,36 +174,11 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
         if (media?[indexPath.row]["image"] != nil && media?[indexPath.row]["tag"] != nil) {
             
             // Create image and tag properties
-            let imageFile = media?[indexPath.row]["image"] as! PFFile
             let imageTag = media?[indexPath.row]["tag"] as! String
             
-            imageFile.getDataInBackgroundWithBlock({ (data: NSData?, error: NSError?) ->
-                Void in
-                
-                // Failure to get image
-                if let error = error {
-                    
-                    // Log Failure
-                    NSLog("Unable to get image data for table cell \(indexPath.row)\nError: \(error)")
-                    
-                }
-                    // Success getting image
-                else {
-                    
-                    // Get image and set to cell's content
-                    let image = UIImage(data: data!)
-                    
-                    //let image = UIImage(CGImage: cgImageRef!,scale: 1.0,orientation: UIImageOrientation.Right)
-                    let portraitImage = UIImage(CGImage: (image?.CGImage)!,scale: 1.0,orientation: UIImageOrientation.Right)
-                    
-                    // Set image and tag for cell
-                    cell.cellImageView.image = portraitImage
-                    cell.wildLifeTagCell.text = imageTag
-                    
-                    
-                    // UIImage(CGImage: cgImageRef!,scale: 1.0,orientation: UIImageOrientation.Right)
-                }
-            })
+            cell.cellImageView.image = self.images![indexPath.row]
+            cell.wildLifeTagCell.text = imageTag
+            
         }
             
         else {
