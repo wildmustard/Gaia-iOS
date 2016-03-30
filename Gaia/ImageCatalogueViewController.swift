@@ -71,9 +71,9 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
         CatalogueCollectionView.delegate = self
         CatalogueCollectionView.dataSource = self
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "callServerForUserMedia", name: reloadCatalogue, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "callServerForUserMedia:", name: reloadCatalogue, object: nil)
         
-        callServerForUserMedia()
+        callServerForUserMedia(NSNotification())
     }
     
     override func didReceiveMemoryWarning() {
@@ -82,7 +82,7 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
     }
     
     
-    func callServerForUserMedia() {
+    func callServerForUserMedia(notification: NSNotification) {
         
         // Setup a PFQuery object to handle collection of the user's images
         let query = PFQuery(className: "CaptureMedia")
@@ -142,11 +142,10 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
                             }
                         })
                         
-                        self.CatalogueCollectionView.reloadData()
+                        
                     }
                 }
-                
-                
+                self.CatalogueCollectionView.reloadData()
             }
                 // Unable to get new user media
             else {
@@ -158,7 +157,7 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
             }
         }
         
-        print("test")
+        
     }
     
     

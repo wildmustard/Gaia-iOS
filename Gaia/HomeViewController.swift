@@ -354,8 +354,7 @@ class HomeViewController: UIViewController {
         
         // Show save and cancel buttons
         enableSaveCancelButtons()
-        self.saveButton.hidden = false
-        self.cancelButton.hidden = false
+        
 
         
         // Disable video and capture button
@@ -378,8 +377,6 @@ class HomeViewController: UIViewController {
         
         // Reset & hide views, save, cancel buttons
         disableSaveCancelButtons()
-        cancelButton.hidden = true
-        saveButton.hidden = true
         
         // Enable & display camera button
         cameraButton.enabled = true
@@ -397,15 +394,19 @@ class HomeViewController: UIViewController {
         
         saveButton.userInteractionEnabled = false
         cancelButton.userInteractionEnabled = false
-        
+        cancelButton.hidden = true
+        saveButton.hidden = true
     }
     
     // Turn on cancel save buttons
     func enableSaveCancelButtons() {
+        if self.savedTagMatch != "" {
+            self.saveButton.userInteractionEnabled = true
+            self.saveButton.hidden = false
+        }
         
-        self.saveButton.userInteractionEnabled = true
         self.cancelButton.userInteractionEnabled = true
-        
+        self.cancelButton.hidden = false
     }
     
     /*
