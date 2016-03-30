@@ -17,7 +17,8 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
     
     // Parse media object
     var media: [PFObject]?
-    var images: [UIImage]?
+    var images: [UIImage]? = []
+    var tags: [String]? = []
     
     
     // Catalogue collection view
@@ -102,10 +103,16 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
                 self.CatalogueCollectionView.reloadData()
                 NSLog("Queried data successfully")
                 
-                var counter = 0
-                for entry in media {
+                for _ in 0 ..< media.count {
+                    self.tags?.append("")
+                    let temp = UIImage()
+                    self.images?.append(temp)
+                }
+                
+                for i in 0 ..< media.count {
+                    let entry = media[i]
                     if entry["image"] != nil {
-                        print(entry["tag"])
+                        //print(entry["tag"])
                         let imageFile = entry["image"] as! PFFile
                         
                         imageFile.getDataInBackgroundWithBlock({ (data: NSData?, error: NSError?) ->
@@ -115,7 +122,7 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
                             if let error = error {
                                 
                                 // Log Failure
-                                NSLog("Unable to get image data for table cell \(counter)\nError: \(error)")
+                                NSLog("Unable to get image data for table cell \(i)\nError: \(error)")
                                 
                             }
                                 // Success getting image
@@ -126,13 +133,16 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
                                 
                                 //let image = UIImage(CGImage: cgImageRef!,scale: 1.0,orientation: UIImageOrientation.Right)
                                 let portraitImage = UIImage(CGImage: (image?.CGImage)!,scale: 1.0,orientation: UIImageOrientation.Right)
-                                
+                                //print(portraitImage.size.height)
                                 // Set image and tag for cell
-                                self.images?.append(portraitImage)
-                                
+                                self.images?[i] = portraitImage
+                                self.tags?[i] = (entry["tag"] as? String)!
+                                print("test \(i)")
+                        
                             }
                         })
-                        counter += 1
+                        
+                        self.CatalogueCollectionView.reloadData()
                     }
                 }
                 
@@ -148,7 +158,7 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
             }
         }
         
-        
+        print("test")
     }
     
     
@@ -170,22 +180,12 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MyCell", forIndexPath: indexPath) as! CustomCellCollectionViewCell
         
         // If the media content for this cell exists, set it
-        if (media?[indexPath.row]["image"] != nil && media?[indexPath.row]["tag"] != nil) {
             
             // Create image and tag properties
-            let imageTag = media?[indexPath.row]["tag"] as! String
             
-            cell.cellImageView.image = self.images![indexPath.row]
-            cell.wildLifeTagCell.text = imageTag
-            
-        }
-            
-        else {
-            
-            // Log Failure
-            NSLog("Unable to get image data or tag data")
-            
-        }
+        cell.cellImageView.image = self.images?[indexPath.row]
+        cell.wildLifeTagCell.text = self.tags?[indexPath.row]
+
         
         
         return cell
