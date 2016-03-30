@@ -15,10 +15,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
+    //Load loginView first
+    let LoginVC :LogInViewController = LogInViewController(nibName: "LogInViewController", bundle: nil)
+    
   // var tabViewController1 : MapViewController?
    // var tabViewController2 : ImageCatalogueViewController?
     
-    
+
     
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -31,6 +34,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 configuration.server = "https://stark-falls-28866.herokuapp.com/parse"
             })
         )
+        
+        //Assign Login view controller as first thing to be loaded
+        self.window!.rootViewController = self.LoginVC;
+
         
         return true
     }

@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		0158D1EF1C952A6200CC3B88 /* CustomCellCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0158D1ED1C952A6200CC3B88 /* CustomCellCollectionViewCell.swift */; };
 		0158D1F01C952A6200CC3B88 /* CustomCellCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0158D1EE1C952A6200CC3B88 /* CustomCellCollectionViewCell.xib */; };
+		017E3A601CAB4C01000821D1 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017E3A5E1CAB4C01000821D1 /* LogInViewController.swift */; };
+		017E3A611CAB4C01000821D1 /* LogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017E3A5F1CAB4C01000821D1 /* LogInViewController.xib */; };
+		017E3A641CAB4CDB000821D1 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017E3A621CAB4CDB000821D1 /* SignUpViewController.swift */; };
+		017E3A651CAB4CDB000821D1 /* SignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017E3A631CAB4CDB000821D1 /* SignUpViewController.xib */; };
 		01A4003D1C96016200424F69 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A4003B1C96016200424F69 /* MapViewController.swift */; };
 		01A4003E1C96016200424F69 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A4003C1C96016200424F69 /* MapViewController.xib */; };
 		B07DF8671C62E20500DEA760 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07DF8661C62E20500DEA760 /* AppDelegate.swift */; };
@@ -31,6 +35,10 @@
 /* Begin PBXFileReference section */
 		0158D1ED1C952A6200CC3B88 /* CustomCellCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellCollectionViewCell.swift; sourceTree = "<group>"; };
 		0158D1EE1C952A6200CC3B88 /* CustomCellCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCellCollectionViewCell.xib; sourceTree = "<group>"; };
+		017E3A5E1CAB4C01000821D1 /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		017E3A5F1CAB4C01000821D1 /* LogInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogInViewController.xib; sourceTree = "<group>"; };
+		017E3A621CAB4CDB000821D1 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		017E3A631CAB4CDB000821D1 /* SignUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignUpViewController.xib; sourceTree = "<group>"; };
 		01A4003B1C96016200424F69 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		01A4003C1C96016200424F69 /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
 		1AA8BCE1E8E6648420495AAF /* Pods-Gaia.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gaia.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Gaia/Pods-Gaia.debug.xcconfig"; sourceTree = "<group>"; };
@@ -68,6 +76,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		017E3A5D1CAB48A3000821D1 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				017E3A5E1CAB4C01000821D1 /* LogInViewController.swift */,
+				017E3A5F1CAB4C01000821D1 /* LogInViewController.xib */,
+				017E3A621CAB4CDB000821D1 /* SignUpViewController.swift */,
+				017E3A631CAB4CDB000821D1 /* SignUpViewController.xib */,
+			);
+			name = User;
+			sourceTree = "<group>";
+		};
 		01A4003A1C96014B00424F69 /* Map */ = {
 			isa = PBXGroup;
 			children = (
@@ -140,6 +159,7 @@
 		FA5539361C8F9A42005591A0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				017E3A5D1CAB48A3000821D1 /* User */,
 				01A4003A1C96014B00424F69 /* Map */,
 				FA5539441C8F9CFC005591A0 /* Score */,
 				FA55393F1C8F9B48005591A0 /* Image Catalogue */,
@@ -257,8 +277,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				017E3A651CAB4CDB000821D1 /* SignUpViewController.xib in Resources */,
 				B07DF8711C62E20500DEA760 /* LaunchScreen.storyboard in Resources */,
 				FA5539481C8F9D1A005591A0 /* ScoreViewController.xib in Resources */,
+				017E3A611CAB4C01000821D1 /* LogInViewController.xib in Resources */,
 				B07DF86E1C62E20500DEA760 /* Assets.xcassets in Resources */,
 				01A4003E1C96016200424F69 /* MapViewController.xib in Resources */,
 				FA5539431C8F9BC3005591A0 /* ImageCatalogueViewController.xib in Resources */,
@@ -325,9 +347,11 @@
 			files = (
 				FA5539421C8F9BC3005591A0 /* ImageCatalogueViewController.swift in Sources */,
 				FA1672421C9A810B00453432 /* CaptureMedia.swift in Sources */,
+				017E3A601CAB4C01000821D1 /* LogInViewController.swift in Sources */,
 				FA5539391C8F9A88005591A0 /* ContainerViewController.swift in Sources */,
 				FA5539471C8F9D1A005591A0 /* ScoreViewController.swift in Sources */,
 				FAB86A211CA2047C009347C8 /* ClarifaiClient.m in Sources */,
+				017E3A641CAB4CDB000821D1 /* SignUpViewController.swift in Sources */,
 				B07DF8671C62E20500DEA760 /* AppDelegate.swift in Sources */,
 				0158D1EF1C952A6200CC3B88 /* CustomCellCollectionViewCell.swift in Sources */,
 				B0FE4E771CA3715D00033258 /* Wildlife.swift in Sources */,
