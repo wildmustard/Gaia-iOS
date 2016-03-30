@@ -30,7 +30,7 @@ class LogInViewController: UIViewController {
     @IBAction func onNewUser(sender: AnyObject) {
         
         // Present SignUp Controller
-        presentViewController((SignUpViewController() as? UIViewController)!, animated: true, completion: nil)
+        presentViewController((SignUpViewController() ), animated: true, completion: nil)
         
         
     }

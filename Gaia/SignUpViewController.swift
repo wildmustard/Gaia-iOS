@@ -10,17 +10,22 @@ import UIKit
 import Parse
 
 class SignUpViewController: UIViewController {
+    
     //Outlets
     @IBOutlet weak var userNameField: UITextField!
-    
     @IBOutlet weak var emailField: UITextField!
-    
     @IBOutlet weak var passwordField: UITextField!
+    
+    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var passwordLabel: UILabel!
+    
+    @IBOutlet weak var submitButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,40 +33,48 @@ class SignUpViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // Submission Action
+    @IBAction func onSubmit(sender: AnyObject) {
 
-    @IBAction func onCreate(sender: AnyObject) {
-        
+        // Setup new Parse User
         let newUser = PFUser()
         
+        // Set new user from form post details
         newUser.username = userNameField.text
         newUser.password = passwordField.text
         newUser.email = emailField.text
+        
         //Try to sign new user up
         newUser.signUpInBackgroundWithBlock { (success:Bool,error: NSError?) -> Void in
-            //if succesful execute this
-            if success{
-                print("Created a new user")
+            
+            // Failure
+            if let error = error {
                 
+                // Log failure to create user
+                NSLog("Unable to create Parse User\nError: \(error)\n")
                 
-                //Segue not working
+            }
+                // Creation Successful
+            else {
                 
-                //self.presentViewController((ContainerViewController() as? UIViewController)!, animated: true, completion: nil)
+                // Log success
+                NSLog("Successfully created new user for Parse\nUser: \(newUser)")
                 
-                
-                //self.performSegueWithIdentifier("loginSegue", sender: nil)
-            }else{
-                print(error?.localizedDescription)
+                // Segue to Home
+                self.presentViewController((ContainerViewController()), animated: true, completion: nil)
                 
             }
         }
-
+        
     }
    
-    @IBAction func onBack(sender: AnyObject) {
+    // Cancel User Signup Action
+    @IBAction func onCancel(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: {
         })
-
     }
+    
+    
     /*
     // MARK: - Navigation
 
