@@ -102,6 +102,40 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
                 self.CatalogueCollectionView.reloadData()
                 NSLog("Queried data successfully")
                 
+                var counter = 0
+                for entry in media {
+                    if entry["image"] != nil {
+                        print(entry["tag"])
+                        let imageFile = entry["image"] as! PFFile
+                        
+                        imageFile.getDataInBackgroundWithBlock({ (data: NSData?, error: NSError?) ->
+                            Void in
+                            
+                            // Failure to get image
+                            if let error = error {
+                                
+                                // Log Failure
+                                NSLog("Unable to get image data for table cell \(counter)\nError: \(error)")
+                                
+                            }
+                                // Success getting image
+                            else {
+                                
+                                // Get image and set to cell's content
+                                let image = UIImage(data: data!)
+                                
+                                //let image = UIImage(CGImage: cgImageRef!,scale: 1.0,orientation: UIImageOrientation.Right)
+                                let portraitImage = UIImage(CGImage: (image?.CGImage)!,scale: 1.0,orientation: UIImageOrientation.Right)
+                                
+                                // Set image and tag for cell
+                                self.images?.append(portraitImage)
+                                
+                            }
+                        })
+                        counter += 1
+                    }
+                }
+                
                 
             }
                 // Unable to get new user media
@@ -113,41 +147,6 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
                 
             }
         }
-        var counter = 0
-        for entry in self.media! {
-            
-            let imageFile = entry["image"] as! PFFile
-            
-            imageFile.getDataInBackgroundWithBlock({ (data: NSData?, error: NSError?) ->
-                Void in
-                
-                // Failure to get image
-                if let error = error {
-                    
-                    // Log Failure
-                    NSLog("Unable to get image data for table cell \(counter)\nError: \(error)")
-                    
-                }
-                    // Success getting image
-                else {
-                    
-                    // Get image and set to cell's content
-                    let image = UIImage(data: data!)
-                    
-                    //let image = UIImage(CGImage: cgImageRef!,scale: 1.0,orientation: UIImageOrientation.Right)
-                    let portraitImage = UIImage(CGImage: (image?.CGImage)!,scale: 1.0,orientation: UIImageOrientation.Right)
-                    
-                    // Set image and tag for cell
-                    self.images?.append(portraitImage)
-                    
-                    // UIImage(CGImage: cgImageRef!,scale: 1.0,orientation: UIImageOrientation.Right)
-                }
-            })
-            
-            counter += 1
-        }
-        
-        
         
         
     }
