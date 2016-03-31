@@ -25,6 +25,7 @@
 		FA5539431C8F9BC3005591A0 /* ImageCatalogueViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA5539411C8F9BC3005591A0 /* ImageCatalogueViewController.xib */; };
 		FA5539471C8F9D1A005591A0 /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5539451C8F9D1A005591A0 /* ScoreViewController.swift */; };
 		FA5539481C8F9D1A005591A0 /* ScoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA5539461C8F9D1A005591A0 /* ScoreViewController.xib */; };
+		FA9AC5A61CACB18800F671E9 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9AC5A51CACB18800F671E9 /* Media.swift */; };
 		FAB86A211CA2047C009347C8 /* ClarifaiClient.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB86A201CA2047C009347C8 /* ClarifaiClient.m */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +51,7 @@
 		FA5539411C8F9BC3005591A0 /* ImageCatalogueViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageCatalogueViewController.xib; sourceTree = "<group>"; };
 		FA5539451C8F9D1A005591A0 /* ScoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
 		FA5539461C8F9D1A005591A0 /* ScoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScoreViewController.xib; sourceTree = "<group>"; };
+		FA9AC5A51CACB18800F671E9 /* Media.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		FAB86A1E1CA2047C009347C8 /* Gaia-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Gaia-Bridging-Header.h"; sourceTree = "<group>"; };
 		FAB86A1F1CA2047C009347C8 /* ClarifaiClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClarifaiClient.h; sourceTree = "<group>"; };
 		FAB86A201CA2047C009347C8 /* ClarifaiClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClarifaiClient.m; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 			children = (
 				FA1672411C9A810B00453432 /* CaptureMedia.swift */,
 				B0FE4E761CA3715D00033258 /* Wildlife.swift */,
+				FA9AC5A51CACB18800F671E9 /* Media.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -323,6 +326,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA9AC5A61CACB18800F671E9 /* Media.swift in Sources */,
 				FA5539421C8F9BC3005591A0 /* ImageCatalogueViewController.swift in Sources */,
 				FA1672421C9A810B00453432 /* CaptureMedia.swift in Sources */,
 				FA5539391C8F9A88005591A0 /* ContainerViewController.swift in Sources */,

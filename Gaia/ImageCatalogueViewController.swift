@@ -16,10 +16,7 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
     let sectionInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
     
     // Parse media object
-    var media: [PFObject]?
-    var images: [UIImage]? = []
-    var tags: [String]? = []
-    
+    var media: [Media]?
     
     // Catalogue collection view
     @IBOutlet var CatalogueCollectionView: UICollectionView!
@@ -88,7 +85,7 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
         let query = PFQuery(className: "CaptureMedia")
         
         //Caches images from parse
-        query.cachePolicy = .CacheElseNetwork
+        
         
         query.orderByDescending("createdAt")
         
@@ -99,15 +96,17 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
             if let media = media {
                 
                 // Reset user media object for the tableview data, reload table to display it
-                self.media = media
-                self.CatalogueCollectionView.reloadData()
                 NSLog("Queried data successfully")
-                
+                self.CatalogueCollectionView.reloadData()
+                print(media.count)
+                self.media = []
                 for _ in 0 ..< media.count {
-                    self.tags?.append("")
-                    let temp = UIImage()
-                    self.images?.append(temp)
+                    let temp
+                        = Media()
+                    self.media?.append(temp)
                 }
+                
+                print(self.media?.count)
                 
                 for i in 0 ..< media.count {
                     let entry = media[i]
@@ -135,10 +134,11 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
                                 let portraitImage = UIImage(CGImage: (image?.CGImage)!,scale: 1.0,orientation: UIImageOrientation.Right)
                                 //print(portraitImage.size.height)
                                 // Set image and tag for cell
-                                self.images?[i] = portraitImage
-                                self.tags?[i] = (entry["tag"] as? String)!
-                                print("test \(i)")
-                        
+                                self.media?[i].image = portraitImage
+                                self.media?[i].tag = (entry["tag"] as? String)!
+                                self.CatalogueCollectionView.reloadData()
+                                //print("test \(i)")
+                                
                             }
                         })
                         
@@ -182,10 +182,8 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
             
             // Create image and tag properties
             
-        cell.cellImageView.image = self.images?[indexPath.row]
-        cell.wildLifeTagCell.text = self.tags?[indexPath.row]
-
-        
+        cell.cellImageView.image = self.media?[indexPath.row].image
+        cell.wildLifeTagCell.text = self.media?[indexPath.row].tag
         
         return cell
     }
@@ -234,6 +232,7 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
     
     
 }
+
 
 
 
