@@ -180,6 +180,11 @@ class HomeViewController: UIViewController {
                     
                     // Display progress wheel during POST to server
                     
+                    
+                    //Clear tags
+                    self.savedTagMatch = ""
+                    self.wildLifeTagHomeView.text = ""
+                    
                     // Send capture to AI server for identification
                     self.recognizeImage(image, completion: { (success, match, error) -> () in
                         
@@ -201,17 +206,17 @@ class HomeViewController: UIViewController {
                             
                                 // Log error
                                 NSLog("Couldn't recognize image content!\n")
+                                self.wildLifeTagHomeView.text = "No Tag Found"
                             
                             }
+                            
+                            
+                            // Enable controls for captured image
+                            self.turnOnCapturedImageControlSettings()
                             
                         }
 
                     })
-                    
-                    
-                    
-                    // Enable controls for captured image
-                    self.turnOnCapturedImageControlSettings()
                     
                     // Log capture
                     NSLog("Successfully captured image\n")
@@ -271,8 +276,6 @@ class HomeViewController: UIViewController {
                     NSNotificationCenter.defaultCenter().postNotificationName(reloadCatalogue, object: nil)
                     // Turn off captured image controls & resume default state function
                     self.turnOffCapturedImageControlSettings()
-                    self.savedTagMatch = ""
-                    self.wildLifeTagHomeView.text = ""
                     
                 }
             })
@@ -355,7 +358,6 @@ class HomeViewController: UIViewController {
         // Show save and cancel buttons
         enableSaveCancelButtons()
         
-
         
         // Disable video and capture button
         self.cameraButton.enabled = false
@@ -400,7 +402,8 @@ class HomeViewController: UIViewController {
     
     // Turn on cancel save buttons
     func enableSaveCancelButtons() {
-        if self.savedTagMatch != "" {
+        
+        if (self.savedTagMatch != "") {
             self.saveButton.userInteractionEnabled = true
             self.saveButton.hidden = false
         }

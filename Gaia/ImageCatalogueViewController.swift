@@ -69,8 +69,6 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
         self.view.addSubview(navigationBar)
         
         // Set source & delegate
-        
-        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "callServerForUserMedia", name: reloadCatalogue, object: nil)
         
         
