@@ -14,9 +14,10 @@ import Parse
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
     //Load loginView first
     let LoginVC :LogInViewController = LogInViewController(nibName: "LogInViewController", bundle: nil)
+    
+    
     
   // var tabViewController1 : MapViewController?
    // var tabViewController2 : ImageCatalogueViewController?

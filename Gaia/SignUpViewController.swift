@@ -17,9 +17,14 @@ class SignUpViewController: UIViewController {
     
     @IBOutlet weak var passwordField: UITextField!
     
+    var mainStoryboard: UIStoryboard?
+    var containerViewController: ContainerViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        containerViewController = mainStoryboard?.instantiateViewControllerWithIdentifier("Main") as? ContainerViewController
         // Do any additional setup after loading the view.
     }
 
@@ -45,7 +50,7 @@ class SignUpViewController: UIViewController {
                 
                 //Segue not working
                 
-                //self.presentViewController((ContainerViewController() as? UIViewController)!, animated: true, completion: nil)
+                self.presentViewController(self.containerViewController!, animated: true, completion: nil)
                 
                 
                 //self.performSegueWithIdentifier("loginSegue", sender: nil)
