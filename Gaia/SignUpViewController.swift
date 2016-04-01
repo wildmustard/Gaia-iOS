@@ -81,6 +81,11 @@ class SignUpViewController: UIViewController {
     }
     
     
+    @IBAction func onTap(sender: AnyObject) {
+        view.endEditing(true)
+    }
+    
+    
     /*
     // MARK: - Navigation
 
