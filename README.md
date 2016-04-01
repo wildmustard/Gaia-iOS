@@ -14,9 +14,9 @@ Gaia is an iOS application that acts as a catalogue of wildlife. Using the custo
 
 ### Optional Features
 - [x] Create application icon and launchscreen assets
-- [ ] Create view for users' score, this would be a pulldown from the landing view
+- [x] Create view for users' score
 - [ ] Modal view of cell picture w/ content about animal & capture details
-- [ ] Log In & Sign Up Screens for tracking unique users
+- [x] Log In & Sign Up Screens for tracking unique users
 - [ ] Users can delete previously taken photos
 - [ ] Overlay cell details onto cell & modal photo rather than as labels
 - [ ] Button for more tags on successful photo capture
@@ -28,7 +28,6 @@ Gaia is an iOS application that acts as a catalogue of wildlife. Using the custo
 - [ ] Use pop for animations
 - [ ] Setup autolayout for application's views and the scrollview container
 - [ ] Create view for geographic tracking of photo locations, displayed on a map view
-- [ ] Allow users to delete images from their gallery of photos
 
 ### Database Models
 We will be using Parse for our database server, using hosting from MongoLab.
@@ -76,6 +75,9 @@ __Basic Flow of Application__
 
 __Tagging Accuracy__  
 ![gaia-submission-3-tagging](https://cloud.githubusercontent.com/assets/6467543/14035753/2521e5b0-f208-11e5-87c5-1da8165bd7ae.gif)
+
+### Optionals Submission (3/31/16)
+![gaia-submission-optionals](https://cloud.githubusercontent.com/assets/6467543/14199032/9be085e8-f7ae-11e5-8a41-ade40e48ea67.gif)
 
 
 
