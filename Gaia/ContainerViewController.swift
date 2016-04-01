@@ -68,20 +68,20 @@ class ContainerViewController: UIViewController, UIScrollViewDelegate {
         
        let scrollContentOffset = scrollView.contentOffset
         
-        if((sessionRunning && scrollContentOffset.x == 0) || (sessionRunning && scrollContentOffset.x == 640)) {
-            // View has left the homeview, stop the camera session
-            HomeVC.session.stopRunning()
-            // Broadcast stop of camera
-            self.sessionRunning = false
-            NSLog("Stopped running session\n")
-        }
-        else if(!sessionRunning && scrollContentOffset.x == 320) {
-            // View has returned to homeview, start the camera session
-            HomeVC.session.startRunning()
-            // Broadcast start of camera
-            self.sessionRunning = true
-            NSLog("Session is running\n")
-        }
+//        if((sessionRunning && scrollContentOffset.x == 0) || (sessionRunning && scrollContentOffset.x == 640)) {
+//            // View has left the homeview, stop the camera session
+//            //HomeVC.session.stopRunning()
+//            // Broadcast stop of camera
+//            self.sessionRunning = false
+//            NSLog("Stopped running session\n")
+//        }
+//        else if(!sessionRunning && scrollContentOffset.x == 320) {
+//            // View has returned to homeview, start the camera session
+//            //HomeVC.session.startRunning()
+//            // Broadcast start of camera
+//            self.sessionRunning = true
+//            NSLog("Session is running\n")
+//        }
         
         // Log position of scrollview window at x
         NSLog("\(scrollContentOffset)")

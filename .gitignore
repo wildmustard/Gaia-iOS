@@ -50,56 +50,56 @@ DerivedData
 #
 #           # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode
 #
-            *.iml
+*.iml
 #
 #             ## Directory-based project format:
-             .idea/
+.idea/
 #
 #              ## File-based project format:
-              *.ipr
-              *.iws
+*.ipr
+*.iws
 #
 #               ## Plugin-specific files:
 #
 #                # IntelliJ
-                out/
+out/
 #
 #                 # mpeltonen/sbt-idea plugin
-                 .idea_modules/
+.idea_modules/
 #
 #                  # JIRA plugin
-                  atlassian-ide-plugin.xml
+atlassian-ide-plugin.xml
 #
 #                   # Crashlytics plugin (for Android Studio and IntelliJ)
-                   com_crashlytics_export_strings.xml
-                   crashlytics.properties
-                   crashlytics-build.properties
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
 #
 #                    ## Covers Sonar
-                    .sonar
-                    compile_commands.json
-                    sonar-reports/
+.sonar
+compile_commands.json
+sonar-reports/
 #
 #                    ## Covers Fastlane
 #
 #                    # fastlane specific
-                    fastlane/report.xml
+fastlane/report.xml
 #
 #                    # deliver temporary files
-                    fastlane/Preview.html
+fastlane/Preview.html
 #
 #                    # snapshot generated screenshots
-                    fastlane/screenshots/**/*.png
-                    fastlane/screenshots/screenshots.html
+fastlane/screenshots/**/*.png
+fastlane/screenshots/screenshots.html
 #
 #                    # scan temporary files
-                    fastlane/test_output
+fastlane/test_output
 #
 #                    # other temporary files
-                    fastlane/temp
+fastlane/temp
 #
 #                    # build files
-                    fastlane/build
+fastlane/build
 #
 #                    ## Covers Carthage
 
