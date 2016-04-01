@@ -60,6 +60,14 @@ class LogInViewController: UIViewController {
         }
 
     }
+    
+    
+    @IBAction func onTap(sender: AnyObject) {
+        view.endEditing(true)
+    }
+    
+    
+    
     /*
     // MARK: - Navigation
 
