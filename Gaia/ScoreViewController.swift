@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 let userDidLogoutNotification = "User Logged Out\n"
 
@@ -37,7 +38,23 @@ class ScoreViewController: UIViewController {
     
     @IBAction func onLogout(sender: AnyObject) {
         
-        NSNotificationCenter.defaultCenter().postNotificationName(userDidLogoutNotification, object: nil)
+        PFUser.logOutInBackgroundWithBlock { (error: NSError?) ->
+            Void in
+            
+            if let error = error {
+                // Log
+                NSLog("Error on logout:\n\(error.localizedDescription)")
+            }
+            else {
+                
+                // Log
+                NSLog("Logout Success")
+                //Broadcast
+                NSNotificationCenter.defaultCenter().postNotificationName(userDidLogoutNotification, object: nil)
+                
+            }
+            
+        }
 
     }
     //Create rounded images

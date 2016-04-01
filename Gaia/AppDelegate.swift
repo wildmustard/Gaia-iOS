@@ -15,9 +15,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var storyboard = UIStoryboard(name: "Main", bundle: nil)
-
-    //Load loginView first
-    let LoginVC :LogInViewController = LogInViewController(nibName: "LogInViewController", bundle: nil)
     
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -50,17 +47,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.rootViewController = vc
             
         } else {
-            self.window!.rootViewController = self.LoginVC;
+            
+            //Load loginView first
+            let LoginVC :LogInViewController = LogInViewController(nibName: "LogInViewController", bundle: nil)
+            self.window!.rootViewController = LoginVC;
+            
         }
-        //Assign Login view controller as first thing to be loaded
-        
-
         
         return true
     }
     
     func userDidLogout() {
-        self.window!.rootViewController = self.LoginVC;
+
+        let vc :LogInViewController = LogInViewController(nibName: "LogInViewController", bundle: nil)
+        self.window!.rootViewController = vc
+        
     }
 
 
