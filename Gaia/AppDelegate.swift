@@ -14,11 +14,17 @@ import Parse
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var storyboard = UIStoryboard(name: "Main", bundle: nil)
+
+    //Load loginView first
+    let LoginVC :LogInViewController = LogInViewController(nibName: "LogInViewController", bundle: nil)
+    
+    
     
   // var tabViewController1 : MapViewController?
    // var tabViewController2 : ImageCatalogueViewController?
     
-    
+
     
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -31,6 +37,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 configuration.server = "https://stark-falls-28866.herokuapp.com/parse"
             })
         )
+        if (PFUser.currentUser() != nil) {
+            
+            // Log Current User Found
+            NSLog("Current User " +  (PFUser.currentUser()?.username)! + " Detected as Logged In\n")
+            NSLog("Moving to Home View Controller\n")
+            
+            //Setup vc to move to home contoller
+            let vc = storyboard.instantiateViewControllerWithIdentifier("Main") as? ContainerViewController
+            
+            
+            // Set window to vc
+            window?.rootViewController = vc
+            
+        } else {
+            self.window!.rootViewController = self.LoginVC;
+        }
+        //Assign Login view controller as first thing to be loaded
+        
+
         
         return true
     }
