@@ -12,11 +12,11 @@ class Wildlife: NSObject {
     
     let wildlife: [String] = ["lion","tiger","alligator","squirrel", "tarantula", "snail","beetle","butterfly","duck","crow","horse","deer","gorilla","monkey","elephant","giraffe","swan","eagle","rose","dandelion","marijuana","spider","sunflower","mushroom","wolf","beagle","retriever","dog","zebra"]
     
-    public func getWildlife() -> [String] {
+    internal func getWildlife() -> [String] {
         return wildlife
     }
     
-    public func matchWildlife(tags: [String]) -> (Bool, String) {
+    internal func matchWildlife(tags: [String]) -> (Bool, String) {
         for wild in wildlife {
             for tag in tags {
                 if (tag == wild) {

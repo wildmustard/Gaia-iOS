@@ -23,6 +23,7 @@ PODS:
     - Bolts/Tasks (~> 1.6)
   - pop (1.0.9)
   - SVProgressHUD (2.0)
+  - SwiftyBeaver (0.4.2)
 
 DEPENDENCIES:
   - AFNetworking
@@ -31,6 +32,7 @@ DEPENDENCIES:
   - Parse
   - pop (~> 1.0)
   - SVProgressHUD
+  - SwiftyBeaver
 
 SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
@@ -40,5 +42,6 @@ SPEC CHECKSUMS:
   Parse: f51c24d2feb412e4b2d6cc73d37cb24e8d0089bc
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
   SVProgressHUD: e9e7c893686a20da55a28015ed384d9425e15479
+  SwiftyBeaver: 3eced9aabe4f10b975453cc1baaa2d523a5eaeae
 
 COCOAPODS: 0.39.0

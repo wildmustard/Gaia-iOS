@@ -39,6 +39,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SwiftyBeaver.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>pop.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -52,12 +57,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>1818F6CF58F665C700791F365320E764</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>1C3436CEA5C3D39764C5F54374794ECB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2759BD572495E0DDC4490A9BEDBA533C</key>
+		<key>270DA4726FB2F9DBAB71166D05BB7AD7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -72,7 +82,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5B5B04653E95E418DAC83DF6AA4B729E</key>
+		<key>61BF989A6429FCC78184C9DF1233A2FE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -82,7 +92,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E0C82E3A13A356FAB0C2981CA5EE42E8</key>
+		<key>D2EA7BE28576C5ED3DFC981CE27D7D5C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
