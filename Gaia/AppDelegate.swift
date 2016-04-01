@@ -37,6 +37,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 configuration.server = "https://stark-falls-28866.herokuapp.com/parse"
             })
         )
+        
+        // Check in with the notifications and see if the logout was called
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidLogout", name: userDidLogoutNotification, object: nil)
+        
+        
+        //Check if there is a user logged in
         if (PFUser.currentUser() != nil) {
             
             // Log Current User Found
@@ -59,6 +65,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+    
+    func userDidLogout() {
+        self.window!.rootViewController = self.LoginVC;
+    }
+
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
