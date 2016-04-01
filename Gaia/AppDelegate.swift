@@ -15,9 +15,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var storyboard = UIStoryboard(name: "Main", bundle: nil)
-
-    //Load loginView first
-    let LoginVC :LogInViewController = LogInViewController(nibName: "LogInViewController", bundle: nil)
     
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -30,6 +27,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 configuration.server = "https://stark-falls-28866.herokuapp.com/parse"
             })
         )
+        
+        // Check in with the notifications and see if the logout was called
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidLogout", name: userDidLogoutNotification, object: nil)
+        
+        
+        //Check if there is a user logged in
         if (PFUser.currentUser() != nil) {
             
             // Log Current User Found
@@ -44,14 +47,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.rootViewController = vc
             
         } else {
-            self.window!.rootViewController = self.LoginVC;
+            
+            //Load loginView first
+            let LoginVC :LogInViewController = LogInViewController(nibName: "LogInViewController", bundle: nil)
+            self.window!.rootViewController = LoginVC;
+            
         }
-        //Assign Login view controller as first thing to be loaded
-        
-
         
         return true
     }
+    
+    func userDidLogout() {
+
+        let vc :LogInViewController = LogInViewController(nibName: "LogInViewController", bundle: nil)
+        self.window!.rootViewController = vc
+        
+    }
+
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

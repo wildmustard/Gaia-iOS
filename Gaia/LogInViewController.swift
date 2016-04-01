@@ -42,6 +42,7 @@ class LogInViewController: UIViewController {
     }
     //If the user exists segue into the Container view
     @IBAction func onLogin(sender: AnyObject) {
+        
         PFUser.logInWithUsernameInBackground(userNameField.text!, password:passwordField.text!) { (user: PFUser?, error: NSError?) -> Void in
             
             if user != nil{
