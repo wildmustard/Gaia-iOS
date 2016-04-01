@@ -20,13 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let LoginVC :LogInViewController = LogInViewController(nibName: "LogInViewController", bundle: nil)
     
     
-    
-  // var tabViewController1 : MapViewController?
-   // var tabViewController2 : ImageCatalogueViewController?
-    
-
-    
-    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         

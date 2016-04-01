@@ -16,8 +16,9 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
     let sectionInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
     
     // Parse media object
-    var media: [Media]?
-    var queue: NSOperationQueue?
+    var content: [PFObject]?
+    var imageCache = [Int:UIImage]()
+
     // Catalogue collection view
     @IBOutlet var CatalogueCollectionView: UICollectionView!
     
@@ -34,13 +35,12 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
         //Load Cell file to be registered with CollectionViewController
         let nibName = UINib(nibName: "CustomCellCollectionViewCell", bundle:nil)
         
-        queue = NSOperationQueue()
-        
         //Associate cell with CollectionViewController
         self.CatalogueCollectionView.registerNib(nibName, forCellWithReuseIdentifier: "MyCell")
         
         CatalogueCollectionView.delegate = self
         CatalogueCollectionView.dataSource = self
+        
         callServerForUserMedia()
         
         // Do any additional setup after loading the view.
@@ -89,64 +89,24 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
         
         query.orderByDescending("createdAt")
         
+        query.cachePolicy = .CacheThenNetwork
         
-        query.findObjectsInBackgroundWithBlock { (media: [PFObject]?, error: NSError?) ->
+        query.findObjectsInBackgroundWithBlock { (content: [PFObject]?, error: NSError?) ->
             Void in
             // If we are able to get new userMedia, then set out new media as the new userMedia object
-            if let media = media {
+            if let content = content {
                 
                 // Reset user media object for the tableview data, reload table to display it
                 NSLog("Queried data successfully")
-                self.CatalogueCollectionView.reloadData()
-                print(media.count)
-                self.media = []
-                for _ in 0 ..< media.count {
-                    let temp = Media()
-                    self.media?.append(temp)
+                
+                for each in content {
+                    print("\(each["tag"])")
                 }
                 
-                print(self.media?.count)
-                let operation = NSBlockOperation(block: { 
-                    for i in 0 ..< media.count {
-                        let entry = media[i]
-                        if entry["image"] != nil {
-                            //print(entry["tag"])
-                            let imageFile = entry["image"] as! PFFile
-                            
-                            
-                            imageFile.getDataInBackgroundWithBlock({ (data: NSData?, error: NSError?) ->
-                                Void in
-                                
-                                // Failure to get image
-                                if let error = error {
-                                    
-                                    // Log Failure
-                                    NSLog("Unable to get image data for table cell \(i)\nError: \(error)")
-                                    
-                                }
-                                    // Success getting image
-                                else {
-                                    
-                                    // Get image and set to cell's content
-                                    let image = UIImage(data: data!)
-                                    
-                                    //let image = UIImage(CGImage: cgImageRef!,scale: 1.0,orientation: UIImageOrientation.Right)
-                                    let portraitImage = UIImage(CGImage: (image?.CGImage)!,scale: 1.0,orientation: UIImageOrientation.Right)
-                                    //print(portraitImage.size.height)
-                                    // Set image and tag for cell
-                                    self.media?[i].image = portraitImage
-                                    self.media?[i].tag = (entry["tag"] as? String)!
-                                    self.CatalogueCollectionView.reloadData()
-                                    //print("test \(i)")
-                                    
-                                }
-                            })
-                            
-                            
-                        }
-                    }
-                })
-                self.queue?.addOperation(operation)
+                self.content = content
+                self.imageCache.removeAll()
+                self.CatalogueCollectionView.reloadData()
+            
             }
                 // Unable to get new user media
             else {
@@ -166,8 +126,8 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         //Returns Items in server
-        if let media = media {
-            return media.count
+        if let content = content {
+            return content.count
         }
         else {
             return 0
@@ -180,11 +140,53 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MyCell", forIndexPath: indexPath) as! CustomCellCollectionViewCell
         
         // If the media content for this cell exists, set it
+        if let img = imageCache[indexPath.row] {
+            cell.cellImageView.image = img
+        }
+        else {
             
-            // Create image and tag properties
+            cell.cellImageView.image = UIImage(named: "Apple_Swift_Logo")
             
-        cell.cellImageView.image = self.media?[indexPath.row].image
-        cell.wildLifeTagCell.text = self.media?[indexPath.row].tag
+            if let imageFile = self.content?[indexPath.row]["image"] as? PFFile {
+                imageFile.getDataInBackgroundWithBlock({ (data: NSData?, error: NSError?) ->
+                    Void in
+                    
+                    // Failure to get image
+                    if let error = error {
+                        
+                        // Log Failure
+                        NSLog("Unable to get image data for table cell \(indexPath.row)\nError: \(error)")
+                        
+                    }
+                        // Success getting image
+                    else {
+                        
+                        // Get image and set to cell's content
+                        let image = UIImage(data: data!)
+                        
+                        //let image = UIImage(CGImage: cgImageRef!,scale: 1.0,orientation: UIImageOrientation.Right)
+                        let portraitImage = UIImage(CGImage: (image?.CGImage)!,scale: 1.0,orientation: UIImageOrientation.Right)
+                        
+                        // Set image and tag for cell
+                        if let updateCell = self.CatalogueCollectionView.cellForItemAtIndexPath(indexPath) as? CustomCellCollectionViewCell {
+                            
+                            updateCell.cellImageView.image = portraitImage
+                        
+                        }
+                        
+                        // Set the cache index
+                        self.imageCache[indexPath.row] = portraitImage
+                    }
+                })
+            }
+        }
+        
+        
+        // Set the tag
+        if let tag = content?[indexPath.row]["tag"]  {
+            cell.wildLifeTagCell.text = tag as! String
+        }
+        
         
         return cell
     }

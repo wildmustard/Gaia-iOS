@@ -10,5 +10,6 @@ target 'Gaia' do
     pod 'AFNetworking'
     pod 'ChameleonFramework/Swift'
     pod 'pop', '~> 1.0'
+    pod 'SwiftyBeaver'
 end
 
