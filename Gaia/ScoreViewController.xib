@@ -19,21 +19,21 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Custom_Nav" translatesAutoresizingMaskIntoConstraints="NO" id="L3w-8z-r1I">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                 </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Profile_Picture" translatesAutoresizingMaskIntoConstraints="NO" id="fha-03-wyC">
+                    <rect key="frame" x="130" y="15" width="61" height="61"/>
+                </imageView>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qoy-mM-BEh">
-                    <rect key="frame" x="249" y="28" width="63" height="30"/>
+                    <rect key="frame" x="249" y="31" width="63" height="30"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                     <state key="normal" title="Logout">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="onLogout:" destination="-1" eventType="touchUpInside" id="E6e-Xk-i4h"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Profile_Picture" translatesAutoresizingMaskIntoConstraints="NO" id="fha-03-wyC">
-                    <rect key="frame" x="130" y="15" width="61" height="61"/>
-                </imageView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.83529411760000005" green="0.83529411760000005" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
             <point key="canvasLocation" x="328" y="404"/>
         </view>
