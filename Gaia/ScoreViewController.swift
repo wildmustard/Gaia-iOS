@@ -12,12 +12,29 @@ import Parse
 let userDidLogoutNotification = "User Logged Out\n"
 
 
-class ScoreViewController: UIViewController {
+class ScoreViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var profilePictureImage: UIImageView!
+    
+    // Parse media object
+    var content: [PFObject]?
+    var userCache = [Int:String]()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Load Cell file to be registered with CollectionViewController
+        let nibName = UINib(nibName: "ScoreViewTableCell", bundle:nil)
+        
+        //Associate cell with CollectionViewController
+        self.tableView.registerNib(nibName, forCellReuseIdentifier: "MyScoreCell")
+        
+        tableView.delegate = self
+        
+        tableView.dataSource = self
+        
         let profileImage = UIImage(named: "Profile_Picture")
         
         //profileImageView = UIImageView(image: profileImage)
@@ -28,7 +45,7 @@ class ScoreViewController: UIViewController {
         self.profilePictureImage.clipsToBounds = true;
 
         
-        // Do any additional setup after loading the view.
+        callServerForUserMedia()
     }
 
     override func didReceiveMemoryWarning() {
@@ -57,6 +74,79 @@ class ScoreViewController: UIViewController {
         }
 
     }
+    
+    
+    func callServerForUserMedia() {
+        
+        // Setup a PFQuery object to handle collection of the user's images
+        let query = PFQuery(className: "_User")
+        
+        //Caches images from parse
+        
+        query.orderByDescending("createdAt")
+        
+        query.cachePolicy = .CacheThenNetwork
+        
+        query.findObjectsInBackgroundWithBlock { (content: [PFObject]?, error: NSError?) ->
+            Void in
+            // If we are able to get new user profiles, then set out new media as the new userMedia object
+            if let content = content {
+                
+                // Reset user media object for the tableview data, reload table to display it
+                NSLog("Queried data successfully")
+                
+                for each in content {
+                    print("\(each["username"])")
+                }
+                
+                self.content = content
+                self.userCache.removeAll()
+                self.tableView.reloadData()
+                
+            }
+                // Unable to get new user media
+            else {
+                if let error = error {
+                    // Log error
+                    NSLog("Error: Unable to query new user media objects\n\(error)")
+                }
+                
+            }
+        }
+        
+        
+    }
+
+    func tableView(tableView:UITableView, numberOfRowsInSection section:Int) -> Int {
+        return 1
+    }
+    // Number of sections in tableview == number of media objects we gathered, else 0 cells we have to show
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        if (content != nil) {
+            return content!.count
+        }
+        else {
+            return 0
+        }
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("MyScoreCell", forIndexPath: indexPath) as! ScoreViewTableCell
+        
+        if (content?[indexPath.section]["username"] != nil) {
+            let usr = content![indexPath.section]["username"] as! String
+            
+            cell.usernameLabel.text = usr
+        }
+        
+       
+        
+        // Return cell header
+        return cell
+    }
+    
+    
+    
     //Create rounded images
     func roundImage (image:UIImage) -> UIImage {
         

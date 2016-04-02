@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ScoreViewController" customModule="Gaia" customModuleProvider="target">
             <connections>
                 <outlet property="profilePictureImage" destination="fha-03-wyC" id="bCP-AM-acR"/>
+                <outlet property="tableView" destination="Bg0-kp-itf" id="Rhq-I2-1r6"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -29,13 +30,13 @@
                         <action selector="onLogout:" destination="-1" eventType="touchUpInside" id="E6e-Xk-i4h"/>
                     </connections>
                 </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Profile_Picture" translatesAutoresizingMaskIntoConstraints="NO" id="fha-03-wyC">
+                    <rect key="frame" x="130" y="14" width="61" height="61"/>
+                </imageView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Bg0-kp-itf">
                     <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Profile_Picture" translatesAutoresizingMaskIntoConstraints="NO" id="fha-03-wyC">
-                    <rect key="frame" x="130" y="14" width="61" height="61"/>
-                </imageView>
             </subviews>
             <color key="backgroundColor" red="0.83529411760000005" green="0.83529411760000005" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
