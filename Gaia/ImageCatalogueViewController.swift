@@ -31,7 +31,9 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
     
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
         //Load Cell file to be registered with CollectionViewController
         let nibName = UINib(nibName: "CustomCellCollectionViewCell", bundle:nil)
         
@@ -46,7 +48,7 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
         // Do any additional setup after loading the view.
         
         // Create the navigation bar
-        let navigationBar = UINavigationBar(frame: CGRectMake(0, 0, self.view.frame.size.width, 47)) // Offset by 20 pixels vertically to take the status bar into account
+        let navigationBar = UINavigationBar(frame: CGRectMake(0, 0, (parentViewController?.view.frame.size.width)!, 50)) // Offset by 20 pixels vertically to take the status bar into account
         
         navigationBar.backgroundColor = UIColor.whiteColor()
         //navigationBar.delegate = self;
