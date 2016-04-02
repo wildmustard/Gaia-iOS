@@ -14,10 +14,14 @@ class ImageDetailViewController: UIViewController {
     weak var content: PFObject?
     weak var image: UIImage?
 
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var closeButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        imageView.image = self.image
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -25,6 +29,12 @@ class ImageDetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func onPressClose(sender: AnyObject) {
+        
+        // Close this view controller
+        self.dismissViewControllerAnimated(true, completion: nil)
+        
+    }
 
     /*
     // MARK: - Navigation
