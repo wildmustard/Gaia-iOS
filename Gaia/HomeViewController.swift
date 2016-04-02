@@ -54,7 +54,7 @@ class HomeViewController: UIViewController {
         
         // Setup Camera Button Size, Position, Label Font-Size, Turn off Animation of Press
         cameraButton.frame = CGRectMake(160, 100, 75, 75)
-        cameraButton.center = CGPointMake(160, 510)
+        cameraButton.center = CGPointMake(parentViewController!.view.frame.width / 2, parentViewController!.view.frame.height - cameraButton.frame.height)
         cameraButton.titleLabel!.font = UIFont.systemFontOfSize(16)
         cameraButton.animateTap = false
         

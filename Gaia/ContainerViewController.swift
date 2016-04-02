@@ -37,20 +37,6 @@ class ContainerViewController: UIViewController, UIScrollViewDelegate {
         self.scrollView!.addSubview(HomeVC.view)
         HomeVC.didMoveToParentViewController(self)
         
-        // Setup frame locations for the views
-        var catalogueFrame :CGRect = CatalogueVC.view.frame
-        catalogueFrame.origin.x = catalogueFrame.width
-        HomeVC.view.frame = catalogueFrame
-        
-        var homeFrame :CGRect = HomeVC.view.frame
-        homeFrame.origin.x = 2 * homeFrame.width
-        ScoreVC.view.frame = homeFrame
-        
-        // Setup height of views
-        let scrollWidth :CGFloat = 3 * self.view.frame.width
-        let scrollHeight : CGFloat = self.view.frame.size.width
-        self.scrollView!.contentSize = CGSizeMake(scrollWidth, scrollHeight)
-        
         // Delegate control of the scrollview
         scrollView.delegate = self
         
@@ -102,10 +88,26 @@ class ContainerViewController: UIViewController, UIScrollViewDelegate {
     override func viewWillAppear(animated: Bool) {
         
         // Setup origin for container view to appear on the Home View
-        var frame :CGRect = scrollView.frame
-        frame.origin.x = frame.size.width
+        var frame :CGRect = self.view.frame
+        scrollView.frame = frame
+        
+        // Setup height of views
+        let scrollWidth :CGFloat = 3 * frame.width
+        let scrollHeight :CGFloat = frame.height
+        self.scrollView!.contentSize = CGSizeMake(scrollWidth, scrollHeight)
+        
+        // Setup frame locations for the views
+        CatalogueVC.view.frame.size.width = frame.width
+        CatalogueVC.view.frame.size.height = frame.height
+        var catalogueFrame :CGRect = CatalogueVC.view.frame
+        catalogueFrame.origin.x = catalogueFrame.width
+        HomeVC.view.frame = catalogueFrame
+        var homeFrame :CGRect = HomeVC.view.frame
+        homeFrame.origin.x = 2 * homeFrame.width
+        ScoreVC.view.frame = homeFrame
+        
+        frame.origin.x = frame.width
         scrollView.scrollRectToVisible(frame, animated: false)
-
         
     }
 
