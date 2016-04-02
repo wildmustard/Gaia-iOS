@@ -21,7 +21,7 @@ class CaptureMedia: NSObject {
         
         // Encode image using Parse into 64-bit text
         capture["image"] = getPFFileUsingImage(image)
-        capture["username"] = "Gaia Dummy User"
+        capture["username"] = PFUser.currentUser()?.username
         capture["tag"] = tag
         
         // Save capture media to server
