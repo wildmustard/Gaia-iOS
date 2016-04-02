@@ -83,7 +83,7 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
     func callServerForUserMedia() {
         
         // Setup a PFQuery object to handle collection of the user's images
-        let query = PFQuery(className: "CaptureMedia")
+        let query = PFQuery(className: "CaptureMedia").whereKey("username", equalTo: (PFUser.currentUser()?.username)!)
         
         //Caches images from parse
         
