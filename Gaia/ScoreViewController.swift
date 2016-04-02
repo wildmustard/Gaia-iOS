@@ -20,7 +20,7 @@ class ScoreViewController: UIViewController {
         super.viewDidLoad()
         let profileImage = UIImage(named: "Profile_Picture")
         
-        var profileImageView = UIImageView(image: profileImage)
+        //profileImageView = UIImageView(image: profileImage)
         
         profilePictureImage.image = roundImage(profileImage!)
 
