@@ -14,6 +14,8 @@ let userDidLogoutNotification = "User Logged Out\n"
 
 class ScoreViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
+    @IBOutlet weak var currentUsernameLabel: UILabel!
+    @IBOutlet weak var userScoreLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var profilePictureImage: UIImageView!
     
@@ -35,6 +37,8 @@ class ScoreViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         
         tableView.dataSource = self
         
+        callServerForUserScore()
+
         let profileImage = UIImage(named: "Profile_Picture")
         
         //profileImageView = UIImageView(image: profileImage)
@@ -43,9 +47,13 @@ class ScoreViewController: UIViewController,UITableViewDelegate,UITableViewDataS
 
         //self.profilePictureImage.layer.cornerRadius = self.profilePictureImage.frame.size.width / 2;
         self.profilePictureImage.clipsToBounds = true;
+        
+        //reload tableview score when image is saved
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "callServerForUserScore", name: userSavedImage, object: nil)
 
         
-        callServerForUserMedia()
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -76,14 +84,14 @@ class ScoreViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     }
     
     
-    func callServerForUserMedia() {
+    func callServerForUserScore() {
         
-        // Setup a PFQuery object to handle collection of the user's images
-        let query = PFQuery(className: "_User")
+        // Setup a PFQuery object to handle collection of the user's scores
+        let query = PFQuery(className: "_User")//.whereKey("username", notEqualTo: (PFUser.currentUser()?.username)!)
         
         //Caches images from parse
         
-        query.orderByDescending("createdAt")
+        query.orderByDescending("score")
         
         query.cachePolicy = .CacheThenNetwork
         
@@ -133,10 +141,30 @@ class ScoreViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("MyScoreCell", forIndexPath: indexPath) as! ScoreViewTableCell
         
-        if (content?[indexPath.section]["username"] != nil) {
+        if (content?[indexPath.section]["username"] != nil && (content?[indexPath.section]["score"] != nil)) {
             let usr = content![indexPath.section]["username"] as! String
+            let scr = content![indexPath.section]["score"] as! Int
             
-            cell.usernameLabel.text = usr
+            //Highlight the current user cell
+            if (usr == PFUser.currentUser()?.username) {
+                //Set the labels next to profile image
+                userScoreLabel.text = "\(scr)"
+                currentUsernameLabel.text = usr
+                
+                cell.backgroundColor = UIColor.yellowColor()
+                cell.usernameLabel.text = usr
+                cell.scoreLabel.text = "\(scr)"
+                
+                }
+            else {
+                cell.backgroundColor = UIColor.whiteColor()
+
+                cell.usernameLabel.text = usr
+                cell.scoreLabel.text = "\(scr)"
+
+                
+            }
+            
         }
         
        

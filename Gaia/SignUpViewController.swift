@@ -48,6 +48,7 @@ class SignUpViewController: UIViewController {
         newUser.username = userNameField.text
         newUser.password = passwordField.text
         newUser.email = emailField.text
+        newUser["score"] = 0
         
         //Try to sign new user up
         newUser.signUpInBackgroundWithBlock { (success:Bool,error: NSError?) -> Void in
@@ -62,7 +63,6 @@ class SignUpViewController: UIViewController {
                 // Creation Successful
             else {
 
-                
                 // Log success
                 NSLog("Successfully created new user for Parse\nUser: \(newUser)")
                 

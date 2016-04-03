@@ -27,4 +27,11 @@ class Wildlife: NSObject {
         return (false,"")
     }
     
+    internal func pointsTag(tag: String) -> (Int){
+        
+        let points = tag.characters.count * 15
+    
+        return points
+    }
+    
 }
