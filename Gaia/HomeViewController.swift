@@ -261,7 +261,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         if status == CLAuthorizationStatus.AuthorizedWhenInUse {
-            locationManager.startUpdatingLocation()
+            
         }
     }
     
