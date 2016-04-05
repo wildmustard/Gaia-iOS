@@ -366,7 +366,7 @@ class HomeViewController: UIViewController {
                 user!["score"] = user!["score"] as! Int + self.points!
             
                 // Log update & total
-                log.debug("Updated Score of user \(PFUser.currentUser()?.username) to \(user!["score"])")
+                log.debug("Updated Score of user \(PFUser.currentUser()!.username!) to \(user!["score"])")
                 
                 // Save user object to Parse w/ completion to update leaderboard table
                 user!.saveInBackgroundWithBlock({ (success: Bool?, error: NSError?) -> Void in
