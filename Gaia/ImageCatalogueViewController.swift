@@ -18,7 +18,7 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
     // Parse media object
     var content: [PFObject]?
     var imageCache = [Int:UIImage]()
-
+    
     // Catalogue collection view
     @IBOutlet var CatalogueCollectionView: UICollectionView!
     
@@ -218,10 +218,13 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
         
         NSLog("Map button clicked, transition started to map")
         
+        let vc = MapViewController(nibName: "MapViewController", bundle: nil, content: self.content!, imageCache: self.imageCache)
+        
         // Present MapView Controller
-        presentViewController((MapViewController() as? UIViewController)!, animated: true, completion: nil)
+        presentViewController(vc as UIViewController, animated: true, completion: nil)
         
     }
+    
     
     // Set Our Delay
     func delay(delay:Double, closure:()->()) {

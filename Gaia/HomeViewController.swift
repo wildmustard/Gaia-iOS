@@ -281,6 +281,12 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        print(error.localizedDescription)
+    }
+    
+    
+    
     
     @IBAction func onSavePhoto(sender: AnyObject) {
         

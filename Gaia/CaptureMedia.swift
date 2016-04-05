@@ -25,8 +25,7 @@ class CaptureMedia: NSObject {
         capture["username"] = PFUser.currentUser()?.username
         capture["tag"] = tag
         capture["points"] = points
-        capture["location"] = location
-        
+        capture["location"] = PFGeoPoint(latitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!)
         
         // Save capture media to server
         capture.saveInBackgroundWithBlock(completion)
