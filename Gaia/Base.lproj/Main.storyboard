@@ -29,6 +29,7 @@
                             <constraint firstItem="GgJ-LP-ka4" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="vqR-wM-d6Q"/>
                         </constraints>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="scrollView" destination="GgJ-LP-ka4" id="Sfs-yV-uRZ"/>
