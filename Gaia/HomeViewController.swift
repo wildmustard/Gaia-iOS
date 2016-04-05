@@ -14,7 +14,9 @@ import Parse
 
 let userCapturedImage = "User Captured Image\n"
 let userReleasedImage = "User Released Image\n"
-let reloadCatalogue = "Calling Parse to reload images"
+let reloadCatalogue = "Calling Parse to Reload Images For Catalogue\n"
+let reloadScores = "Calling Parse to Reload User Score Leaderboards\n"
+let userSavedImage = "User Saved an Image\n"
 
 let clarifaiClientID = "WMZrJ33oE9fISVNAPLZNVtnMhXIC9reQ9YGtAuV2"
 let clarifaiClientSecret = "8lPWDBKJDIDNlnrBEiKjqnfWYlqJ8JEOGH76oseS"
@@ -36,6 +38,8 @@ class HomeViewController: UIViewController {
     var stillImageOutput : AVCaptureStillImageOutput!
     var videoPreviewLayer : AVCaptureVideoPreviewLayer!
     var savedTagMatch: String!
+    var userScore: PFObject?
+
     
     // CaptureMedia Object instance to submit to server
     let capture = CaptureMedia()
@@ -47,7 +51,8 @@ class HomeViewController: UIViewController {
     private lazy var client : ClarifaiClient = ClarifaiClient(appID: clarifaiClientID, appSecret: clarifaiClientSecret)
     // Camera Button
     let cameraButton = DKCircleButton.init(type: .Custom) // Capture Button for Camera using DK Pod
-
+    //Points for image
+    var points:Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -173,20 +178,18 @@ class HomeViewController: UIViewController {
                     let cgImageRef = CGImageCreateWithJPEGDataProvider(dataProvider, nil, true, CGColorRenderingIntent.RenderingIntentDefault)
                     
                     //Get an UIImage
-                    let image = UIImage(CGImage: cgImageRef!,scale: 1.0,orientation: UIImageOrientation.Right)
+                    let image = UIImage(CGImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.Right)
                     
                     // Set the taken image property
                     self.takenPicture.image = image
                     
-                    // Display progress wheel during POST to server
-                    
-                    
-                    //Clear tags
+                    //Clear tags & points
                     self.savedTagMatch = ""
                     self.wildLifeTagHomeView.text = ""
+                    self.points = 0
                     
                     // Send capture to AI server for identification
-                    self.recognizeImage(image, completion: { (success, match, error) -> () in
+                    self.recognizeImage(image, completion: { (success, match, points, error) -> () in
                         
                         if let error = error {
                         
@@ -200,6 +203,9 @@ class HomeViewController: UIViewController {
                                 //Set the tag retrieved
                                 self.wildLifeTagHomeView.text = match
                                 self.savedTagMatch = match
+                                self.points = points
+                                
+                                
 
                             }
                             else {
@@ -245,7 +251,8 @@ class HomeViewController: UIViewController {
         // Disable buttons until ready
         disableSaveCancelButtons()
         
-        capture.postCapturedImage(takenPicture.image, tag: self.savedTagMatch, withCompletion:
+        // Post captured image to the Parse Server
+        capture.postCapturedImage(takenPicture.image, tag: self.savedTagMatch, points: points, withCompletion:
             { (success: Bool, error: NSError?) -> Void in
                 
                 // Stop progressHUD after network task done
@@ -272,8 +279,14 @@ class HomeViewController: UIViewController {
                     
                     // Log success post
                     NSLog("Image capture successfully posted to parse server\n")
-                    //Call function callServerForUserMedia in ImageCatalogue to reload images being displayed in collection view 
+                    
+                    
+                    // Update User Score
+                    self.updateScore()
+                    
+                    //Call functions in ScoreViewController to reload User Scores
                     NSNotificationCenter.defaultCenter().postNotificationName(reloadCatalogue, object: nil)
+                    
                     // Turn off captured image controls & resume default state function
                     self.turnOffCapturedImageControlSettings()
                     
@@ -283,7 +296,7 @@ class HomeViewController: UIViewController {
     }
     
     // Function to send the taken image to the AI for tag recognition
-    private func recognizeImage(image: UIImage!, completion: (success: Bool!, match: String!, error: NSError?) -> ()) {
+    private func recognizeImage(image: UIImage!, completion: (success: Bool!, match: String!,points:Int?, error: NSError?) -> ()) {
         // Scale down the image. This step is optional. However, sending large images over the
         // network is slow and does not significantly improve recognition performance.
         let size = CGSizeMake(320, 320 * image.size.height / image.size.width)
@@ -302,7 +315,7 @@ class HomeViewController: UIViewController {
                 
                 // Log failure to connect
                 NSLog("Unable to send Clarifai client jpeg image\nError: \(error)\n")
-                completion(success: false, match: nil, error: error)
+                completion(success: false, match: nil, points: nil,error: error)
 
             }
             else {
@@ -317,9 +330,10 @@ class HomeViewController: UIViewController {
                 
                 // Collect the matched tag if it exists from wildlife dictionary
                 let (success , match) = self.myWildlife.matchWildlife(tags)
+                let points = self.myWildlife.pointsTag(match)
                
                 // Set return values
-                completion(success: success, match: match, error: nil)
+                completion(success: success, match: match,points:points, error: nil)
     
                 // Log status & match result
                 NSLog("Match successful: \(success)\n")
@@ -331,8 +345,61 @@ class HomeViewController: UIViewController {
             
         }
     }
+    func updateScore() {
+        
+        let query = PFQuery(className: "_User").whereKey("username", equalTo: (PFUser.currentUser()?.username)!)
+        
+        // Query current posting user and update their score if successful
+        query.getFirstObjectInBackgroundWithBlock  {
+            (user: PFObject?, error: NSError?) -> Void in
+            // Failure
+            if error != nil {
+                
+                // Log Error
+                log.error("Unable to retrieve current user to update score")
+                
+            }
+            // User retrieved, update score
+            else {
+                
+                // Update user associated score to add captured image
+                user!["score"] = user!["score"] as! Int + self.points!
+            
+                // Log update & total
+                log.debug("Updated Score of user \(PFUser.currentUser()?.username) to \(user!["score"])")
+                
+                // Save user object to Parse w/ completion to update leaderboard table
+                user!.saveInBackgroundWithBlock({ (success: Bool?, error: NSError?) -> Void in
+                    
+                    // If error exists
+                    if let error = error {
+                        
+                        // Log Error
+                        log.error("Unable to save user score in background\nError: \(error)")
+                        
+                    }
+                    // No error, update tables
+                    else {
+                    
+                        // Log success & send out notification
+                        log.debug("Saved user score in background")
+                        
+                        //Call functions in ScoreViewController to reload User Scores
+                        NSNotificationCenter.defaultCenter().postNotificationName(reloadScores, object: nil)
+                        
+                    }
+                })
+                
+            }
+            
+        }
+        
+        
+    
+    }
     
     
+    // Cancel Button Pressed
     @IBAction func onCancelPhoto(sender: AnyObject) {
         
         // Log action
@@ -342,6 +409,7 @@ class HomeViewController: UIViewController {
         turnOffCapturedImageControlSettings()
         self.savedTagMatch = ""
         self.wildLifeTagHomeView.text = ""
+        self.points = 0
         
     }
     
@@ -398,6 +466,7 @@ class HomeViewController: UIViewController {
         cancelButton.userInteractionEnabled = false
         cancelButton.hidden = true
         saveButton.hidden = true
+        
     }
     
     // Turn on cancel save buttons
