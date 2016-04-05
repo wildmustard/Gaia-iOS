@@ -14,8 +14,9 @@ import Parse
 
 let userCapturedImage = "User Captured Image\n"
 let userReleasedImage = "User Released Image\n"
-let reloadCatalogue = "Calling Parse to reload images"
-let userSavedImage = "User saved an image"
+let reloadCatalogue = "Calling Parse to Reload Images For Catalogue\n"
+let reloadScores = "Calling Parse to Reload User Score Leaderboards\n"
+let userSavedImage = "User Saved an Image\n"
 
 let clarifaiClientID = "WMZrJ33oE9fISVNAPLZNVtnMhXIC9reQ9YGtAuV2"
 let clarifaiClientSecret = "8lPWDBKJDIDNlnrBEiKjqnfWYlqJ8JEOGH76oseS"
@@ -182,12 +183,10 @@ class HomeViewController: UIViewController {
                     // Set the taken image property
                     self.takenPicture.image = image
                     
-                    // Display progress wheel during POST to server
-                    
-                    
-                    //Clear tags
+                    //Clear tags & points
                     self.savedTagMatch = ""
                     self.wildLifeTagHomeView.text = ""
+                    self.points = 0
                     
                     // Send capture to AI server for identification
                     self.recognizeImage(image, completion: { (success, match, points, error) -> () in
@@ -281,13 +280,11 @@ class HomeViewController: UIViewController {
                     // Log success post
                     NSLog("Image capture successfully posted to parse server\n")
                     
+                    
                     // Update User Score
                     self.updateScore()
                     
-                    NSNotificationCenter.defaultCenter().postNotificationName(userSavedImage, object: nil)
-
-                    
-                    //Call function callServerForUserMedia in ImageCatalogue to reload images being displayed in collection view
+                    //Call functions in ScoreViewController to reload User Scores
                     NSNotificationCenter.defaultCenter().postNotificationName(reloadCatalogue, object: nil)
                     
                     // Turn off captured image controls & resume default state function
@@ -348,25 +345,61 @@ class HomeViewController: UIViewController {
             
         }
     }
-    func updateScore(){
+    func updateScore() {
         
         let query = PFQuery(className: "_User").whereKey("username", equalTo: (PFUser.currentUser()?.username)!)
         
+        // Query current posting user and update their score if successful
         query.getFirstObjectInBackgroundWithBlock  {
-            (userScore: PFObject?, error: NSError?) -> Void in
+            (user: PFObject?, error: NSError?) -> Void in
+            // Failure
             if error != nil {
-                print(error)
-            } else if let userScore = userScore {
                 
-                userScore["score"] = userScore["score"] as! Int + self.points!
+                // Log Error
+                log.error("Unable to retrieve current user to update score")
                 
-                userScore.saveInBackground()
             }
+            // User retrieved, update score
+            else {
+                
+                // Update user associated score to add captured image
+                user!["score"] = user!["score"] as! Int + self.points!
+            
+                // Log update & total
+                log.debug("Updated Score of user \(PFUser.currentUser()?.username) to \(user!["score"])")
+                
+                // Save user object to Parse w/ completion to update leaderboard table
+                user!.saveInBackgroundWithBlock({ (success: Bool?, error: NSError?) -> Void in
+                    
+                    // If error exists
+                    if let error = error {
+                        
+                        // Log Error
+                        log.error("Unable to save user score in background\nError: \(error)")
+                        
+                    }
+                    // No error, update tables
+                    else {
+                    
+                        // Log success & send out notification
+                        log.debug("Saved user score in background")
+                        
+                        //Call functions in ScoreViewController to reload User Scores
+                        NSNotificationCenter.defaultCenter().postNotificationName(reloadScores, object: nil)
+                        
+                    }
+                })
+                
+            }
+            
         }
+        
+        
     
     }
     
     
+    // Cancel Button Pressed
     @IBAction func onCancelPhoto(sender: AnyObject) {
         
         // Log action
@@ -433,6 +466,7 @@ class HomeViewController: UIViewController {
         cancelButton.userInteractionEnabled = false
         cancelButton.hidden = true
         saveButton.hidden = true
+        
     }
     
     // Turn on cancel save buttons

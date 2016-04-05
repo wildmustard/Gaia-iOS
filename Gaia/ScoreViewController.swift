@@ -48,11 +48,9 @@ class ScoreViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         //self.profilePictureImage.layer.cornerRadius = self.profilePictureImage.frame.size.width / 2;
         self.profilePictureImage.clipsToBounds = true;
         
-        //reload tableview score when image is saved
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "callServerForUserScore", name: userSavedImage, object: nil)
-
         
-        
+        // Reload tableview on post of new capture
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "callServerForUserScore", name: reloadScores, object: nil)
         
     }
 
@@ -104,7 +102,7 @@ class ScoreViewController: UIViewController,UITableViewDelegate,UITableViewDataS
                 NSLog("Queried data successfully")
                 
                 for each in content {
-                    print("\(each["username"])")
+                    print("\(each["username"]) w/ score \(each["score"])")
                 }
                 
                 self.content = content
@@ -125,9 +123,11 @@ class ScoreViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         
     }
 
+    
     func tableView(tableView:UITableView, numberOfRowsInSection section:Int) -> Int {
         return 1
     }
+    
     // Number of sections in tableview == number of media objects we gathered, else 0 cells we have to show
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         if (content != nil) {

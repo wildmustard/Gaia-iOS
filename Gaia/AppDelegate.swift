@@ -8,7 +8,11 @@
 
 import UIKit
 import Parse
+import SwiftyBeaver
 
+// Setup SwiftyBeaver Logging
+let log = SwiftyBeaver.self
+let console = ConsoleDestination()
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -30,6 +34,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Check in with the notifications and see if the logout was called
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidLogout", name: userDidLogoutNotification, object: nil)
+        
+        // Add SwiftyBeaver
+        log.addDestination(console)
         
         
         //Check if there is a user logged in
