@@ -62,7 +62,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             
             mapView.userInteractionEnabled = false
             SVProgressHUD.show()
-
         }
             
         else if content!.count > 0 {
@@ -147,6 +146,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             let span = MKCoordinateSpanMake(0.1, 0.1)
             let region = MKCoordinateRegionMake(coordinate, span)
             mapView.setRegion(region, animated: true)
+            mapView.showsUserLocation = true
         }
     }
     
