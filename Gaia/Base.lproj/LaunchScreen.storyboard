@@ -39,7 +39,7 @@
                                 <size key="shadowOffset" width="0.0" height="2"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.38039215686274508" blue="0.48627450980392156" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="NTC-iq-tcf" firstAttribute="top" secondItem="CsZ-kH-kDG" secondAttribute="bottom" constant="17" id="CWh-XJ-6PD"/>
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="4do-U0-JDD" secondAttribute="bottom" constant="20" id="LWF-JC-RaM"/>

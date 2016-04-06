@@ -71,8 +71,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         // Setup the call action for camera capture
         cameraButton.addTarget(self,  action: "onPictureTaken", forControlEvents: .TouchUpInside)
         
-        self.locationManager.requestAlwaysAuthorization()
-        self.locationManager.requestWhenInUseAuthorization()
+        locationManager.requestAlwaysAuthorization()
+        locationManager.requestWhenInUseAuthorization()
         
         if CLLocationManager.locationServicesEnabled() {
             print("Location Successful")
@@ -85,7 +85,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.distanceFilter = 200
-        locationManager.requestWhenInUseAuthorization()
+
         // Add button to the subview
         self.view.addSubview(cameraButton)
         
