@@ -52,7 +52,19 @@ class ContainerViewController: UIViewController, UIScrollViewDelegate {
     
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         
+        // Grab scroll offset from scrollview position on end of deacceleration
        let scrollContentOffset = scrollView.contentOffset
+        
+        // Based on scroll content offset value, we can determine which frame we are in
+        // We can determine the last frame we were in before controller was unloaded
+        switch (scrollContentOffset.x) {
+        case 0.0: // Image Catalogue
+            currentFrameReturnIndex = 0
+        case (2 * scrollView.frame.size.width): // Score
+            currentFrameReturnIndex = 2
+        default: // Home
+            currentFrameReturnIndex = 1
+        }
         
 //        if((sessionRunning && scrollContentOffset.x == 0) || (sessionRunning && scrollContentOffset.x == 640)) {
 //            // View has left the homeview, stop the camera session
@@ -70,7 +82,9 @@ class ContainerViewController: UIViewController, UIScrollViewDelegate {
 //        }
         
         // Log position of scrollview window at x
-        NSLog("\(scrollContentOffset)")
+        log.debug("Current Scroll Content Offset: \(scrollContentOffset)")
+        // Log Index on change
+        log.debug("Current Frame Index To Return To: \(currentFrameReturnIndex)")
         
     }
     
@@ -106,7 +120,8 @@ class ContainerViewController: UIViewController, UIScrollViewDelegate {
         homeFrame.origin.x = 2 * homeFrame.width
         ScoreVC.view.frame = homeFrame
         
-        frame.origin.x = frame.width
+        // Set the origin of the frame to the current returning frame
+        frame.origin.x = getCurrentReturnFrameOrigin()
         scrollView.scrollRectToVisible(frame, animated: false)
         
     }
@@ -116,6 +131,20 @@ class ContainerViewController: UIViewController, UIScrollViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    // Function to return the current frame index for returning origin on dismissing subview controller
+    func getCurrentReturnFrameOrigin() -> CGFloat! {
+        
+        // Case of the returning frame index
+        switch (currentFrameReturnIndex) {
+        case 0: // Image Catalogue
+            return 0.0
+        case 2: // Score
+            return 2 * self.view.frame.size.width
+        default: // Home
+            return self.view.frame.size.width
+        }
+        
+    }
 
     /*
     // MARK: - Navigation
