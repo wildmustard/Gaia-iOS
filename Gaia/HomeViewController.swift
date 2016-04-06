@@ -11,6 +11,7 @@ import AVFoundation
 import DKCircleButton
 import SVProgressHUD
 import Parse
+import CoreLocation
 
 let userCapturedImage = "User Captured Image\n"
 let userReleasedImage = "User Released Image\n"
@@ -22,7 +23,7 @@ let clarifaiClientID = "WMZrJ33oE9fISVNAPLZNVtnMhXIC9reQ9YGtAuV2"
 let clarifaiClientSecret = "8lPWDBKJDIDNlnrBEiKjqnfWYlqJ8JEOGH76oseS"
 
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, CLLocationManagerDelegate {
     
     
     // Outlets
@@ -39,7 +40,11 @@ class HomeViewController: UIViewController {
     var videoPreviewLayer : AVCaptureVideoPreviewLayer!
     var savedTagMatch: String!
     var userScore: PFObject?
-
+    
+    var saved = false
+    
+    var locationManager = CLLocationManager()
+    var myLocation: CLLocation!
     
     // CaptureMedia Object instance to submit to server
     let capture = CaptureMedia()
@@ -66,12 +71,27 @@ class HomeViewController: UIViewController {
         // Setup the call action for camera capture
         cameraButton.addTarget(self,  action: "onPictureTaken", forControlEvents: .TouchUpInside)
         
+        locationManager.requestAlwaysAuthorization()
+        locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            print("Location Successful")
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        } else {
+            print("No location")
+        }
+        
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        locationManager.distanceFilter = 200
+
         // Add button to the subview
         self.view.addSubview(cameraButton)
         
         // Hide captured image controls and views until needed
         turnOffCapturedImageControlSettings()
-        
+        //print(myLocation.coordinate)
     }
 
     override func didReceiveMemoryWarning() {
@@ -91,7 +111,6 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         
-
         super.viewWillAppear(animated)
         
         // Setup Session Var for AVCapture
@@ -161,7 +180,6 @@ class HomeViewController: UIViewController {
     func onPictureTaken() {
         //Get the connection from the stillImageOutput
         if (stillImageOutput != nil) {
-            
             let videoConnection = stillImageOutput.connectionWithMediaType(AVMediaTypeVideo)
             stillImageOutput.captureStillImageAsynchronouslyFromConnection(videoConnection, completionHandler: { (sampleBuffer, error) -> Void in
                 
@@ -187,12 +205,15 @@ class HomeViewController: UIViewController {
                     self.savedTagMatch = ""
                     self.wildLifeTagHomeView.text = ""
                     self.points = 0
+                    self.myLocation = nil
+                    
+                    self.locationManager.requestLocation()
                     
                     // Send capture to AI server for identification
                     self.recognizeImage(image, completion: { (success, match, points, error) -> () in
                         
                         if let error = error {
-                        
+                            
                             // Log error
                             NSLog("Failure recognizing image\nError: \(error)")
                             
@@ -239,20 +260,43 @@ class HomeViewController: UIViewController {
 
     }
     
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        if status == CLAuthorizationStatus.AuthorizedWhenInUse {
+            
+        }
+    }
     
-    @IBAction func onSavePhoto(sender: AnyObject) {
-        
-        // Log action
-        NSLog("Save photo button pressed\n")
-        
-        //Start progressHUD
-        SVProgressHUD.show()
-        
-        // Disable buttons until ready
-        disableSaveCancelButtons()
-        
-        // Post captured image to the Parse Server
-        capture.postCapturedImage(takenPicture.image, tag: self.savedTagMatch, points: points, withCompletion:
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            
+            let latitude = location.coordinate.latitude
+            let latitudeString = "\(latitude)"
+            
+            let longitude = location.coordinate.longitude
+            let longitudeString = "\(longitude)"
+            
+            
+            
+            
+            print(latitudeString + " " + longitudeString)
+            
+            self.myLocation = location
+            
+            if self.saved {
+                postImage()
+                self.saved = false
+            }
+            
+        }
+    }
+    
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        print(error.localizedDescription)
+    }
+    
+    
+    func postImage() {
+        capture.postCapturedImage(takenPicture.image, tag: self.savedTagMatch, points: points, location: self.myLocation, withCompletion:
             { (success: Bool, error: NSError?) -> Void in
                 
                 // Stop progressHUD after network task done
@@ -260,10 +304,10 @@ class HomeViewController: UIViewController {
                 
                 // Check if successful post of image to server
                 if let error = error {
-                
+                    
                     // Log error
                     NSLog("Error posting capture image content: \(error.localizedDescription)\n")
-            
+                    
                     
                     // Alert user to post failure
                     let alert = UIAlertController(title: "Error Uploading Image", message: "", preferredStyle: .Alert)
@@ -276,7 +320,6 @@ class HomeViewController: UIViewController {
                     
                 }
                 else {
-                    
                     // Log success post
                     NSLog("Image capture successfully posted to parse server\n")
                     
@@ -291,7 +334,29 @@ class HomeViewController: UIViewController {
                     self.turnOffCapturedImageControlSettings()
                     
                 }
-            })
+        })
+    }
+    
+    @IBAction func onSavePhoto(sender: AnyObject) {
+        
+        // Log action
+        NSLog("Save photo button pressed\n")
+        
+        //Start progressHUD
+        SVProgressHUD.show()
+        
+        // Disable buttons until ready
+        disableSaveCancelButtons()
+        
+        if self.myLocation != nil {
+            postImage()
+        }
+        else {
+            self.saved = true
+        }
+        
+        // Post captured image to the Parse Server
+        
         
     }
     
