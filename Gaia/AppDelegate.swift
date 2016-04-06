@@ -14,6 +14,9 @@ import SwiftyBeaver
 let log = SwiftyBeaver.self
 let console = ConsoleDestination()
 
+// ID for current view the frame will return to
+var currentFrameReturnIndex = 1
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -65,7 +68,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func userDidLogout() {
-
+        
+        currentFrameReturnIndex = 1
         let vc :LogInViewController = LogInViewController(nibName: "LogInViewController", bundle: nil)
         self.window!.rootViewController = vc
         

@@ -240,6 +240,24 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
         
     }
     
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        // Setup Detail View Controller
+        let vc = ImageDetailViewController()
+        
+        // Pass this current object & img to the controller
+        let data = content![indexPath.row]
+        vc.content = data
+        vc.image = imageCache[indexPath.row]
+        
+        // Bring up Image Detail Controller
+        self.presentViewController(vc, animated: true, completion: nil)
+        
+    }
+    
+    
+    
+    
     
 }
 

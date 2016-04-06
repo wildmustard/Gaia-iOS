@@ -26,6 +26,8 @@
 		B0FE4E771CA3715D00033258 /* Wildlife.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FE4E761CA3715D00033258 /* Wildlife.swift */; };
 		BAB377A35FEE6106789F9B6B /* Pods_Gaia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E6A5E7AB7382F82E8EEB1C9 /* Pods_Gaia.framework */; };
 		FA1672421C9A810B00453432 /* CaptureMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1672411C9A810B00453432 /* CaptureMedia.swift */; };
+		FA3A8A9E1CAF6DFB001852C9 /* ImageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3A8A9C1CAF6DFB001852C9 /* ImageDetailViewController.swift */; };
+		FA3A8A9F1CAF6DFB001852C9 /* ImageDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA3A8A9D1CAF6DFB001852C9 /* ImageDetailViewController.xib */; };
 		FA5539391C8F9A88005591A0 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5539381C8F9A88005591A0 /* ContainerViewController.swift */; };
 		FA55393C1C8F9B00005591A0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA55393A1C8F9B00005591A0 /* HomeViewController.swift */; };
 		FA55393D1C8F9B00005591A0 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA55393B1C8F9B00005591A0 /* HomeViewController.xib */; };
@@ -59,6 +61,8 @@
 		B0D25A251CB4C09700CE0A0C /* PhotoAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoAnnotation.swift; sourceTree = "<group>"; };
 		B0FE4E761CA3715D00033258 /* Wildlife.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wildlife.swift; sourceTree = "<group>"; };
 		FA1672411C9A810B00453432 /* CaptureMedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureMedia.swift; sourceTree = "<group>"; };
+		FA3A8A9C1CAF6DFB001852C9 /* ImageDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDetailViewController.swift; sourceTree = "<group>"; };
+		FA3A8A9D1CAF6DFB001852C9 /* ImageDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageDetailViewController.xib; sourceTree = "<group>"; };
 		FA5539381C8F9A88005591A0 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		FA55393A1C8F9B00005591A0 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		FA55393B1C8F9B00005591A0 /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
@@ -167,9 +171,19 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
+		FA3A8A9B1CAF6D9C001852C9 /* Image Detail */ = {
+			isa = PBXGroup;
+			children = (
+				FA3A8A9C1CAF6DFB001852C9 /* ImageDetailViewController.swift */,
+				FA3A8A9D1CAF6DFB001852C9 /* ImageDetailViewController.xib */,
+			);
+			name = "Image Detail";
+			sourceTree = "<group>";
+		};
 		FA5539361C8F9A42005591A0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FA3A8A9B1CAF6D9C001852C9 /* Image Detail */,
 				017E3A5D1CAB48A3000821D1 /* User */,
 				01A4003A1C96014B00424F69 /* Map */,
 				FA5539441C8F9CFC005591A0 /* Score */,
@@ -298,6 +312,7 @@
 				B07DF86E1C62E20500DEA760 /* Assets.xcassets in Resources */,
 				01A4003E1C96016200424F69 /* MapViewController.xib in Resources */,
 				FA5539431C8F9BC3005591A0 /* ImageCatalogueViewController.xib in Resources */,
+				FA3A8A9F1CAF6DFB001852C9 /* ImageDetailViewController.xib in Resources */,
 				B07DF86C1C62E20500DEA760 /* Main.storyboard in Resources */,
 				0158D1F01C952A6200CC3B88 /* CustomCellCollectionViewCell.xib in Resources */,
 				FA55393D1C8F9B00005591A0 /* HomeViewController.xib in Resources */,
@@ -360,6 +375,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA5539421C8F9BC3005591A0 /* ImageCatalogueViewController.swift in Sources */,
+				FA3A8A9E1CAF6DFB001852C9 /* ImageDetailViewController.swift in Sources */,
 				FA1672421C9A810B00453432 /* CaptureMedia.swift in Sources */,
 				017E3A601CAB4C01000821D1 /* LogInViewController.swift in Sources */,
 				FA5539391C8F9A88005591A0 /* ContainerViewController.swift in Sources */,
