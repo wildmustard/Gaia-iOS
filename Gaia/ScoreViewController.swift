@@ -105,6 +105,7 @@ class ScoreViewController: UIViewController,UITableViewDelegate,UITableViewDataS
                     print("\(each["username"]) w/ score \(each["score"])")
                 }
                 
+                
                 self.content = content
                 self.userCache.removeAll()
                 self.tableView.reloadData()

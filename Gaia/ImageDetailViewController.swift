@@ -18,8 +18,10 @@ class ImageDetailViewController: UIViewController {
     @IBOutlet weak var closeButton: UIButton!
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
+        // Set image to the passed image from presenting ImageCatalgoueController
         imageView.image = self.image
         
     }
@@ -29,6 +31,7 @@ class ImageDetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // Pressing Close Button
     @IBAction func onPressClose(sender: AnyObject) {
         
         // Close this view controller
