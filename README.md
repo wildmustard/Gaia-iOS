@@ -23,11 +23,11 @@ Gaia is an iOS application that acts as a catalogue of wildlife. Using the custo
 - [ ] Animation for successful / failure to capture
 - [ ] Custom transitions to score & map
 - [ ] Specific tags, as well as 'Generic' tags for family/species (would be shown in button or if no specfic match found)
-- [ ] Leaderboard for tracking other users scores based on logged in username
+- [x] Leaderboard for tracking other users scores based on logged in username
 - [ ] Use chameleon framework for UI color and design
 - [ ] Use pop for animations
 - [ ] Setup autolayout for application's views and the scrollview container
-- [ ] Create view for geographic tracking of photo locations, displayed on a map view
+- [x] Create view for geographic tracking of photo locations, displayed on a map view
 
 ### Database Models
 We will be using Parse for our database server, using hosting from MongoLab.
@@ -45,6 +45,7 @@ __Database Structure__
   * Extinction Status
   * Score For Entry
   * Attached User (FK to User.Username)
+  * Image Location
 
 ### API Endpoints Used
 * [The Unofficial Wikipedia API](http://www.programmableweb.com/api/wikipedia)
