@@ -218,7 +218,9 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
         
         NSLog("Map button clicked, transition started to map")
         
-        let vc = MapViewController(nibName: "MapViewController", bundle: nil, content: self.content!, imageCache: self.imageCache)
+        let vc = MapViewController()
+        vc.content = self.content
+        vc.imageCache = self.imageCache
         
         // Present MapView Controller
         presentViewController(vc as UIViewController, animated: true, completion: nil)

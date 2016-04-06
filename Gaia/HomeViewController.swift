@@ -41,9 +41,10 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     var savedTagMatch: String!
     var userScore: PFObject?
     
+    var saved = false
+    
     var locationManager = CLLocationManager()
     var myLocation: CLLocation!
-    
     
     // CaptureMedia Object instance to submit to server
     let capture = CaptureMedia()
@@ -274,9 +275,17 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
             let longitude = location.coordinate.longitude
             let longitudeString = "\(longitude)"
             
+            
+            
+            
             print(latitudeString + " " + longitudeString)
             
             self.myLocation = location
+            
+            if self.saved {
+                postImage()
+                self.saved = false
+            }
             
         }
     }
@@ -286,20 +295,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     
-    
-    
-    @IBAction func onSavePhoto(sender: AnyObject) {
-        
-        // Log action
-        NSLog("Save photo button pressed\n")
-        
-        //Start progressHUD
-        SVProgressHUD.show()
-        
-        // Disable buttons until ready
-        disableSaveCancelButtons()
-        
-        // Post captured image to the Parse Server
+    func postImage() {
         capture.postCapturedImage(takenPicture.image, tag: self.savedTagMatch, points: points, location: self.myLocation, withCompletion:
             { (success: Bool, error: NSError?) -> Void in
                 
@@ -308,10 +304,10 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                 
                 // Check if successful post of image to server
                 if let error = error {
-                
+                    
                     // Log error
                     NSLog("Error posting capture image content: \(error.localizedDescription)\n")
-            
+                    
                     
                     // Alert user to post failure
                     let alert = UIAlertController(title: "Error Uploading Image", message: "", preferredStyle: .Alert)
@@ -324,7 +320,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                     
                 }
                 else {
-                    
                     // Log success post
                     NSLog("Image capture successfully posted to parse server\n")
                     
@@ -339,7 +334,29 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                     self.turnOffCapturedImageControlSettings()
                     
                 }
-            })
+        })
+    }
+    
+    @IBAction func onSavePhoto(sender: AnyObject) {
+        
+        // Log action
+        NSLog("Save photo button pressed\n")
+        
+        //Start progressHUD
+        SVProgressHUD.show()
+        
+        // Disable buttons until ready
+        disableSaveCancelButtons()
+        
+        if self.myLocation != nil {
+            postImage()
+        }
+        else {
+            self.saved = true
+        }
+        
+        // Post captured image to the Parse Server
+        
         
     }
     

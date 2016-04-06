@@ -12,26 +12,19 @@ import MapKit
 
 class MapViewController: UIViewController {
     
-    var content: [PFObject]?
-    var imageCache = [Int:UIImage]()
+    internal var content: [PFObject]?
+    internal var imageCache = [Int:UIImage]()
     
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var testLabel: UILabel!
     
-    init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?, content: [PFObject], imageCache: [Int:UIImage]) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        self.content = content
-        self.imageCache = imageCache
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        testLabel.text = (self.content![0]["tag"] as! String)
+        testLabel.sizeToFit()
         // Do any additional setup after loading the view.
     }
 
