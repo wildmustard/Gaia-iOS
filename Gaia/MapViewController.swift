@@ -100,8 +100,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         for each in self.content! {
             if let location = each["location"] as? PFGeoPoint {
                 let coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
-                let annotation = MKPointAnnotation()
+                let annotation = PhotoAnnotation()
                 annotation.coordinate = coordinate
+                annotation.photo = self.imageCache[count]
                 locationArray.append(count)
                 annotation.title = (each["tag"] as? String)!
                 mapView.addAnnotation(annotation)
@@ -112,6 +113,24 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         //print(locationArray)
         
+    }
+    
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        let reuseID = "myAnnotationView"
+        
+        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseID)
+        if (annotationView == nil) {
+            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
+            annotationView!.canShowCallout = true
+            annotationView!.leftCalloutAccessoryView = UIImageView(frame: CGRect(x:0, y:0, width: 50, height:50))
+        }
+        
+        let imageView = annotationView?.leftCalloutAccessoryView as! UIImageView
+        imageView.contentMode = UIViewContentMode.ScaleAspectFill
+        let photoAnnotation = (annotation as? PhotoAnnotation)!
+        imageView.image = photoAnnotation.photo!
+        
+        return annotationView
     }
     
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
