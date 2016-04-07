@@ -31,6 +31,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         defaults = NSUserDefaults.standardUserDefaults()
         
         mapView.delegate = self
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        locationManager.distanceFilter = 20
+        
+        
         
         if let launchDate = defaults?.objectForKey("launchDate") as? NSDate {
             let elapsedTime = NSDate().timeIntervalSinceDate(launchDate)
@@ -40,26 +45,27 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             }
         }
         
-        
-        if !defaults!.boolForKey("launchedBefore") {
-            defaults?.setObject(NSDate() as NSObject, forKey: "launchDate")
-        }
+
         
         if let latitude = defaults?.doubleForKey("latitude"), longitude = defaults?.doubleForKey("longitude"), latitudeDelta = defaults?.doubleForKey("latitudeDelta"),longitudeDelta = defaults?.doubleForKey("longitudeDelta") where defaults!.boolForKey("launchedBefore") {
             let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
             let span = MKCoordinateSpanMake(latitudeDelta, longitudeDelta)
             let region = MKCoordinateRegionMake(coordinate, span)
+            
+//            if CLLocationManager.locationServicesEnabled() {
+//                locationManager.requestLocation()
+//                mapView.showsUserLocation = true
+//            }
+            
             mapView.setRegion(region, animated: false)
+            
         }
 //        if let region = defaults?.objectForKey("region") as? MKCoordinateRegion {
 //            mapView.setRegion(region, animated: true)
 //        }
         else if CLLocationManager.locationServicesEnabled() {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            locationManager.distanceFilter = 20
-            locationManager.requestLocation()
             
+            locationManager.requestLocation()
             mapView.userInteractionEnabled = false
             SVProgressHUD.show()
         }
@@ -71,6 +77,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             let location = content![locationArray[randomIndex]]["location"] as? PFGeoPoint
             
             let coordinate = CLLocationCoordinate2D(latitude: (location?.latitude)!, longitude: (location?.longitude)!)
+            print(coordinate)
             let span = MKCoordinateSpanMake(0.1, 0.1)
             let region = MKCoordinateRegionMake(coordinate, span)
             mapView.setRegion(region, animated: true)
@@ -84,6 +91,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             mapView.setRegion(region, animated: true)
         }
         
+        defaults?.setObject(NSDate() as NSObject, forKey: "launchDate")
         defaults?.setBool(true, forKey: "launchedBefore")
         // Do any additional setup after loading the view.
     }
@@ -97,7 +105,35 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func viewWillAppear(animated: Bool) {
         var count = 0
         for each in self.content! {
+            
             if let location = each["location"] as? PFGeoPoint {
+                if let imageFile = each["image"] as? PFFile {
+                    imageFile.getDataInBackgroundWithBlock({ (data: NSData?, error: NSError?) ->
+                        Void in
+                        
+                        // Failure to get image
+                        if let error = error {
+                            
+                            // Log Failure
+                            NSLog("Unable to get image data for image \(count)\nError: \(error.localizedDescription)")
+                            
+                        }
+                            // Success getting image
+                        else {
+                            
+                            // Get image and set to cell's content
+                            let image = UIImage(data: data!)
+                            
+                            //let image = UIImage(CGImage: cgImageRef!,scale: 1.0,orientation: UIImageOrientation.Right)
+                            let portraitImage = UIImage(CGImage: (image?.CGImage)!,scale: 1.0,orientation: UIImageOrientation.Right)
+                            
+                            // Set image and tag for cell
+                            
+                            // Set the cache index
+                            self.imageCache[count] = portraitImage
+                        }
+                    })
+                }
                 let coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
                 let annotation = PhotoAnnotation()
                 annotation.coordinate = coordinate
@@ -114,8 +150,19 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        self.defaults?.setDouble(self.mapView.region.center.latitude, forKey: "latitude")
+        self.defaults?.setDouble(self.mapView.region.center.longitude, forKey: "longitude")
+        self.defaults?.setDouble(self.mapView.region.span.latitudeDelta, forKey: "latitudeDelta")
+        self.defaults?.setDouble(self.mapView.region.span.longitudeDelta, forKey: "longitudeDelta")
+    }
+    
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         let reuseID = "myAnnotationView"
+        
+        if annotation.isKindOfClass(MKUserLocation) {
+            return nil
+        }
         
         var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseID)
         if (annotationView == nil) {
@@ -124,10 +171,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             annotationView!.leftCalloutAccessoryView = UIImageView(frame: CGRect(x:0, y:0, width: 50, height:50))
         }
         
-        let imageView = annotationView?.leftCalloutAccessoryView as! UIImageView
-        imageView.contentMode = UIViewContentMode.ScaleAspectFill
-        let photoAnnotation = (annotation as? PhotoAnnotation)!
-        imageView.image = photoAnnotation.photo!
+       
+        
+        if let photoAnnotation = annotation as? PhotoAnnotation {
+            let imageView = annotationView?.leftCalloutAccessoryView as! UIImageView
+            imageView.contentMode = UIViewContentMode.ScaleAspectFill
+            imageView.image = photoAnnotation.photo!
+        }
+        
+        
         
         return annotationView
     }
@@ -146,7 +198,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             let span = MKCoordinateSpanMake(0.1, 0.1)
             let region = MKCoordinateRegionMake(coordinate, span)
             mapView.setRegion(region, animated: true)
-            mapView.showsUserLocation = true
+            
         }
     }
     
@@ -186,10 +238,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     //Dismisses current view and returns to homeView, have to fix, should return to catalogue view
     @IBAction func onBack(sender: AnyObject) {
-        self.defaults?.setDouble(self.mapView.region.center.latitude, forKey: "latitude")
-        self.defaults?.setDouble(self.mapView.region.center.longitude, forKey: "longitude")
-        self.defaults?.setDouble(self.mapView.region.span.latitudeDelta, forKey: "latitudeDelta")
-        self.defaults?.setDouble(self.mapView.region.span.longitudeDelta, forKey: "longitudeDelta")
+
         //self.defaults?.setObject(self.mapView.region as? AnyObject, forKey: "region")
         
         self.dismissViewControllerAnimated(true, completion: {
