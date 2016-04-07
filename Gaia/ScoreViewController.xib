@@ -19,77 +19,69 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Custom_Nav" translatesAutoresizingMaskIntoConstraints="NO" id="L3w-8z-r1I">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="65" id="rVl-Ia-FhC"/>
-                    </constraints>
-                </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qoy-mM-BEh">
-                    <rect key="frame" x="249" y="31" width="63" height="30"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="63" id="DUx-gN-1vL"/>
-                        <constraint firstAttribute="height" constant="30" id="OJA-4P-Nly"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                    <state key="normal" title="Logout">
-                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="onLogout:" destination="-1" eventType="touchUpInside" id="E6e-Xk-i4h"/>
-                    </connections>
-                </button>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Bg0-kp-itf">
-                    <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Bg0-kp-itf">
+                    <rect key="frame" x="0.0" y="44" width="320" height="524"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K7f-yR-vMq">
-                    <rect key="frame" x="23" y="35" width="81" height="21"/>
+                <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OeX-2E-l7e">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <items>
+                        <navigationItem title="Title" id="KwU-mD-1Sk">
+                            <barButtonItem key="rightBarButtonItem" style="plain" id="I2q-Hh-RVM">
+                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Qoy-mM-BEh">
+                                    <rect key="frame" x="241" y="7" width="63" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="63" id="DUx-gN-1vL"/>
+                                        <constraint firstAttribute="height" constant="30" id="OJA-4P-Nly"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                    <state key="normal" title="Logout">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="onLogout:" destination="-1" eventType="touchUpInside" id="E6e-Xk-i4h"/>
+                                    </connections>
+                                </button>
+                            </barButtonItem>
+                        </navigationItem>
+                    </items>
+                </navigationBar>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K7f-yR-vMq">
+                    <rect key="frame" x="8" y="15" width="81" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="fXS-3U-Ops"/>
                         <constraint firstAttribute="width" constant="81" id="tG0-Ca-5ce"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7s0-FY-8Of">
-                    <rect key="frame" x="23" y="13" width="94" height="21"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="94" id="GQB-Ps-dMx"/>
-                        <constraint firstAttribute="height" constant="21" id="w1g-Vc-3PV"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Profile_Picture" translatesAutoresizingMaskIntoConstraints="NO" id="fha-03-wyC">
-                    <rect key="frame" x="130" y="3" width="60" height="60"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Profile_Picture" translatesAutoresizingMaskIntoConstraints="NO" id="fha-03-wyC">
+                    <rect key="frame" x="145" y="0.0" width="43" height="43"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="60" id="2xf-Dg-AKU"/>
                         <constraint firstAttribute="height" constant="60" id="SNS-Ew-Ban"/>
                     </constraints>
                 </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7s0-FY-8Of">
+                    <rect key="frame" x="8" y="0.0" width="94" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="94" id="GQB-Ps-dMx"/>
+                        <constraint firstAttribute="height" constant="21" id="w1g-Vc-3PV"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="0.83529411760000005" green="0.83529411760000005" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="7s0-FY-8Of" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="13" id="0sX-BG-1rz"/>
-                <constraint firstItem="Bg0-kp-itf" firstAttribute="top" secondItem="fha-03-wyC" secondAttribute="bottom" constant="1" id="0yS-y9-KPn"/>
                 <constraint firstItem="K7f-yR-vMq" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="23" id="17r-GP-vnT"/>
-                <constraint firstItem="Qoy-mM-BEh" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="31" id="5gE-re-hjb"/>
                 <constraint firstItem="fha-03-wyC" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="GYW-XE-wzb"/>
-                <constraint firstItem="L3w-8z-r1I" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="HhH-ll-mIr"/>
-                <constraint firstAttribute="trailing" secondItem="L3w-8z-r1I" secondAttribute="trailing" id="JNc-8B-i1u"/>
-                <constraint firstAttribute="trailing" secondItem="Qoy-mM-BEh" secondAttribute="trailing" constant="8" id="RHi-lH-xwU"/>
-                <constraint firstItem="Bg0-kp-itf" firstAttribute="top" secondItem="K7f-yR-vMq" secondAttribute="bottom" constant="8" id="TNP-aw-sg7"/>
                 <constraint firstItem="K7f-yR-vMq" firstAttribute="top" secondItem="7s0-FY-8Of" secondAttribute="bottom" constant="1" id="UHC-gX-UfI"/>
-                <constraint firstItem="Bg0-kp-itf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="UgM-Sc-hMW"/>
-                <constraint firstAttribute="bottom" secondItem="Bg0-kp-itf" secondAttribute="bottom" id="adQ-S0-CfN"/>
-                <constraint firstItem="Bg0-kp-itf" firstAttribute="top" secondItem="fha-03-wyC" secondAttribute="bottom" constant="1" id="bIm-Ye-Mgi"/>
                 <constraint firstItem="K7f-yR-vMq" firstAttribute="top" secondItem="7s0-FY-8Of" secondAttribute="bottom" constant="1" id="eON-4a-Cin"/>
-                <constraint firstAttribute="trailing" secondItem="Bg0-kp-itf" secondAttribute="trailing" id="eh3-8v-Br1"/>
-                <constraint firstItem="L3w-8z-r1I" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hnz-Gs-WgJ"/>
-                <constraint firstItem="Bg0-kp-itf" firstAttribute="top" secondItem="Qoy-mM-BEh" secondAttribute="bottom" constant="3" id="lO8-Dh-dON"/>
                 <constraint firstItem="fha-03-wyC" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="3" id="lgF-5x-Kqc"/>
                 <constraint firstItem="7s0-FY-8Of" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="23" id="wQv-dG-QPh"/>
                 <constraint firstItem="K7f-yR-vMq" firstAttribute="top" secondItem="7s0-FY-8Of" secondAttribute="bottom" constant="1" id="yfG-Rm-kSh"/>
@@ -100,7 +92,6 @@
         </view>
     </objects>
     <resources>
-        <image name="Custom_Nav" width="320" height="64"/>
         <image name="Profile_Picture" width="600" height="600"/>
     </resources>
 </document>
