@@ -19,29 +19,35 @@ PODS:
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
   - DKCircleButton (1.1)
+  - GoogleMaterialIconFont (0.3.1)
   - Parse (1.13.0):
     - Bolts/Tasks (~> 1.6)
   - pop (1.0.9)
   - SVProgressHUD (2.0.2)
   - SwiftyBeaver (0.4.2)
+  - ZFRippleButton (0.5.1)
 
 DEPENDENCIES:
   - AFNetworking
   - ChameleonFramework/Swift
   - DKCircleButton
+  - GoogleMaterialIconFont
   - Parse
   - pop (~> 1.0)
   - SVProgressHUD
   - SwiftyBeaver
+  - ZFRippleButton
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   DKCircleButton: 62564c9debae08ad77dabb8d9658dfeb5520f2c4
+  GoogleMaterialIconFont: 506cb29a056200029ed7ec4990be6fd448126e9e
   Parse: f51c24d2feb412e4b2d6cc73d37cb24e8d0089bc
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
   SVProgressHUD: e4020e23badbd7cc61bc4a80d3c1da57f166a978
   SwiftyBeaver: 3eced9aabe4f10b975453cc1baaa2d523a5eaeae
+  ZFRippleButton: 263bdf4e31dabd5826133b121d9ff908c87a6a11
 
 COCOAPODS: 0.39.0

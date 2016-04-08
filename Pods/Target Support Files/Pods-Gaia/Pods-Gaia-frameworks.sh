@@ -88,9 +88,11 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-Gaia/Bolts.framework"
   install_framework "Pods-Gaia/ChameleonFramework.framework"
   install_framework "Pods-Gaia/DKCircleButton.framework"
+  install_framework "Pods-Gaia/GoogleMaterialIconFont.framework"
   install_framework "Pods-Gaia/Parse.framework"
   install_framework "Pods-Gaia/SVProgressHUD.framework"
   install_framework "Pods-Gaia/SwiftyBeaver.framework"
+  install_framework "Pods-Gaia/ZFRippleButton.framework"
   install_framework "Pods-Gaia/pop.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -98,8 +100,10 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-Gaia/Bolts.framework"
   install_framework "Pods-Gaia/ChameleonFramework.framework"
   install_framework "Pods-Gaia/DKCircleButton.framework"
+  install_framework "Pods-Gaia/GoogleMaterialIconFont.framework"
   install_framework "Pods-Gaia/Parse.framework"
   install_framework "Pods-Gaia/SVProgressHUD.framework"
   install_framework "Pods-Gaia/SwiftyBeaver.framework"
+  install_framework "Pods-Gaia/ZFRippleButton.framework"
   install_framework "Pods-Gaia/pop.framework"
 fi
