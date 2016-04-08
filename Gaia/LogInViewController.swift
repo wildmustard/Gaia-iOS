@@ -8,12 +8,17 @@
 
 import UIKit
 import Parse
+import ZFRippleButton
+import GoogleMaterialIconFont
+import ChameleonFramework
 
 class LogInViewController: UIViewController {
     
     //Outlets
     @IBOutlet weak var userNameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var loginButton: ZFRippleButton!
+    @IBOutlet weak var signUpButton: ZFRippleButton!
     
     
     var mainStoryboard: UIStoryboard?
@@ -22,9 +27,19 @@ class LogInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Grab Storyboard Instance && move to container view controller
         mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         containerViewController = mainStoryboard?.instantiateViewControllerWithIdentifier("Main") as? ContainerViewController
-        // Do any additional setup after loading the view.
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
+        // Handle Gradient With ThemeHandler
+        ThemeHandler.sharedThemeHandler.setFrameGradientTheme(self)
+        
     }
 
     override func didReceiveMemoryWarning() {

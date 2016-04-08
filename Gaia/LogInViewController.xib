@@ -7,7 +7,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LogInViewController" customModule="Gaia" customModuleProvider="target">
             <connections>
+                <outlet property="loginButton" destination="J7L-Ym-ryM" id="KCs-za-nSX"/>
                 <outlet property="passwordField" destination="Cg8-nv-ylm" id="0E7-R6-tXC"/>
+                <outlet property="signUpButton" destination="7ui-2m-iXS" id="Ngm-Mq-Fof"/>
                 <outlet property="userNameField" destination="Mky-Zg-dtJ" id="P7n-rT-dIc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -17,45 +19,136 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J7L-Ym-ryM">
-                    <rect key="frame" x="137" y="372" width="46" height="30"/>
-                    <state key="normal" title="Log in"/>
-                    <connections>
-                        <action selector="onLogin:" destination="-1" eventType="touchUpInside" id="xsv-7e-qhD"/>
-                    </connections>
-                </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t5r-2Q-QNa">
-                    <rect key="frame" x="123" y="300" width="74" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t5r-2Q-QNa">
+                    <rect key="frame" x="121" y="281" width="78" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="78" id="L0m-k8-VsJ"/>
+                        <constraint firstAttribute="height" constant="24" id="ZNH-jp-WTU"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="20"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D58-Xs-51V">
-                    <rect key="frame" x="121" y="209" width="79" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D58-Xs-51V">
+                    <rect key="frame" x="120" y="202" width="80" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="aDn-ZT-I6x"/>
+                        <constraint firstAttribute="width" constant="80" id="k1q-gZ-Xbx"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="20"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ui-2m-iXS">
-                    <rect key="frame" x="114" y="416" width="93" height="30"/>
-                    <state key="normal" title="Sign Up"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Mky-Zg-dtJ">
+                    <rect key="frame" x="67" y="234" width="185" height="30"/>
+                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="GHM-Hv-b6j"/>
+                        <constraint firstAttribute="width" constant="185" id="QSk-Je-IlO"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Cg8-nv-ylm">
+                    <rect key="frame" x="68" y="315" width="185" height="30"/>
+                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="aUa-eu-6u3"/>
+                        <constraint firstAttribute="width" constant="185" id="eO7-JF-r6n"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ui-2m-iXS" customClass="ZFRippleButton" customModule="ZFRippleButton">
+                    <rect key="frame" x="95" y="455" width="130" height="30"/>
+                    <color key="backgroundColor" red="0.035294117647058823" green="0.28235294117647058" blue="0.77254901960784317" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="PH1-Ql-gc5"/>
+                        <constraint firstAttribute="width" constant="130" id="Qyn-iw-Mfy"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="20"/>
+                    <size key="titleShadowOffset" width="2.2250738585072014e-308" height="0.0"/>
+                    <state key="normal" title="Sign Up">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="ripplePercent">
+                            <real key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="rippleColor">
+                            <color key="value" red="0.2784313725" green="0.46666666670000001" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="rippleBackgroundColor">
+                            <color key="value" red="0.11372549019607843" green="0.35686274509803922" blue="0.83921568627450982" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="buttonCornerRadius">
+                            <real key="value" value="7"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="rippleOverBounds" value="NO"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="trackTouchLocation" value="NO"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="shadowRippleRadius">
+                            <real key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="shadowRippleEnable" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="onNewUser:" destination="-1" eventType="touchUpInside" id="kj9-5Z-YfI"/>
                     </connections>
                 </button>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mky-Zg-dtJ">
-                    <rect key="frame" x="73" y="238" width="175" height="30"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
-                </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cg8-nv-ylm">
-                    <rect key="frame" x="73" y="329" width="175" height="30"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
-                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J7L-Ym-ryM" customClass="ZFRippleButton" customModule="ZFRippleButton">
+                    <rect key="frame" x="95" y="385" width="130" height="30"/>
+                    <color key="backgroundColor" red="0.035294117647058823" green="0.28235294117647058" blue="0.77254901960784317" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="7na-az-ffd"/>
+                        <constraint firstAttribute="width" constant="130" id="v9h-mH-Ygq"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="20"/>
+                    <inset key="contentEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <size key="titleShadowOffset" width="2.2250738585072014e-308" height="0.0"/>
+                    <state key="normal" title="Login">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="buttonCornerRadius">
+                            <real key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="ripplePercent">
+                            <real key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="rippleOverBounds" value="NO"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="trackTouchLocation" value="NO"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="shadowRippleEnable" value="YES"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="rippleColor">
+                            <color key="value" red="0.2784313725" green="0.46666666670000001" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="shadowRippleRadius">
+                            <real key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="rippleBackgroundColor">
+                            <color key="value" red="0.11372549019607843" green="0.35686274509803922" blue="0.83921568627450982" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="onLogin:" destination="-1" eventType="touchUpInside" id="xsv-7e-qhD"/>
+                    </connections>
+                </button>
             </subviews>
-            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+            <color key="backgroundColor" red="0.20784313725490194" green="0.81568627450980391" blue="0.76862745098039209" alpha="1" colorSpace="calibratedRGB"/>
             <gestureRecognizers/>
+            <constraints>
+                <constraint firstItem="Mky-Zg-dtJ" firstAttribute="top" secondItem="D58-Xs-51V" secondAttribute="bottom" constant="8" id="65X-uW-REU"/>
+                <constraint firstItem="J7L-Ym-ryM" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="AH2-NI-xla"/>
+                <constraint firstItem="Mky-Zg-dtJ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="OEZ-LP-Gl4"/>
+                <constraint firstItem="7ui-2m-iXS" firstAttribute="top" secondItem="J7L-Ym-ryM" secondAttribute="bottom" constant="40" id="ScL-zz-o3q"/>
+                <constraint firstItem="t5r-2Q-QNa" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="b41-ik-RAC"/>
+                <constraint firstItem="Cg8-nv-ylm" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="ddd-C1-Hrb"/>
+                <constraint firstItem="D58-Xs-51V" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="drh-vs-746"/>
+                <constraint firstItem="D58-Xs-51V" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="202" id="epB-X1-bj4"/>
+                <constraint firstItem="t5r-2Q-QNa" firstAttribute="top" secondItem="Mky-Zg-dtJ" secondAttribute="bottom" constant="17" id="mNN-jw-oo7"/>
+                <constraint firstItem="7ui-2m-iXS" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" constant="0.5" id="vgM-F3-KIn"/>
+                <constraint firstItem="J7L-Ym-ryM" firstAttribute="top" secondItem="Cg8-nv-ylm" secondAttribute="bottom" constant="40" id="yDf-lK-5Kq"/>
+                <constraint firstItem="Cg8-nv-ylm" firstAttribute="top" secondItem="t5r-2Q-QNa" secondAttribute="bottom" constant="10" id="zQN-e2-p8R"/>
+            </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
             <connections>
                 <outletCollection property="gestureRecognizers" destination="w39-LP-LJi" appends="YES" id="Z9G-2T-VrL"/>
