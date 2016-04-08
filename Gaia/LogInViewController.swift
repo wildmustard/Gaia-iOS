@@ -8,12 +8,17 @@
 
 import UIKit
 import Parse
+import ZFRippleButton
+import GoogleMaterialIconFont
+import ChameleonFramework
 
 class LogInViewController: UIViewController {
     
     //Outlets
     @IBOutlet weak var userNameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var loginButton: ZFRippleButton!
+    @IBOutlet weak var signUpButton: ZFRippleButton!
     
     
     var mainStoryboard: UIStoryboard?
@@ -22,9 +27,19 @@ class LogInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Grab Storyboard Instance && move to container view controller
         mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         containerViewController = mainStoryboard?.instantiateViewControllerWithIdentifier("Main") as? ContainerViewController
-        // Do any additional setup after loading the view.
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
+        // Handle Gradient With ThemeHandler
+        ThemeHandler.sharedThemeHandler.setFrameGradientTheme(self)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,9 +50,11 @@ class LogInViewController: UIViewController {
     //Load sign up view to create a new User
     @IBAction func onNewUser(sender: AnyObject) {
         
-        // Present SignUp Controller
-        presentViewController((SignUpViewController() ), animated: true, completion: nil)
+        let vc = SignUpViewController()
+        vc.view.frame.size = self.view.frame.size
         
+        // Present SignUp Controller
+        presentViewController(vc, animated: true, completion: nil)
         
     }
     //If the user exists segue into the Container view
@@ -45,16 +62,18 @@ class LogInViewController: UIViewController {
         
         PFUser.logInWithUsernameInBackground(userNameField.text!, password:passwordField.text!) { (user: PFUser?, error: NSError?) -> Void in
             
-            if user != nil{
+            if user != nil {
                 
-                print("You are logged in")
+                log.info("User \(user!.username) has logged in")
                 
-                
-                //Segue not working
+                // Segue to ContainerViewController
                 self.presentViewController(self.containerViewController!, animated: true, completion: nil)
                 
-                //self.performSegueWithIdentifier("loginSegue", sender: nil)
-                
+            }
+            else {
+            
+                // Log failure
+                log.error("Unable to log in user in background!")
             }
             
         }
