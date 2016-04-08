@@ -8,6 +8,7 @@
 
 import UIKit
 import ChameleonFramework
+import ZFRippleButton
 
 class ThemeHandler: NSObject {
     
@@ -20,22 +21,106 @@ class ThemeHandler: NSObject {
     
     // Colors
     
+    // Primary
+    let PrimaryColor1 = FlatMint()
+    let PrimaryColor2 = FlatMintDark()
+    let PrimaryColor3 = FlatGreen()
+    let PrimaryColor4 = FlatGreenDark()
+    
     // Complementary
-    let ComplementaryColor = UIColor(hexString: "#0948C5")
-    let DarkComplementaryColor = UIColor(hexString: "#052A73")
-    let LightComplementaryColor = UIColor(hexString: "#4777D6")
+    let ComplementaryColor1 = UIColor(hexString: "#4777D6")
+    let ComplementaryColor2 = UIColor(hexString: "#1D5BD6")
+    let ComplementaryColor3 = UIColor(hexString: "#0948C5")
+    let ComplementaryColor4 = UIColor(hexString: "#073694")
+    let ComplementaryColor5 = UIColor(hexString: "#052A73")
     
     // Secondary
-    let SecondaryColor = UIColor(hexString: "#15E000")
-    let DarkSecondaryColor = UIColor(hexString: "#4CE93C")
-    let LightSecondaryColor = UIColor(hexString: "#0D8E00")
+    let SecondaryColor1 = UIColor(hexString: "#4CE93C")
+    let SecondaryColor2 = UIColor(hexString: "#1FE909")
+    let SecondaryColor3 = UIColor(hexString: "#15E000")
+    let SecondaryColor4 = UIColor(hexString: "#11B600")
+    let SecondaryColor5 = UIColor(hexString: "#0D8E00")
+    
+    
+    // Fonts
+    let ThemeFont = UIFont(name: "HelveticaNeue-CondensedBold", size: 20)
+    let LargeThemeFont = UIFont(name: "HelveticaNeue-CondensedBold", size: 36)
+    
+    // Functions
     
     func setFrameGradientTheme(vc: UIViewController?) {
     
         // Set passed view controller's background gradient
         if let vc = vc {
             
+            // Set Controller Gradient Theme
             vc.view.backgroundColor = GradientColor(GradientStyle, frame: vc.view.frame, colors: GradientBackgroundColors)
+            
+        }
+        else {
+            
+            // Log Error
+            log.error("Passed UIViewController \(vc?.nibName) does not exist!")
+            
+        }
+        
+    }
+    
+    func setZFRippleButtonThemeAttributes(btn: ZFRippleButton?) {
+        
+        // Set passed button properties
+        if let btn = btn {
+            
+            btn.shadowRippleEnable = true
+            btn.shadowRippleRadius = 1
+            btn.rippleOverBounds = false
+            btn.trackTouchLocation = false
+            btn.buttonCornerRadius = 5
+            btn.rippleColor = ComplementaryColor1
+            btn.rippleBackgroundColor = ComplementaryColor2
+        
+        }
+        else {
+        
+            // Log
+            log.error("Button passed does not exist!")
+
+        }
+    
+    }
+    
+    func setLabelThemeAttributes(label: UILabel?) {
+        
+        // Set passed button properties
+        if let label = label {
+            
+            label.font = ThemeFont
+            label.textColor = UIColor.whiteColor()
+            
+        }
+        else {
+            
+            // Log
+            log.error("Label passed does not exist!")
+            
+        }
+        
+    }
+    
+    func setTextFieldThemeAttributes(field: UITextField?) {
+        
+        // Set passed button properties
+        if let field = field {
+            
+            field.font = ThemeFont
+            field.textColor = UIColor.blackColor()
+            field.borderStyle = .RoundedRect
+            
+        }
+        else {
+            
+            // Log
+            log.error("Label passed does not exist!")
             
         }
         
