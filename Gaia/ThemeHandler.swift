@@ -49,6 +49,13 @@ class ThemeHandler: NSObject {
     let LargeThemeFont = UIFont(name: "HelveticaNeue-CondensedBold", size: 36)
     
     // Functions
+    override init() {
+        
+        super.init()
+        setupThemeProgressHUDDefaults()
+    
+    }
+    
     func setupThemeProgressHUDDefaults() {
         SVProgressHUD.setDefaultStyle(.Custom)
         SVProgressHUD.setBackgroundColor(ComplementaryColor3)
