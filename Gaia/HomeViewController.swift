@@ -12,6 +12,7 @@ import DKCircleButton
 import SVProgressHUD
 import Parse
 import CoreLocation
+import ZFRippleButton
 
 let userCapturedImage = "User Captured Image\n"
 let userReleasedImage = "User Released Image\n"
@@ -27,22 +28,25 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     
     
     // Outlets
-    @IBOutlet weak var wildLifeTagHomeView: UILabel!
     @IBOutlet weak var takenPicture: UIImageView!
-    @IBOutlet weak var pictureOverlayView: UIView!
     @IBOutlet weak var cameraView: UIView!
-    @IBOutlet weak var saveButton: UIButton!
-    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var saveButton: ZFRippleButton!
+    @IBOutlet weak var cancelButton: ZFRippleButton!
+    @IBOutlet weak var errorMessageLabel: UILabel!
+    @IBOutlet weak var tagPreviewLabel: UILabel!
+    @IBOutlet weak var tagListButton: ZFRippleButton!
+    @IBOutlet weak var tagListView: UIScrollView!
+    @IBOutlet weak var tagListLabel: UILabel!
     
     // Variables
     var session: AVCaptureSession!
     var stillImageOutput : AVCaptureStillImageOutput!
     var videoPreviewLayer : AVCaptureVideoPreviewLayer!
     var savedTagMatch: String!
+    var savedTagsList: String!
     var userScore: PFObject?
-    
     var saved = false
-    
+    var tagListOpen = false
     var locationManager = CLLocationManager()
     var myLocation: CLLocation!
     
@@ -91,7 +95,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         
         // Hide captured image controls and views until needed
         turnOffCapturedImageControlSettings()
-        //print(myLocation.coordinate)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -121,21 +125,33 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         var inputError: NSError!
         var input: AVCaptureDeviceInput!
         
-        //Set capture device to be back camera
+        // Set capture device to be back camera
         let backCamera = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
         
-        do{
-            //Try to access back camera
-            input = try AVCaptureDeviceInput(device: backCamera)
-            
-        } catch {
+        // Setup Theme UI
+        ThemeHandler.sharedThemeHandler.setZFRippleButtonThemeAttributes(saveButton)
+        ThemeHandler.sharedThemeHandler.setZFRippleButtonThemeAttributes(cancelButton)
+        ThemeHandler.sharedThemeHandler.setToggleZFRippleButtonThemeAttributes(tagListButton)
+        ThemeHandler.sharedThemeHandler.setSmallLabelThemeAttributes(errorMessageLabel)
+        ThemeHandler.sharedThemeHandler.setLabelThemeAttributes(tagListLabel)
+        saveButton.backgroundColor = ThemeHandler.sharedThemeHandler.PrimaryColor3
+        errorMessageLabel.hidden = true
+        
+        // Scrollview Content Size
+        tagListView.contentSize = CGSize(width: tagListView.frame.size.width, height: tagListLabel.frame.origin.y + tagListLabel.frame.size.height)
+        
+        do {
+            // Try to access back camera
+            input = try AVCaptureDeviceInput(device: backCamera)    
+        }
+        catch {
             
             // Catch Error & Nil Input
             inputError = error as NSError
             input = nil
 
             // Log Error
-            NSLog("Could not start AVCapture: \(inputError.localizedDescription)\n")
+            log.error("Could not start AVCapture: \(inputError.localizedDescription)\n")
         }
         
         // If no error occurred and there is an input device accessible, add input to current session
@@ -143,26 +159,26 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
             
             session.addInput(input)
             
-            //Set output to be a jpeg
+            // Set output to be a jpeg
             stillImageOutput = AVCaptureStillImageOutput()
             stillImageOutput.outputSettings = [AVVideoCodecKey: AVVideoCodecJPEG]
             
-            //If session accepts output
+            // If session accepts output
             if session.canAddOutput(stillImageOutput){
 
                 // Add still image to output
                 session.addOutput(stillImageOutput)
                 
-                //Set up video preview from camera into the view
+                // Set up video preview from camera into the view
                 videoPreviewLayer = AVCaptureVideoPreviewLayer(session: session)
                 videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspect
                 videoPreviewLayer.connection.videoOrientation = AVCaptureVideoOrientation.Portrait
                 cameraView.layer.addSublayer(videoPreviewLayer)
                 
-                //Overlay button to eake picture on top of UIView
+                // Overlay button to eake picture on top of UIView
                 cameraView.layer.addSublayer(cameraButton.layer)
                 
-                //Initiate session
+                // Initiate session
                 session.startRunning()
             
                 
@@ -170,7 +186,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
             else {
                 
                 // Log error for failure to output
-                NSLog("Cannot add output to session\n")
+                log.error("Cannot add output to session\n")
                 
             }
         }
@@ -186,7 +202,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                 if (error != nil) {
                     
                     // Log Error
-                    NSLog("Could not capture still image output async from location: \(error!.localizedDescription)\n")
+                    log.error("Could not capture still image output async from location: \(error!.localizedDescription)\n")
                     
                 }
                 else { // Process the image data found in sampleBuffer in order to end up with a UIImage
@@ -201,87 +217,119 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                     // Set the taken image property
                     self.takenPicture.image = image
                     
-                    //Clear tags & points
-                    self.savedTagMatch = ""
-                    self.wildLifeTagHomeView.text = ""
-                    self.points = 0
-                    self.myLocation = nil
-                    
-                    self.locationManager.requestLocation()
+                    // Prevent camera button from being pressed until we have been told if image contained a tag
+                    self.cameraButton.userInteractionEnabled = false
                     
                     // Send capture to AI server for identification
-                    self.recognizeImage(image, completion: { (success, match, points, error) -> () in
+                    self.recognizeImage(image, completion: { (success, match, tags, points, error) -> () in
                         
                         if let error = error {
                             
                             // Log error
-                            NSLog("Failure recognizing image\nError: \(error)")
+                            log.error("Failure recognizing image\nError: \(error)")
                             
                         }
                         else {
                             
                             if (success == true) {
+                                
+                                //Clear tags & points
+                                self.savedTagMatch = ""
+                                self.tagPreviewLabel.text = ""
+                                self.points = 0
+                                self.myLocation = nil
+                                
+                                self.locationManager.requestLocation()
+                                
                                 //Set the tag retrieved
-                                self.wildLifeTagHomeView.text = match
-                                self.savedTagMatch = match
+                                self.savedTagMatch = match.capitalizedString
+                                self.tagPreviewLabel.text = self.savedTagMatch
+                                self.savedTagsList = tags.joinWithSeparator(", ").capitalizedString
+                                self.tagListLabel.text = self.savedTagsList
+                                
                                 self.points = points
                                 
-                                
+                                // Enable controls for captured image
+                                self.turnOnCapturedImageControlSettings()
 
                             }
                             else {
                             
                                 // Log error
-                                NSLog("Couldn't recognize image content!\n")
-                                self.wildLifeTagHomeView.text = "No Tag Found"
+                                log.error("Couldn't recognize image content!\n")
+                                
+                                // Captured picture was unable to be identified, inform the user and try again!
+                                self.showDelayedErrorMessage()
                             
                             }
                             
-                            
-                            // Enable controls for captured image
-                            self.turnOnCapturedImageControlSettings()
+                            // Re-enable camera button to be pressed
+                            self.cameraButton.userInteractionEnabled = true
                             
                         }
 
                     })
                     
                     // Log capture
-                    NSLog("Successfully captured image\n")
-                    
+                    log.debug("Successfully captured image\n")
+
                 }
             })
         }
         else {
             
             // Log error
-            NSLog("Could not get still image output\n")
+            log.error("Could not get still image output\n")
             
         }
 
     }
     
+    // Display the error message for being unable to find a tag
+    func showDelayedErrorMessage() {
+
+        // Show Error Message Label
+        
+        errorMessageLabel.hidden = false
+        
+        // Hide Error Message Label After Delay
+        dispatch_after(
+            dispatch_time(
+                DISPATCH_TIME_NOW,
+                Int64(2 * Double(NSEC_PER_SEC))
+            ),
+            dispatch_get_main_queue(), {
+                self.errorMessageLabel.hidden = true
+            })
+        
+    }
+    
+    
+    // Location Manager for recording position of capture from image
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         if status == CLAuthorizationStatus.AuthorizedWhenInUse {
             
         }
     }
-    
+
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        // Check if locations if new
         if let location = locations.first {
             
+            // Grab long. & lat. of position for first gathered location
             let latitude = location.coordinate.latitude
             let latitudeString = "\(latitude)"
-            
             let longitude = location.coordinate.longitude
             let longitudeString = "\(longitude)"
+
+            // Log coordinates
+            log.debug(latitudeString + " " + longitudeString)
             
-            
-            
-            
-            print(latitudeString + " " + longitudeString)
-            
+            // Update location
             self.myLocation = location
             
+            // If was saved, then add the location to the image
             if self.saved {
                 postImage()
                 self.saved = false
@@ -290,11 +338,15 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    // Location Manager Failure Clause
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        print(error.localizedDescription)
+        
+        // Log Error for failure of location manager
+        log.error("Location manager failure!\nError:\(error.localizedDescription)")
+        
     }
     
-    
+    // Post image to server
     func postImage() {
         capture.postCapturedImage(takenPicture.image, tag: self.savedTagMatch, points: points, location: self.myLocation, withCompletion:
             { (success: Bool, error: NSError?) -> Void in
@@ -306,11 +358,11 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                 if let error = error {
                     
                     // Log error
-                    NSLog("Error posting capture image content: \(error.localizedDescription)\n")
+                    log.error("Error posting capture image content: \(error.localizedDescription)\n")
                     
                     
                     // Alert user to post failure
-                    let alert = UIAlertController(title: "Error Uploading Image", message: "", preferredStyle: .Alert)
+                    let alert = UIAlertController(title: "Error Uploading Image", message: "Please try again", preferredStyle: .Alert)
                     let dismissAction = UIAlertAction(title: "OK", style: .Default) { (action) in }
                     alert.addAction(dismissAction)
                     self.presentViewController(alert, animated: true) {}
@@ -320,9 +372,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                     
                 }
                 else {
-                    // Log success post
-                    NSLog("Image capture successfully posted to parse server\n")
                     
+                    // Log success post
+                    log.debug("Image capture successfully posted to parse server\n")
                     
                     // Update User Score
                     self.updateScore()
@@ -340,7 +392,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     @IBAction func onSavePhoto(sender: AnyObject) {
         
         // Log action
-        NSLog("Save photo button pressed\n")
+        log.debug("Save photo button pressed\n")
         
         //Start progressHUD
         SVProgressHUD.show()
@@ -349,19 +401,49 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         disableSaveCancelButtons()
         
         if self.myLocation != nil {
+        
+            // Log Saved
+            log.debug("Saved image location on post")
             postImage()
+            
         }
         else {
+            
+            // Log Failure
+            log.debug("Failure to use location on save of image")
             self.saved = true
+            
         }
-        
-        // Post captured image to the Parse Server
         
         
     }
     
+    
+    // Handle displaying the tag list of the picture
+    @IBAction func onTagPress(sender: AnyObject) {
+        
+        // Close / Open List based on state
+        if (tagListOpen) {
+        
+            // Hide the view
+            tagListView.hidden = true
+            tagListOpen = false
+            toggleTagButtonImage()
+            
+        }
+        else {
+            
+            // Display the view
+            tagListView.hidden = false
+            tagListOpen = true
+            toggleTagButtonImage()
+        
+        }
+    }
+    
+    
     // Function to send the taken image to the AI for tag recognition
-    private func recognizeImage(image: UIImage!, completion: (success: Bool!, match: String!,points:Int?, error: NSError?) -> ()) {
+    private func recognizeImage(image: UIImage!, completion: (success: Bool!, match: String!, tags: [String]!, points:Int?, error: NSError?) -> ()) {
         // Scale down the image. This step is optional. However, sending large images over the
         // network is slow and does not significantly improve recognition performance.
         let size = CGSizeMake(320, 320 * image.size.height / image.size.width)
@@ -379,37 +461,36 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
             if (error != nil) {
                 
                 // Log failure to connect
-                NSLog("Unable to send Clarifai client jpeg image\nError: \(error)\n")
-                completion(success: false, match: nil, points: nil,error: error)
+                log.error("Unable to send Clarifai client jpeg image\nError: \(error)\n")
+                completion(success: false, match: nil, tags: [], points: nil, error: error)
 
             }
             else {
                 
                 // Log success of connecting to Clarifai
-                NSLog("Sent Clarifai client jpeg image successfully\n")
+                log.debug("Sent Clarifai client jpeg image successfully\n")
                 
                 // Set tags object
                 let tags = results![0].tags
                 // Log tags
-                NSLog("Tag content: \(results![0].tags.joinWithSeparator(", "))")
+                log.debug("Tag content: \(results![0].tags.joinWithSeparator(", "))")
                 
                 // Collect the matched tag if it exists from wildlife dictionary
                 let (success , match) = self.myWildlife.matchWildlife(tags)
                 let points = self.myWildlife.pointsTag(match)
                
                 // Set return values
-                completion(success: success, match: match,points:points, error: nil)
+                completion(success: success, match: match, tags: tags, points:points, error: nil)
     
                 // Log status & match result
-                NSLog("Match successful: \(success)\n")
-                NSLog("Matched wildlife: \(match)\n")
-                
-                // Set image tag here
+                log.debug("Match successful: \(success)\n")
+                log.debug("Matched wildlife: \(match)\n")
                 
             }
             
         }
     }
+    
     func updateScore() {
         
         let query = PFQuery(className: "_User").whereKey("username", equalTo: (PFUser.currentUser()?.username)!)
@@ -449,7 +530,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                         // Log success & send out notification
                         log.debug("Saved user score in background")
                         
-                        //Call functions in ScoreViewController to reload User Scores
+                        // Call functions in ScoreViewController to reload User Scores
                         NSNotificationCenter.defaultCenter().postNotificationName(reloadScores, object: nil)
                         
                     }
@@ -468,12 +549,14 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     @IBAction func onCancelPhoto(sender: AnyObject) {
         
         // Log action
-        NSLog("Cancel button pressed\n")
+        log.debug("Cancel button pressed\n")
         
         // Turn off captured image controls
         turnOffCapturedImageControlSettings()
+        
+        // Clear default values
         self.savedTagMatch = ""
-        self.wildLifeTagHomeView.text = ""
+        self.tagPreviewLabel.text = ""
         self.points = 0
         
     }
@@ -483,22 +566,20 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         
         // Show the captured image on screen
         self.takenPicture.hidden = false
-        
-        // Show the overlay on the image
-        self.pictureOverlayView.alpha = 0.4
-        self.pictureOverlayView.hidden = false
+        self.tagPreviewLabel.hidden = false
         
         // Show save and cancel buttons
         enableSaveCancelButtons()
-        
+        enableTagListButton()
         
         // Disable video and capture button
         self.cameraButton.enabled = false
         
+        // Broadcast that user has taken a picture and that the scrollview needs to be locked
         NSNotificationCenter.defaultCenter().postNotificationName(userCapturedImage, object: nil)
         
         // Log control state
-        NSLog("Turned on image capture controls & views\n")
+        log.debug("Turned on image capture controls & views\n")
     
     }
     
@@ -507,44 +588,65 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         
         takenPicture.image = nil  // Clear image
         takenPicture.hidden = true
+        tagPreviewLabel.hidden = true
+        tagListView.hidden = true
         
-        pictureOverlayView.hidden = true
-        
-        // Reset & hide views, save, cancel buttons
+        // Reset & hide views, save, cancel, tag buttons
         disableSaveCancelButtons()
+        disableTagListButton()
         
         // Enable & display camera button
         cameraButton.enabled = true
         
+        // Broadcast that user has released the image and scrollview can continue scrolling
         NSNotificationCenter.defaultCenter().postNotificationName(userReleasedImage, object: nil)
 
         // Log control state
-        NSLog("Turned off image capture controls & views\n")
+        log.debug("Turned off image capture controls & views\n")
     
     }
     
     
     // Turn off cancel save buttons
     func disableSaveCancelButtons() {
-        
         saveButton.userInteractionEnabled = false
         cancelButton.userInteractionEnabled = false
         cancelButton.hidden = true
         saveButton.hidden = true
-        
     }
     
     // Turn on cancel save buttons
     func enableSaveCancelButtons() {
-        
-        if (self.savedTagMatch != "") {
-            self.saveButton.userInteractionEnabled = true
-            self.saveButton.hidden = false
-        }
-        
-        self.cancelButton.userInteractionEnabled = true
-        self.cancelButton.hidden = false
+        saveButton.userInteractionEnabled = true
+        saveButton.hidden = false
+        cancelButton.userInteractionEnabled = true
+        cancelButton.hidden = false
     }
+    
+    func disableTagListButton() {
+        tagListOpen = false
+        tagListButton.userInteractionEnabled = false
+        tagListButton.hidden = true
+        toggleTagButtonImage()
+    }
+    
+    func enableTagListButton() {
+        tagListButton.userInteractionEnabled = true
+        tagListButton.hidden = false
+        toggleTagButtonImage()
+    }
+    
+    func toggleTagButtonImage() {
+        if (tagListOpen) {
+            // Toggle tag button color
+            tagListButton.setImage(UIImage(named: "ic_loyalty_white_enabled_36pt"), forState: .Normal)
+        }
+        else {
+            // Reset tag button image
+            tagListButton.setImage(UIImage(named: "ic_loyalty_white_36pt"), forState: .Normal)
+        }
+    }
+    
     
     /*
     // MARK: - Navigation
