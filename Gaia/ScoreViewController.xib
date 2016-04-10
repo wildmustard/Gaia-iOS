@@ -7,10 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ScoreViewController" customModule="Gaia" customModuleProvider="target">
             <connections>
-                <outlet property="currentUsernameLabel" destination="7s0-FY-8Of" id="xXa-Oi-5hd"/>
-                <outlet property="profilePictureImage" destination="fha-03-wyC" id="bCP-AM-acR"/>
                 <outlet property="tableView" destination="Bg0-kp-itf" id="Rhq-I2-1r6"/>
-                <outlet property="userScoreLabel" destination="K7f-yR-vMq" id="b3G-7R-yVD"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -29,51 +26,5 @@
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
             <point key="canvasLocation" x="328" y="404"/>
         </view>
-        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Profile_Picture" translatesAutoresizingMaskIntoConstraints="NO" id="fha-03-wyC">
-            <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
-            <constraints>
-                <constraint firstAttribute="width" constant="60" id="2xf-Dg-AKU"/>
-                <constraint firstAttribute="height" constant="60" id="SNS-Ew-Ban"/>
-            </constraints>
-            <point key="canvasLocation" x="629" y="150"/>
-        </imageView>
-        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qoy-mM-BEh">
-            <rect key="frame" x="0.0" y="0.0" width="63" height="30"/>
-            <constraints>
-                <constraint firstAttribute="width" constant="63" id="DUx-gN-1vL"/>
-                <constraint firstAttribute="height" constant="30" id="OJA-4P-Nly"/>
-            </constraints>
-            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-            <state key="normal" title="Logout">
-                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-            </state>
-            <connections>
-                <action selector="onLogout:" destination="-1" eventType="touchUpInside" id="E6e-Xk-i4h"/>
-            </connections>
-        </button>
-        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7s0-FY-8Of">
-            <rect key="frame" x="0.0" y="0.0" width="94" height="21"/>
-            <constraints>
-                <constraint firstAttribute="width" constant="94" id="GQB-Ps-dMx"/>
-                <constraint firstAttribute="height" constant="21" id="w1g-Vc-3PV"/>
-            </constraints>
-            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-            <nil key="highlightedColor"/>
-        </label>
-        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K7f-yR-vMq">
-            <rect key="frame" x="0.0" y="0.0" width="81" height="21"/>
-            <constraints>
-                <constraint firstAttribute="height" constant="21" id="fXS-3U-Ops"/>
-                <constraint firstAttribute="width" constant="81" id="tG0-Ca-5ce"/>
-            </constraints>
-            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-            <nil key="highlightedColor"/>
-            <point key="canvasLocation" x="576.5" y="334.5"/>
-        </label>
     </objects>
-    <resources>
-        <image name="Profile_Picture" width="600" height="600"/>
-    </resources>
 </document>

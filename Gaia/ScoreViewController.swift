@@ -9,15 +9,11 @@
 import UIKit
 import Parse
 
-let userDidLogoutNotification = "User Logged Out\n"
 
 
 class ScoreViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
-    @IBOutlet weak var currentUsernameLabel: UILabel!
-    @IBOutlet weak var userScoreLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var profilePictureImage: UIImageView!
     
     // Parse media object
     var content: [PFObject]?
@@ -39,14 +35,7 @@ class ScoreViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         
         callServerForUserScore()
 
-        let profileImage = UIImage(named: "Profile_Picture")
         
-        //profileImageView = UIImageView(image: profileImage)
-        
-        profilePictureImage.image = roundImage(profileImage!)
-
-        //self.profilePictureImage.layer.cornerRadius = self.profilePictureImage.frame.size.width / 2;
-        self.profilePictureImage.clipsToBounds = true;
         
         
         // Reload tableview on post of new capture
@@ -59,28 +48,7 @@ class ScoreViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func onLogout(sender: AnyObject) {
         
-        PFUser.logOutInBackgroundWithBlock { (error: NSError?) ->
-            Void in
-            
-            if let error = error {
-                // Log
-                NSLog("Error on logout:\n\(error.localizedDescription)")
-            }
-            else {
-                
-                // Log
-                NSLog("Logout Success")
-                //Broadcast
-                NSNotificationCenter.defaultCenter().postNotificationName(userDidLogoutNotification, object: nil)
-                
-            }
-            
-        }
-
-    }
-    
     
     func callServerForUserScore() {
         
@@ -150,8 +118,6 @@ class ScoreViewController: UIViewController,UITableViewDelegate,UITableViewDataS
             if (usr == PFUser.currentUser()?.username) {
                 //Set the labels next to profile image
                // userScoreLabel.text = "\(scr)"
-               // currentUsernameLabel.text = usr
-                
                 cell.backgroundColor = UIColor.yellowColor()
                 cell.usernameLabel.text = usr
                 cell.scoreLabel.text = "\(scr)"
@@ -176,27 +142,7 @@ class ScoreViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     
     
     
-    //Create rounded images
-    func roundImage (image:UIImage) -> UIImage {
-        
-        let size = CGSizeMake(640, 640)
-        UIGraphicsBeginImageContext(size)
-        let ctx = UIGraphicsGetCurrentContext()
-        CGContextAddArc(ctx, 320, 320, 320,0.0, CGFloat(2 * M_PI), 1)
-        CGContextClip(ctx)
-        CGContextSaveGState(ctx)
-        CGContextTranslateCTM(ctx, 0.0, 640)
-        CGContextScaleCTM(ctx, 1.0, -1)
-        CGContextDrawImage(ctx, CGRectMake(0, 0, 640, 640), image.CGImage)
-        CGContextRestoreGState(ctx)
-        let finalImage = UIGraphicsGetImageFromCurrentImageContext()
-        
-        
-        UIGraphicsEndImageContext()
-        return finalImage
-        
-    }
-    override func prefersStatusBarHidden() -> Bool {
+        override func prefersStatusBarHidden() -> Bool {
         return true
     }
 

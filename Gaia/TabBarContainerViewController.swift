@@ -17,6 +17,7 @@ class TabBarContainerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Load first (Score) Viewcontroller by default 
         activeViewController = firstViewController
 
 
@@ -55,10 +56,14 @@ class TabBarContainerViewController: UIViewController {
         }
     }
     
+    //Switch to first (Score) ViewController
+
     @IBAction func didTapFirstButton(sender: AnyObject) {
         
         activeViewController = firstViewController
     }
+    //Switch to first (Profile) ViewController
+
     @IBAction func didTapSecondButton(sender: AnyObject) {
         
         activeViewController = secondViewController

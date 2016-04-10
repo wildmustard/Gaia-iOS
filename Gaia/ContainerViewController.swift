@@ -18,8 +18,8 @@ class ContainerViewController: UIViewController, UIScrollViewDelegate {
     let CatalogueVC :ImageCatalogueViewController = ImageCatalogueViewController(nibName: "ImageCatalogueViewController", bundle: nil)
     let HomeVC :HomeViewController = HomeViewController(nibName: "HomeViewController", bundle: nil)
     
-    let vc1 = ScoreViewController(nibName: "ScoreViewController", bundle: nil)
-    let vc2 = ProfileViewController(nibName: "ProfileViewController",bundle: nil)
+    let ScoreVC = ScoreViewController(nibName: "ScoreViewController", bundle: nil)
+    let ProfileVC = ProfileViewController(nibName: "ProfileViewController",bundle: nil)
     
     
     // Variables
@@ -27,8 +27,9 @@ class ContainerViewController: UIViewController, UIScrollViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        TabVC.firstViewController = vc1
-        TabVC.secondViewController = vc2
+        //Links score viewController and profile VC to the tab bar ViewController
+        TabVC.firstViewController = ScoreVC
+        TabVC.secondViewController = ProfileVC
 
         
         // Add Child Views to Container View Hierarchy
