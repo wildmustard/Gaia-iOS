@@ -369,6 +369,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                     
                     // Turn back on save & cancel buttons, failure to post means user may want to keep image and try again after alerted to issue
                     self.enableSaveCancelButtons()
+                    self.enableTagListButton()
                     
                 }
                 else {
@@ -399,6 +400,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         
         // Disable buttons until ready
         disableSaveCancelButtons()
+        disableTagListButton()
         
         if self.myLocation != nil {
         
