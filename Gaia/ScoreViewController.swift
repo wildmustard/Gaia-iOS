@@ -196,6 +196,10 @@ class ScoreViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         return finalImage
         
     }
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+
 
     /*
     // MARK: - Navigation

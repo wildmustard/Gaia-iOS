@@ -11,5 +11,7 @@ target 'Gaia' do
     pod 'ChameleonFramework/Swift'
     pod 'pop', '~> 1.0'
     pod 'SwiftyBeaver'
+    pod 'ZFRippleButton'
+    pod 'GoogleMaterialIconFont'
 end
 

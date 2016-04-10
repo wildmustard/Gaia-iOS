@@ -9,9 +9,12 @@
             <connections>
                 <outlet property="cancelButton" destination="JkY-bM-kiC" id="4r7-xg-mN4"/>
                 <outlet property="emailField" destination="ZeG-mS-gtu" id="wLO-Dt-Guf"/>
+                <outlet property="emailLabel" destination="jwU-rY-lsX" id="fC0-0B-fUJ"/>
                 <outlet property="passwordField" destination="1vF-UB-a1g" id="ji3-pj-TXA"/>
+                <outlet property="passwordLabel" destination="UFe-4p-i93" id="2Vs-qz-5xk"/>
                 <outlet property="submitButton" destination="XC0-yw-h4a" id="Vni-eo-gSV"/>
                 <outlet property="userNameField" destination="WcK-Ph-7fY" id="emb-2x-5ok"/>
+                <outlet property="userNameLabel" destination="ABX-lN-NQC" id="wtE-gJ-4b6"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,56 +23,127 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jwU-rY-lsX">
-                    <rect key="frame" x="138" y="160" width="42" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jwU-rY-lsX">
+                    <rect key="frame" x="120" y="217" width="80" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="4kt-EO-KgR"/>
+                        <constraint firstAttribute="height" constant="24" id="8xc-Ge-b4y"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UFe-4p-i93">
-                    <rect key="frame" x="123" y="260" width="74" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UFe-4p-i93">
+                    <rect key="frame" x="120" y="296" width="80" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="CrQ-gj-cjZ"/>
+                        <constraint firstAttribute="height" constant="24" id="qhd-lM-T9M"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ABX-lN-NQC">
-                    <rect key="frame" x="118" y="69" width="84" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ABX-lN-NQC">
+                    <rect key="frame" x="120" y="138" width="80" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="Luz-pc-t84"/>
+                        <constraint firstAttribute="height" constant="24" id="ckT-D4-5dI"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Ex: john316" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WcK-Ph-7fY">
-                    <rect key="frame" x="72" y="98" width="175" height="30"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="john316" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WcK-Ph-7fY">
+                    <rect key="frame" x="68" y="170" width="185" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="185" id="ViO-P2-b2I"/>
+                        <constraint firstAttribute="height" constant="30" id="ogo-R1-FTj"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                 </textField>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JkY-bM-kiC">
-                    <rect key="frame" x="135" y="443" width="50" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XC0-yw-h4a" customClass="ZFRippleButton" customModule="ZFRippleButton">
+                    <rect key="frame" x="95" y="398" width="130" height="30"/>
+                    <color key="backgroundColor" red="0.035294117647058823" green="0.28235294117647058" blue="0.77254901960784317" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="4gX-lX-aLX"/>
+                        <constraint firstAttribute="width" constant="130" id="7Jn-yy-UUu"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="20"/>
+                    <state key="normal" title="Submit">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="ripplePercent">
+                            <real key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="buttonCornerRadius">
+                            <real key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="shadowRippleRadius">
+                            <real key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="trackTouchLocation" value="NO"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="shadowRippleEnable" value="YES"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="rippleOverBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="onSubmit:" destination="-1" eventType="touchUpInside" id="I3a-ut-UFb"/>
+                    </connections>
+                </button>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="mammal@gaia.org" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZeG-mS-gtu">
+                    <rect key="frame" x="68" y="249" width="185" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="BAc-A8-O8Y"/>
+                        <constraint firstAttribute="width" constant="185" id="Mat-4x-Cwh"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="7-12 Characters" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1vF-UB-a1g">
+                    <rect key="frame" x="68" y="328" width="185" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="R6y-hP-C5w"/>
+                        <constraint firstAttribute="width" constant="185" id="nyZ-jm-KAC"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JkY-bM-kiC" customClass="ZFRippleButton" customModule="ZFRippleButton">
+                    <rect key="frame" x="95" y="468" width="130" height="30"/>
+                    <color key="backgroundColor" red="0.035294117649999998" green="0.28235294119999998" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="130" id="AY3-HG-abg"/>
+                        <constraint firstAttribute="height" constant="30" id="Xbm-LI-0ty"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="20"/>
                     <state key="normal" title="Cancel"/>
                     <connections>
                         <action selector="onCancel:" destination="-1" eventType="touchUpInside" id="eX6-TK-NnY"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XC0-yw-h4a">
-                    <rect key="frame" x="134" y="393" width="50" height="30"/>
-                    <state key="normal" title="Submit"/>
-                    <connections>
-                        <action selector="onSubmit:" destination="-1" eventType="touchUpInside" id="I3a-ut-UFb"/>
-                    </connections>
-                </button>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="mammal@gaia.org" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZeG-mS-gtu">
-                    <rect key="frame" x="72" y="189" width="175" height="30"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
-                </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="7-12 Characters" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1vF-UB-a1g">
-                    <rect key="frame" x="72" y="282" width="175" height="30"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
-                </textField>
             </subviews>
-            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
             <gestureRecognizers/>
+            <constraints>
+                <constraint firstItem="ABX-lN-NQC" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="138" id="5cW-3v-MRj"/>
+                <constraint firstItem="jwU-rY-lsX" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="CCf-9f-wUi"/>
+                <constraint firstItem="WcK-Ph-7fY" firstAttribute="top" secondItem="ABX-lN-NQC" secondAttribute="bottom" constant="8" id="ERc-tF-53d"/>
+                <constraint firstItem="JkY-bM-kiC" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="H8V-UG-o4O"/>
+                <constraint firstItem="XC0-yw-h4a" firstAttribute="top" secondItem="1vF-UB-a1g" secondAttribute="bottom" constant="40" id="Hly-U7-Gq7"/>
+                <constraint firstItem="XC0-yw-h4a" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="IQ7-GB-3nf"/>
+                <constraint firstItem="1vF-UB-a1g" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="K4E-dZ-Kfz"/>
+                <constraint firstItem="ABX-lN-NQC" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="LDg-sl-dz5"/>
+                <constraint firstItem="JkY-bM-kiC" firstAttribute="top" secondItem="XC0-yw-h4a" secondAttribute="bottom" constant="40" id="Tmc-fP-gX3"/>
+                <constraint firstItem="ZeG-mS-gtu" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Vas-jp-VbN"/>
+                <constraint firstItem="ZeG-mS-gtu" firstAttribute="top" secondItem="jwU-rY-lsX" secondAttribute="bottom" constant="8" id="hd3-IK-oSA"/>
+                <constraint firstItem="1vF-UB-a1g" firstAttribute="top" secondItem="UFe-4p-i93" secondAttribute="bottom" constant="8" id="jFt-ul-Pip"/>
+                <constraint firstItem="1vF-UB-a1g" firstAttribute="top" secondItem="UFe-4p-i93" secondAttribute="bottom" constant="8" id="kqY-hg-3sk"/>
+                <constraint firstItem="jwU-rY-lsX" firstAttribute="top" secondItem="WcK-Ph-7fY" secondAttribute="bottom" constant="17" id="mBY-92-loL"/>
+                <constraint firstItem="WcK-Ph-7fY" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="oUK-9B-5bJ"/>
+                <constraint firstItem="UFe-4p-i93" firstAttribute="top" secondItem="ZeG-mS-gtu" secondAttribute="bottom" constant="17" id="qh2-Sn-myp"/>
+                <constraint firstItem="UFe-4p-i93" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="r9G-pj-GcV"/>
+            </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
             <connections>
                 <outletCollection property="gestureRecognizers" destination="DYH-NU-e3I" appends="YES" id="C47-D9-hOd"/>

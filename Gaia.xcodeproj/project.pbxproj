@@ -35,6 +35,7 @@
 		FA5539431C8F9BC3005591A0 /* ImageCatalogueViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA5539411C8F9BC3005591A0 /* ImageCatalogueViewController.xib */; };
 		FA5539471C8F9D1A005591A0 /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5539451C8F9D1A005591A0 /* ScoreViewController.swift */; };
 		FA5539481C8F9D1A005591A0 /* ScoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA5539461C8F9D1A005591A0 /* ScoreViewController.xib */; };
+		FA6C6CAE1CB74DDC00AEF0F3 /* ThemeHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C6CAD1CB74DDC00AEF0F3 /* ThemeHandler.swift */; };
 		FAB86A211CA2047C009347C8 /* ClarifaiClient.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB86A201CA2047C009347C8 /* ClarifaiClient.m */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +71,7 @@
 		FA5539411C8F9BC3005591A0 /* ImageCatalogueViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageCatalogueViewController.xib; sourceTree = "<group>"; };
 		FA5539451C8F9D1A005591A0 /* ScoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
 		FA5539461C8F9D1A005591A0 /* ScoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScoreViewController.xib; sourceTree = "<group>"; };
+		FA6C6CAD1CB74DDC00AEF0F3 /* ThemeHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeHandler.swift; sourceTree = "<group>"; };
 		FAB86A1E1CA2047C009347C8 /* Gaia-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Gaia-Bridging-Header.h"; sourceTree = "<group>"; };
 		FAB86A1F1CA2047C009347C8 /* ClarifaiClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClarifaiClient.h; sourceTree = "<group>"; };
 		FAB86A201CA2047C009347C8 /* ClarifaiClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClarifaiClient.m; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 				FA1672411C9A810B00453432 /* CaptureMedia.swift */,
 				B0FE4E761CA3715D00033258 /* Wildlife.swift */,
 				B0D25A251CB4C09700CE0A0C /* PhotoAnnotation.swift */,
+				FA6C6CAD1CB74DDC00AEF0F3 /* ThemeHandler.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -277,7 +280,7 @@
 				TargetAttributes = {
 					B07DF8621C62E20500DEA760 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 73E8XBAH3Q;
+						DevelopmentTeam = 3R735PE73A;
 					};
 				};
 			};
@@ -388,6 +391,7 @@
 				FA55393C1C8F9B00005591A0 /* HomeViewController.swift in Sources */,
 				B0D25A261CB4C09700CE0A0C /* PhotoAnnotation.swift in Sources */,
 				01A4003D1C96016200424F69 /* MapViewController.swift in Sources */,
+				FA6C6CAE1CB74DDC00AEF0F3 /* ThemeHandler.swift in Sources */,
 				B02E21901CAF5F75006646A8 /* ScoreViewTableCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -507,7 +511,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Gaia/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jlh.GaiaiOS;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Alex.Gaia;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Gaia/Gaia-Bridging-Header.h";
@@ -525,7 +529,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Gaia/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jlh.GaiaiOS;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Alex.Gaia;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Gaia/Gaia-Bridging-Header.h";

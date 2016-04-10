@@ -8,17 +8,20 @@
 
 import UIKit
 import Parse
+import ZFRippleButton
 
 class SignUpViewController: UIViewController {
     
     //Outlets
     @IBOutlet weak var userNameField: UITextField!
+    @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var emailField: UITextField!
+    @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var passwordLabel: UILabel!
     
-    
-    @IBOutlet weak var submitButton: UIButton!
-    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var submitButton: ZFRippleButton!
+    @IBOutlet weak var cancelButton: ZFRippleButton!
     
     var mainStoryboard: UIStoryboard?
     var containerViewController: ContainerViewController?
@@ -26,16 +29,32 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Grab Storyboard Instance && move to container view controller
         mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         containerViewController = mainStoryboard?.instantiateViewControllerWithIdentifier("Main") as? ContainerViewController
-        // Do any additional setup after loading the view.
+    
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Handle Gradient, Buttons, Label Attributes With ThemeHandler
+        ThemeHandler.sharedThemeHandler.setFrameGradientTheme(self)
+        ThemeHandler.sharedThemeHandler.setZFRippleButtonThemeAttributes(submitButton)
+        ThemeHandler.sharedThemeHandler.setZFRippleButtonThemeAttributes(cancelButton)
+        ThemeHandler.sharedThemeHandler.setLabelThemeAttributes(userNameLabel)
+        ThemeHandler.sharedThemeHandler.setLabelThemeAttributes(emailLabel)
+        ThemeHandler.sharedThemeHandler.setLabelThemeAttributes(passwordLabel)
+        ThemeHandler.sharedThemeHandler.setTextFieldThemeAttributes(userNameField)
+        ThemeHandler.sharedThemeHandler.setTextFieldThemeAttributes(emailField)
+        ThemeHandler.sharedThemeHandler.setTextFieldThemeAttributes(passwordField)
+        
     }
 
 
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // Submission Action

@@ -25,6 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+       
+        application.statusBarHidden = true
+
         // Override point for customization after application launch.
         
         Parse.initializeWithConfiguration(
@@ -63,7 +66,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window!.rootViewController = LoginVC;
             
         }
-        
         return true
     }
     

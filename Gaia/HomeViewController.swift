@@ -337,6 +337,10 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         })
     }
     
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
     @IBAction func onSavePhoto(sender: AnyObject) {
         
         // Log action

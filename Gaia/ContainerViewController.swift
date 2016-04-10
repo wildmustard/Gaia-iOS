@@ -14,9 +14,13 @@ class ContainerViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     
     // Setup Views for Scroll View Container Swipe
-    let ScoreVC :ScoreViewController = ScoreViewController(nibName: "ScoreViewController", bundle: nil)
+    let TabVC = TabBarContainerViewController(nibName: "TabBarContainerViewController", bundle: nil)
     let CatalogueVC :ImageCatalogueViewController = ImageCatalogueViewController(nibName: "ImageCatalogueViewController", bundle: nil)
     let HomeVC :HomeViewController = HomeViewController(nibName: "HomeViewController", bundle: nil)
+    
+    let vc1 = ScoreViewController(nibName: "ScoreViewController", bundle: nil)
+    let vc2 = ProfileViewController(nibName: "ProfileViewController",bundle: nil)
+    
     
     // Variables
     var sessionRunning = false // Flag test for the session running
@@ -25,9 +29,9 @@ class ContainerViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         
         // Add Child Views to Container View Hierarchy
-        self.addChildViewController(ScoreVC)
-        self.scrollView!.addSubview(ScoreVC.view)
-        ScoreVC.didMoveToParentViewController(self)
+        self.addChildViewController(TabVC)
+        self.scrollView!.addSubview(TabVC.view)
+        TabVC.didMoveToParentViewController(self)
         
         self.addChildViewController(CatalogueVC)
         self.scrollView!.addSubview(CatalogueVC.view)
@@ -100,6 +104,9 @@ class ContainerViewController: UIViewController, UIScrollViewDelegate {
     }
     
     override func viewWillAppear(animated: Bool) {
+        TabVC.firstViewController = vc1
+        TabVC.secondViewController = vc2
+
         
         // Setup origin for container view to appear on the Home View
         var frame :CGRect = self.view.frame
@@ -118,7 +125,7 @@ class ContainerViewController: UIViewController, UIScrollViewDelegate {
         HomeVC.view.frame = catalogueFrame
         var homeFrame :CGRect = HomeVC.view.frame
         homeFrame.origin.x = 2 * homeFrame.width
-        ScoreVC.view.frame = homeFrame
+        TabVC.view.frame = homeFrame
         
         // Set the origin of the frame to the current returning frame
         frame.origin.x = getCurrentReturnFrameOrigin()
