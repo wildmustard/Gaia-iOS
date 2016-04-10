@@ -26,19 +26,27 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
     @IBOutlet weak var profilePictureImage: UIImageView!
     
     let ivc = UIImagePickerController()
+    
+    var userImage: PFFile?
+    
+    var profilePcture: UIImage?
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         hideOptions()
+        
+        loadImages()
         
         ivc.delegate = self
         ivc.allowsEditing = true
         
         let profileImage = UIImage(named: "Profile_Picture")
         
+        
         //profileImageView = UIImageView(image: profileImage)
         
-        profilePictureImage.image = roundImage(profileImage!)
+        //profilePictureImage.image = roundImage(profileImage!)
         
         PFUser.currentUser()
         //self.profilePictureImage.layer.cornerRadius = self.profilePictureImage.frame.size.width / 2;
@@ -172,6 +180,48 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         uploadButton.hidden = false
         imageOptionsView.hidden = false
     
+    }
+    
+    func loadImages()
+    {
+        let query = PFQuery(className: "ProfilePicture").whereKey("username", equalTo: (PFUser.currentUser()?.username)!)
+        
+        query.findObjectsInBackgroundWithBlock { (content: [PFObject]?, error: NSError?) ->
+            Void in
+            if (error != nil) {
+                let userData:PFObject = (content! as NSArray).lastObject as! PFObject
+                
+               self.userImage = userData["profilePicture"] as! PFFile?
+                
+                self.userImage!.getDataInBackgroundWithBlock({ (data: NSData?, error: NSError?) ->
+                    Void in
+                    
+                    
+                    // Failure to get image
+                    if let error = error {
+                        
+                        // Log Failure
+                        NSLog("Unable to get image data Error: \(error)")
+                        
+                    }
+                        // Success getting image
+                    else {
+                        
+                        // Get image and set to cell's content
+                        let image = UIImage(data: data!)
+                        
+                        self.profilePcture = image
+                        
+                        self.profilePictureImage.image = self.roundImage(self.profilePcture!)
+                    }
+
+
+            
+                })
+            }
+            
+            
+        }
     }
 
     /*
