@@ -348,7 +348,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     
     // Post image to server
     func postImage() {
-        capture.postCapturedImage(takenPicture.image, tag: self.savedTagMatch, points: points, location: self.myLocation, withCompletion:
+        capture.postCapturedImage(takenPicture.image, tag: self.savedTagMatch, tagsList: self.savedTagsList, points: points, location: self.myLocation, withCompletion:
             { (success: Bool, error: NSError?) -> Void in
                 
                 // Stop progressHUD after network task done
