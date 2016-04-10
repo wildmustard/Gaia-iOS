@@ -149,8 +149,8 @@ class ScoreViewController: UIViewController,UITableViewDelegate,UITableViewDataS
             //Highlight the current user cell
             if (usr == PFUser.currentUser()?.username) {
                 //Set the labels next to profile image
-                userScoreLabel.text = "\(scr)"
-                currentUsernameLabel.text = usr
+               // userScoreLabel.text = "\(scr)"
+               // currentUsernameLabel.text = usr
                 
                 cell.backgroundColor = UIColor.yellowColor()
                 cell.usernameLabel.text = usr

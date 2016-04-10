@@ -27,6 +27,9 @@ class ContainerViewController: UIViewController, UIScrollViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        TabVC.firstViewController = vc1
+        TabVC.secondViewController = vc2
+
         
         // Add Child Views to Container View Hierarchy
         self.addChildViewController(TabVC)
@@ -104,8 +107,6 @@ class ContainerViewController: UIViewController, UIScrollViewDelegate {
     }
     
     override func viewWillAppear(animated: Bool) {
-        TabVC.firstViewController = vc1
-        TabVC.secondViewController = vc2
 
         
         // Setup origin for container view to appear on the Home View
