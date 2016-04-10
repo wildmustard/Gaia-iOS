@@ -44,6 +44,7 @@ class ThemeHandler: NSObject {
     
     // Fonts
     let ThemeFont = UIFont(name: "HelveticaNeue-CondensedBold", size: 20)
+    let SmallThemeFont = UIFont(name: "HelveticaNeue-CondensedBold", size: 12)
     let LargeThemeFont = UIFont(name: "HelveticaNeue-CondensedBold", size: 36)
     
     // Functions
@@ -95,6 +96,42 @@ class ThemeHandler: NSObject {
         if let label = label {
             
             label.font = ThemeFont
+            label.textColor = UIColor.whiteColor()
+            
+        }
+        else {
+            
+            // Log
+            log.error("Label passed does not exist!")
+            
+        }
+        
+    }
+    
+    func setSmallLabelThemeAttributes(label: UILabel?) {
+        
+        // Set passed button properties
+        if let label = label {
+            
+            label.font = SmallThemeFont
+            label.textColor = UIColor.whiteColor()
+            
+        }
+        else {
+            
+            // Log
+            log.error("Label passed does not exist!")
+            
+        }
+        
+    }
+    
+    func setLargeSmallLabelThemeAttributes(label: UILabel?) {
+        
+        // Set passed button properties
+        if let label = label {
+            
+            label.font = LargeThemeFont
             label.textColor = UIColor.whiteColor()
             
         }
