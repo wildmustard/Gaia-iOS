@@ -67,6 +67,29 @@ class ThemeHandler: NSObject {
         
     }
     
+    func setToggleZFRippleButtonThemeAttributes(btn: ZFRippleButton?) {
+        
+        // Set passed button properties
+        if let btn = btn {
+            
+            btn.shadowRippleEnable = true
+            btn.shadowRippleRadius = 30
+            btn.rippleOverBounds = true
+            btn.trackTouchLocation = false
+            btn.buttonCornerRadius = 0
+            btn.rippleColor = ComplementaryColor1
+            btn.rippleBackgroundColor = UIColor.clearColor()
+            
+        }
+        else {
+            
+            // Log
+            log.error("Button passed does not exist!")
+            
+        }
+        
+    }
+    
     func setZFRippleButtonThemeAttributes(btn: ZFRippleButton?) {
         
         // Set passed button properties
