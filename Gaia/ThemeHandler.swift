@@ -9,6 +9,7 @@
 import UIKit
 import ChameleonFramework
 import ZFRippleButton
+import SVProgressHUD
 
 class ThemeHandler: NSObject {
     
@@ -48,6 +49,12 @@ class ThemeHandler: NSObject {
     let LargeThemeFont = UIFont(name: "HelveticaNeue-CondensedBold", size: 36)
     
     // Functions
+    func setupThemeProgressHUDDefaults() {
+        SVProgressHUD.setDefaultStyle(.Custom)
+        SVProgressHUD.setBackgroundColor(ComplementaryColor3)
+        SVProgressHUD.setDefaultAnimationType(.Native)
+        SVProgressHUD.setCornerRadius(50)
+    }
     
     func setFrameGradientTheme(vc: UIViewController?) {
     
@@ -185,5 +192,4 @@ class ThemeHandler: NSObject {
         }
         
     }
-
 }

@@ -41,6 +41,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Add SwiftyBeaver
         log.addDestination(console)
         
+        // Set SVProgressHUD Defaults
+        ThemeHandler.sharedThemeHandler.setupThemeProgressHUDDefaults()
         
         //Check if there is a user logged in
         if (PFUser.currentUser() != nil) {

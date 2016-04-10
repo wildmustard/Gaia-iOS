@@ -136,9 +136,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         ThemeHandler.sharedThemeHandler.setLabelThemeAttributes(tagListLabel)
         saveButton.backgroundColor = ThemeHandler.sharedThemeHandler.PrimaryColor3
         errorMessageLabel.hidden = true
-        
         // Scrollview Content Size
         tagListView.contentSize = CGSize(width: tagListView.frame.size.width, height: tagListLabel.frame.origin.y + tagListLabel.frame.size.height)
+        
         
         do {
             // Try to access back camera
@@ -648,7 +648,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
             tagListButton.setImage(UIImage(named: "ic_loyalty_white_36pt"), forState: .Normal)
         }
     }
-    
     
     /*
     // MARK: - Navigation
