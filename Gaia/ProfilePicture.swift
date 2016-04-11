@@ -53,6 +53,7 @@ class ProfilePicture: NSObject {
         }
         
         // Failure, return nil
+        NSLog("Failure, return nil\n")
         return nil
     }
     

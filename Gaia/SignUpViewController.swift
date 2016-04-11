@@ -10,6 +10,9 @@ import UIKit
 import Parse
 import ZFRippleButton
 
+
+let profileImage = UIImage(named: "Profile_Picture")
+
 class SignUpViewController: UIViewController {
     
     //Outlets
@@ -24,7 +27,6 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var cancelButton: ZFRippleButton!
     
     var mainStoryboard: UIStoryboard?
-    let profileImage = UIImage(named: "Profile_Picture")
     let profile = ProfilePicture()
 
 
@@ -74,7 +76,6 @@ class SignUpViewController: UIViewController {
         newUser["score"] = 0
         
         
-        //postProfilePicture()
         
         //Try to sign new user up
         newUser.signUpInBackgroundWithBlock { (success:Bool,error: NSError?) -> Void in
@@ -91,7 +92,7 @@ class SignUpViewController: UIViewController {
 
                 // Log success
                 NSLog("Successfully created new user for Parse\nUser: \(newUser)")
-                
+                self.postProfilePicture()
                 // Segue to Home
                 self.presentViewController(self.containerViewController!, animated: true, completion: nil)
                 
@@ -134,6 +135,8 @@ class SignUpViewController: UIViewController {
                 else {
                     // Log success post
                     NSLog("Image capture successfully posted to parse server\n")
+                    
+
                     
                     
                 }
