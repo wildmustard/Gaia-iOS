@@ -41,7 +41,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Add SwiftyBeaver
         log.addDestination(console)
         
-        
         //Check if there is a user logged in
         if (PFUser.currentUser() != nil) {
             
