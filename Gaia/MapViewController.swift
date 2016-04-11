@@ -64,10 +64,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 //            mapView.setRegion(region, animated: true)
 //        }
         else if CLLocationManager.locationServicesEnabled() {
-            
-            locationManager.requestLocation()
-            mapView.userInteractionEnabled = false
+            view.userInteractionEnabled = false;
             SVProgressHUD.show()
+            locationManager.requestLocation()
         }
             
         else if content!.count > 0 {
@@ -192,7 +191,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
-            mapView.userInteractionEnabled = true
+            view.userInteractionEnabled = true
             SVProgressHUD.dismiss()
             let coordinate = location.coordinate
             let span = MKCoordinateSpanMake(0.1, 0.1)
@@ -204,6 +203,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         print(error.localizedDescription)
+        view.userInteractionEnabled = true
         SVProgressHUD.dismiss()
         
         //if location cannot be found, region is set on random capture
@@ -229,6 +229,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
+        view.userInteractionEnabled = true
         SVProgressHUD.dismiss()
         mapView.showsUserLocation = true
         let span = MKCoordinateSpanMake(0.1, 0.1)
