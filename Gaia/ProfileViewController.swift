@@ -160,7 +160,7 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         
         let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
         
-        profPic.postCapturedImage(editedImage) { (bool, error) in
+        profPic.updateCapturedImage(editedImage) { (bool, error) in
             if bool {
                 print("successfully uploaded profile picture!")
             } else {
@@ -241,6 +241,12 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
             
             
         }
+    }
+    
+    func updateProfilePicture(image: UIImage) {
+        
+    
+    
     }
 
     /*

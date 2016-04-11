@@ -28,6 +28,32 @@ class ProfilePicture: NSObject {
         profilePicture.saveInBackgroundWithBlock(completion)
     }
     
+    func updateCapturedImage(image: UIImage?,withCompletion completion: PFBooleanResultBlock?) {
+        
+    
+    let query = PFQuery(className: "ProfilePicture").whereKey("username", equalTo: (PFUser.currentUser()?.username)!)
+        
+        
+        query.findObjectsInBackgroundWithBlock { (content: [PFObject]?, error: NSError?) ->
+            Void in
+            if (content != nil) {
+                let userData:PFObject = (content! as NSArray).lastObject as! PFObject
+                
+                print(userData["username"])
+                
+                userData["profilePicture"] = self.getPFFileUsingImage(image)
+                
+                userData.saveInBackgroundWithBlock(completion)
+                
+                
+            } else {
+                print(error?.localizedDescription)
+            }
+            
+            
+        }
+}
+    
     
     func getPFFileUsingImage(image: UIImage?) -> PFFile? {
         
