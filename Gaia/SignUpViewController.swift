@@ -24,6 +24,10 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var cancelButton: ZFRippleButton!
     
     var mainStoryboard: UIStoryboard?
+    let profileImage = UIImage(named: "Profile_Picture")
+    let profile = ProfilePicture()
+
+
     var containerViewController: ContainerViewController?
     
     override func viewDidLoad() {
@@ -69,6 +73,9 @@ class SignUpViewController: UIViewController {
         newUser.email = emailField.text
         newUser["score"] = 0
         
+        
+        //postProfilePicture()
+        
         //Try to sign new user up
         newUser.signUpInBackgroundWithBlock { (success:Bool,error: NSError?) -> Void in
             
@@ -103,6 +110,36 @@ class SignUpViewController: UIViewController {
     @IBAction func onTap(sender: AnyObject) {
         view.endEditing(true)
     }
+    
+    func postProfilePicture() {
+        profile.postCapturedImage(profileImage, withCompletion:
+            { (success: Bool, error: NSError?) -> Void in
+                
+                // Stop progressHUD after network task done
+                
+                // Check if successful post of image to server
+                if let error = error {
+                    
+                    // Log error
+                    NSLog("Error posting capture image content: \(error.localizedDescription)\n")
+                    
+                    
+                    // Alert user to post failure
+                    let alert = UIAlertController(title: "Error Uploading Image", message: "", preferredStyle: .Alert)
+                    let dismissAction = UIAlertAction(title: "OK", style: .Default) { (action) in }
+                    alert.addAction(dismissAction)
+                    self.presentViewController(alert, animated: true) {}
+                    
+                }
+                else {
+                    // Log success post
+                    NSLog("Image capture successfully posted to parse server\n")
+                    
+                    
+                }
+        })
+    }
+
     
     
     /*

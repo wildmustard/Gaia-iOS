@@ -15,12 +15,17 @@
 		017E3A651CAB4CDB000821D1 /* SignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017E3A631CAB4CDB000821D1 /* SignUpViewController.xib */; };
 		01A4003D1C96016200424F69 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A4003B1C96016200424F69 /* MapViewController.swift */; };
 		01A4003E1C96016200424F69 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A4003C1C96016200424F69 /* MapViewController.xib */; };
+		01D713D31CBA9F34006EEB3B /* ProfilePicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D713D21CBA9F34006EEB3B /* ProfilePicture.swift */; };
 		B02E21901CAF5F75006646A8 /* ScoreViewTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02E218F1CAF5F75006646A8 /* ScoreViewTableCell.swift */; };
 		B02E21921CAF5F92006646A8 /* ScoreViewTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B02E21911CAF5F92006646A8 /* ScoreViewTableCell.xib */; };
 		B07DF8671C62E20500DEA760 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07DF8661C62E20500DEA760 /* AppDelegate.swift */; };
 		B07DF86C1C62E20500DEA760 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B07DF86A1C62E20500DEA760 /* Main.storyboard */; };
 		B07DF86E1C62E20500DEA760 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B07DF86D1C62E20500DEA760 /* Assets.xcassets */; };
 		B07DF8711C62E20500DEA760 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B07DF86F1C62E20500DEA760 /* LaunchScreen.storyboard */; };
+		B0C5495B1CBA09F40086133C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C549571CBA09F40086133C /* ProfileViewController.swift */; };
+		B0C5495C1CBA09F40086133C /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0C549581CBA09F40086133C /* ProfileViewController.xib */; };
+		B0C5495D1CBA09F40086133C /* TabBarContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C549591CBA09F40086133C /* TabBarContainerViewController.swift */; };
+		B0C5495E1CBA09F40086133C /* TabBarContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0C5495A1CBA09F40086133C /* TabBarContainerViewController.xib */; };
 		B0D25A241CB4B49500CE0A0C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B01A03741CB48DEF0099316B /* MapKit.framework */; };
 		B0D25A261CB4C09700CE0A0C /* PhotoAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D25A251CB4C09700CE0A0C /* PhotoAnnotation.swift */; };
 		B0FE4E771CA3715D00033258 /* Wildlife.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FE4E761CA3715D00033258 /* Wildlife.swift */; };
@@ -48,6 +53,7 @@
 		017E3A631CAB4CDB000821D1 /* SignUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignUpViewController.xib; sourceTree = "<group>"; };
 		01A4003B1C96016200424F69 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		01A4003C1C96016200424F69 /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
+		01D713D21CBA9F34006EEB3B /* ProfilePicture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePicture.swift; sourceTree = "<group>"; };
 		1AA8BCE1E8E6648420495AAF /* Pods-Gaia.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gaia.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Gaia/Pods-Gaia.debug.xcconfig"; sourceTree = "<group>"; };
 		1E6A5E7AB7382F82E8EEB1C9 /* Pods_Gaia.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gaia.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B01A03741CB48DEF0099316B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -59,6 +65,10 @@
 		B07DF86D1C62E20500DEA760 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B07DF8701C62E20500DEA760 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B07DF8721C62E20500DEA760 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B0C549571CBA09F40086133C /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		B0C549581CBA09F40086133C /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
+		B0C549591CBA09F40086133C /* TabBarContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarContainerViewController.swift; sourceTree = "<group>"; };
+		B0C5495A1CBA09F40086133C /* TabBarContainerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabBarContainerViewController.xib; sourceTree = "<group>"; };
 		B0D25A251CB4C09700CE0A0C /* PhotoAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoAnnotation.swift; sourceTree = "<group>"; };
 		B0FE4E761CA3715D00033258 /* Wildlife.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wildlife.swift; sourceTree = "<group>"; };
 		FA1672411C9A810B00453432 /* CaptureMedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureMedia.swift; sourceTree = "<group>"; };
@@ -145,6 +155,24 @@
 			path = Gaia;
 			sourceTree = "<group>";
 		};
+		B0C5495F1CBA0A210086133C /* Tab Bar */ = {
+			isa = PBXGroup;
+			children = (
+				B0C549591CBA09F40086133C /* TabBarContainerViewController.swift */,
+				B0C5495A1CBA09F40086133C /* TabBarContainerViewController.xib */,
+			);
+			name = "Tab Bar";
+			sourceTree = "<group>";
+		};
+		B0C549601CBA0A320086133C /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				B0C549571CBA09F40086133C /* ProfileViewController.swift */,
+				B0C549581CBA09F40086133C /* ProfileViewController.xib */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
 		B23DE294FC8DD40C5271856E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -170,6 +198,7 @@
 				B0FE4E761CA3715D00033258 /* Wildlife.swift */,
 				B0D25A251CB4C09700CE0A0C /* PhotoAnnotation.swift */,
 				FA6C6CAD1CB74DDC00AEF0F3 /* ThemeHandler.swift */,
+				01D713D21CBA9F34006EEB3B /* ProfilePicture.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -186,6 +215,8 @@
 		FA5539361C8F9A42005591A0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B0C549601CBA0A320086133C /* Profile */,
+				B0C5495F1CBA0A210086133C /* Tab Bar */,
 				FA3A8A9B1CAF6D9C001852C9 /* Image Detail */,
 				017E3A5D1CAB48A3000821D1 /* User */,
 				01A4003A1C96014B00424F69 /* Map */,
@@ -309,7 +340,9 @@
 			files = (
 				017E3A651CAB4CDB000821D1 /* SignUpViewController.xib in Resources */,
 				B07DF8711C62E20500DEA760 /* LaunchScreen.storyboard in Resources */,
+				B0C5495E1CBA09F40086133C /* TabBarContainerViewController.xib in Resources */,
 				FA5539481C8F9D1A005591A0 /* ScoreViewController.xib in Resources */,
+				B0C5495C1CBA09F40086133C /* ProfileViewController.xib in Resources */,
 				017E3A611CAB4C01000821D1 /* LogInViewController.xib in Resources */,
 				B02E21921CAF5F92006646A8 /* ScoreViewTableCell.xib in Resources */,
 				B07DF86E1C62E20500DEA760 /* Assets.xcassets in Resources */,
@@ -384,8 +417,11 @@
 				FA5539391C8F9A88005591A0 /* ContainerViewController.swift in Sources */,
 				FA5539471C8F9D1A005591A0 /* ScoreViewController.swift in Sources */,
 				FAB86A211CA2047C009347C8 /* ClarifaiClient.m in Sources */,
+				B0C5495B1CBA09F40086133C /* ProfileViewController.swift in Sources */,
+				01D713D31CBA9F34006EEB3B /* ProfilePicture.swift in Sources */,
 				017E3A641CAB4CDB000821D1 /* SignUpViewController.swift in Sources */,
 				B07DF8671C62E20500DEA760 /* AppDelegate.swift in Sources */,
+				B0C5495D1CBA09F40086133C /* TabBarContainerViewController.swift in Sources */,
 				0158D1EF1C952A6200CC3B88 /* CustomCellCollectionViewCell.swift in Sources */,
 				B0FE4E771CA3715D00033258 /* Wildlife.swift in Sources */,
 				FA55393C1C8F9B00005591A0 /* HomeViewController.swift in Sources */,
