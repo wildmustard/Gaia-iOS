@@ -25,6 +25,8 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
     @IBOutlet weak var profileUsernameLabel: UILabel!
     @IBOutlet weak var profilePictureImage: UIImageView!
     
+    var profPic = ProfilePicture()
+    
     let ivc = UIImagePickerController()
     
     var userImage: PFFile?
@@ -156,11 +158,21 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         // Bring up everything we need for picker
         
         
-        
         let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
+        
+        profPic.postCapturedImage(editedImage) { (bool, error) in
+            if bool {
+                print("successfully uploaded profile picture!")
+            } else {
+                print("could not upload profile picture")
+            }
+        }
         
         // Set image
         profilePictureImage.image = roundImage(editedImage)
+        
+        
+        
         
         // Dismiss controller
         dismissViewControllerAnimated(true, completion: nil)
@@ -186,12 +198,16 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
     {
         let query = PFQuery(className: "ProfilePicture").whereKey("username", equalTo: (PFUser.currentUser()?.username)!)
         
+        
         query.findObjectsInBackgroundWithBlock { (content: [PFObject]?, error: NSError?) ->
             Void in
-            if (error != nil) {
+            if (content != nil) {
                 let userData:PFObject = (content! as NSArray).lastObject as! PFObject
                 
-               self.userImage = userData["profilePicture"] as! PFFile?
+                print(userData["username"])
+                
+                self.userImage = userData["profilePicture"] as! PFFile?
+                
                 
                 self.userImage!.getDataInBackgroundWithBlock({ (data: NSData?, error: NSError?) ->
                     Void in
@@ -214,10 +230,13 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
                         
                         self.profilePictureImage.image = self.roundImage(self.profilePcture!)
                     }
+            
 
 
             
                 })
+            } else {
+               print(error?.localizedDescription)
             }
             
             
