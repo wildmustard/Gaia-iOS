@@ -110,7 +110,7 @@ class ScoreViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
             cell.profilePictureView.image = UIImage(named: "Apple_Swift_Logo")
         
-        if let imageFile = self.content?[indexPath.row]["profilePicture"] as? PFFile {
+        if let imageFile = self.content?[indexPath.section]["profilePicture"] as? PFFile {
             imageFile.getDataInBackgroundWithBlock({ (data: NSData?, error: NSError?) ->
                 Void in
                 
@@ -118,7 +118,7 @@ class ScoreViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 if let error = error {
                     
                     // Log Failure
-                    NSLog("Unable to get image data for table cell \(indexPath.row)\nError: \(error)")
+                    NSLog("Unable to get image data for table cell \(indexPath.section)\nError: \(error)")
                     
                 }
                     // Success getting image
@@ -138,14 +138,14 @@ class ScoreViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     }
                     
                     // Set the cache index
-                    self.userCache[indexPath.row] = roundProfile
+                    self.userCache[indexPath.section] = roundProfile
                 }
             })
         }
     }
 
-    
-    
+        
+        //Load username and score for user
         if (content?[indexPath.section]["username"] != nil && (content?[indexPath.section]["score"] != nil)) {
             let usr = content![indexPath.section]["username"] as! String
             let scr = content![indexPath.section]["score"] as! Int
@@ -159,6 +159,7 @@ class ScoreViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 cell.scoreLabel.text = "\(scr)"
                 
                 }
+                //Set other cells to be white
             else {
                 cell.backgroundColor = UIColor.whiteColor()
 

@@ -11,6 +11,7 @@ import Parse
 import SVProgressHUD
 
 let userDidLogoutNotification = "User Logged Out\n"
+let userUpdatedProfileImage = "User changed Profile Image"
 
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
     
