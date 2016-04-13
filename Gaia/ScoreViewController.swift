@@ -17,7 +17,7 @@ class ScoreViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     // Parse media object
     var content: [PFObject]?
-    var userCache = [Int:String]()
+    var userCache = [Int:UIImage]()
 
     
     override func viewDidLoad() {
@@ -57,7 +57,8 @@ class ScoreViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func callServerForUserScore() {
         // Setup a PFQuery object to handle collection of all user scores
         let query = PFQuery(className: "_User")
-        // Order by highest score
+        // Order by highest score and set caching
+        query.cachePolicy = .CacheThenNetwork
         query.orderByDescending("score")
         // Always attempt to check network else pull cached data
         query.cachePolicy = .NetworkElseCache
@@ -100,7 +101,51 @@ class ScoreViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("MyScoreCell", forIndexPath: indexPath) as! ScoreViewTableCell
+        // If the media content for this cell exists, set it
         
+        if let img = userCache[indexPath.row] {
+            cell.profilePictureView.image = img
+        }
+        else {
+            
+            cell.profilePictureView.image = UIImage(named: "Apple_Swift_Logo")
+        
+        if let imageFile = self.content?[indexPath.row]["profilePicture"] as? PFFile {
+            imageFile.getDataInBackgroundWithBlock({ (data: NSData?, error: NSError?) ->
+                Void in
+                
+                // Failure to get image
+                if let error = error {
+                    
+                    // Log Failure
+                    NSLog("Unable to get image data for table cell \(indexPath.row)\nError: \(error)")
+                    
+                }
+                    // Success getting image
+                else {
+                    
+                    // Get image and set to cell's content
+                    let image = UIImage(data: data!)
+                    
+                    //let image = UIImage(CGImage: cgImageRef!,scale: 1.0,orientation: UIImageOrientation.Right)
+                    let roundProfile = self.roundImage(image!)
+                    
+                    // Set image and tag for cell
+                    if let updateCell = self.tableView.cellForRowAtIndexPath(indexPath) as? ScoreViewTableCell {
+                        
+                        updateCell.profilePictureView.image = roundProfile
+                        
+                    }
+                    
+                    // Set the cache index
+                    self.userCache[indexPath.row] = roundProfile
+                }
+            })
+        }
+    }
+
+    
+    
         if (content?[indexPath.section]["username"] != nil && (content?[indexPath.section]["score"] != nil)) {
             let usr = content![indexPath.section]["username"] as! String
             let scr = content![indexPath.section]["score"] as! Int
@@ -133,6 +178,21 @@ class ScoreViewController: UIViewController, UITableViewDelegate, UITableViewDat
     // Hide Status Bar
     override func prefersStatusBarHidden() -> Bool {
         return true
+    }
+    func roundImage (image:UIImage) -> UIImage {
+        let size = CGSizeMake(640, 640)
+        UIGraphicsBeginImageContext(size)
+        let ctx = UIGraphicsGetCurrentContext()
+        CGContextAddArc(ctx, 320, 320, 320,0.0, CGFloat(2 * M_PI), 1)
+        CGContextClip(ctx)
+        CGContextSaveGState(ctx)
+        CGContextTranslateCTM(ctx, 0.0, 640)
+        CGContextScaleCTM(ctx, 1.0, -1)
+        CGContextDrawImage(ctx, CGRectMake(0, 0, 640, 640), image.CGImage)
+        CGContextRestoreGState(ctx)
+        let finalImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return finalImage
     }
 
 }
