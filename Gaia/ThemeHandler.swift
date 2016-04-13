@@ -61,6 +61,9 @@ class ThemeHandler: NSObject {
         SVProgressHUD.setBackgroundColor(ComplementaryColor3)
         SVProgressHUD.setDefaultAnimationType(.Native)
         SVProgressHUD.setCornerRadius(50)
+        SVProgressHUD.setFont(LargeThemeFont)
+        SVProgressHUD.setForegroundColor(UIColor.whiteColor())
+        SVProgressHUD.setDefaultMaskType(.Black)
     }
     
     func setFrameGradientTheme(vc: UIViewController?) {

@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import SVProgressHUD
 
 let userDidLogoutNotification = "User Logged Out\n"
 
@@ -15,7 +16,6 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
     
     internal var score: Int?
     internal var capturedScore = false
-    
     
     @IBOutlet weak var captureImageButton: UIButton!
     @IBOutlet weak var uploadButton: UIButton!
@@ -25,61 +25,53 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
     @IBOutlet weak var profileUsernameLabel: UILabel!
     @IBOutlet weak var profilePictureImage: UIImageView!
     
-    var profPic = ProfilePicture()
-    
     let ivc = UIImagePickerController()
-    
-    var userImage: PFFile?
-    
-    var profilePcture: UIImage?
+    var cachedProfileImage: UIImage?
+    let tempProfileImage = UIImage(named: "Profile_Picture")
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Call load for user image
+        loadCurrentUserProfileImage()
+        // Hide current options
         hideOptions()
-        
-        loadImages()
-        
+        // Set delegate & datasource for imageviewcontroller
         ivc.delegate = self
         ivc.allowsEditing = true
-        
-        let profileImage = UIImage(named: "Profile_Picture")
-        
-        
-        //profileImageView = UIImageView(image: profileImage)
-        
-        //profilePictureImage.image = roundImage(profileImage!)
-        
-        PFUser.currentUser()
-        //self.profilePictureImage.layer.cornerRadius = self.profilePictureImage.frame.size.width / 2;
-        self.profilePictureImage.clipsToBounds = true;
-        
-        profileUsernameLabel.text = PFUser.currentUser()?.username
-        
-        scoreLabel.text = "\((PFUser.currentUser()!["score"] as! Int?)!)"
-        
-        emailLabel.text = PFUser.currentUser()?.email
-        
+        // Setup Base Profile Info
+        setupProfileUIElements()
         // Check photo library
         if (UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary) == false) {
             uploadButton.enabled = false
         }
-        
         // Check the camera
         if (UIImagePickerController.isSourceTypeAvailable(.Camera) == false) {
             captureImageButton.enabled = false
         }
-
-    
-
-        // Do any additional setup after loading the view.
+        // Listen for broadcast to update user score
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "refreshUserScore", name: reloadScores, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-    //Create rounded images
+    
+    // Setup base info for user
+    func setupProfileUIElements() {
+        profilePictureImage.clipsToBounds = true;
+        profileUsernameLabel.text = PFUser.currentUser()?.username
+        emailLabel.text = PFUser.currentUser()?.email
+        // Call score on load
+        refreshUserScore()
+    }
+    
+    // Refresh current user score
+    func refreshUserScore() {
+        scoreLabel.text = "\((PFUser.currentUser()!["score"] as! Int?)!)"
+    }
+    
+    // Create rounded images for profile picture
     func roundImage (image:UIImage) -> UIImage {
         
         let size = CGSizeMake(640, 640)
@@ -94,55 +86,46 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         CGContextRestoreGState(ctx)
         let finalImage = UIGraphicsGetImageFromCurrentImageContext()
         
-        
         UIGraphicsEndImageContext()
         return finalImage
         
     }
 
     @IBAction func onLogout(sender: AnyObject) {
-        
+        // Logout of user
         PFUser.logOutInBackgroundWithBlock { (error: NSError?) ->
             Void in
-            
             if let error = error {
-                // Log
-                NSLog("Error on logout:\n\(error.localizedDescription)")
+                // Log Error Logging Out
+                log.error("Error on logout:\n\(error.localizedDescription)")
             }
             else {
-                
-                // Log
-                NSLog("Logout Success")
-                //Broadcast
+                // Log Success
+                log.info("Logout Success")
+                // Broadcast Logout Event to App
                 NSNotificationCenter.defaultCenter().postNotificationName(userDidLogoutNotification, object: nil)
-                
             }
-            
         }
-
     }
+    
     @IBAction func onAddImage(sender: AnyObject) {
         displayOptions()
-        
     }
+    
     @IBAction func onTap(sender: AnyObject) {
         hideOptions()
-        
     }
+    
     @IBAction func onUpload(sender: AnyObject) {
-        
         // Bring up the photo lib
         ivc.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        
         // Enable the hidden media fields
         showImagePickerController()
-        
     }
+    
     @IBAction func onCaptureImage(sender: AnyObject) {
-        
         // Bring up the camera
         ivc.sourceType = UIImagePickerControllerSourceType.Camera
-        
         showImagePickerController()
     }
     
@@ -154,32 +137,33 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
     // Setup the image picker controller
     func imagePickerController(picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        
+        // Show progress wheel
+        SVProgressHUD.show()
         // Bring up everything we need for picker
-        
-        
         let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
-        
-        profPic.postCapturedImage(editedImage) { (bool, error) in
-            if bool {
-                print("successfully uploaded profile picture!")
-            } else {
-                print("could not upload profile picture")
-            }
-        }
-        
-        // Set image
-        profilePictureImage.image = roundImage(editedImage)
-        
-        
-        
-        
+        // Set current user image
+        GaiaUserClient.sharedInstance.updateCapturedImageForCurrentUser(editedImage, withCompletion: { (success, error) ->
+            Void in
+                if let error = error {
+                    // Log Error
+                    log.error("Unable to update current user profile image\nError: \(error.localizedDescription)")
+                }
+                else {
+                    // Log Success
+                    log.info("Successfully updated current user profile image")
+                    // Set new cached image
+                    self.cachedProfileImage = editedImage
+                    // Set image regardless, will default back to old image if save was unsuccessful
+                    self.profilePictureImage.image = self.roundImage(editedImage)
+                }
+            // Dismiss Progress Wheel
+            SVProgressHUD.dismiss()
+        })
         // Dismiss controller
         dismissViewControllerAnimated(true, completion: nil)
-        
     }
     
-    func hideOptions(){
+    func hideOptions() {
     
         captureImageButton.hidden = true
         uploadButton.hidden = true
@@ -187,70 +171,43 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
     
     
     }
-    func displayOptions(){
+    func displayOptions() {
+        
         captureImageButton.hidden = false
         uploadButton.hidden = false
         imageOptionsView.hidden = false
     
     }
     
-    func loadImages()
-    {
-        let query = PFQuery(className: "ProfilePicture").whereKey("username", equalTo: (PFUser.currentUser()?.username)!)
-        
-        
-        query.findObjectsInBackgroundWithBlock { (content: [PFObject]?, error: NSError?) ->
-            Void in
-            if (content != nil) {
-                let userData:PFObject = (content! as NSArray).lastObject as! PFObject
-                
-                print(userData["username"])
-                
-                self.userImage = userData["profilePicture"] as! PFFile?
-                
-                
-                self.userImage!.getDataInBackgroundWithBlock({ (data: NSData?, error: NSError?) ->
-                    Void in
-                    
-                    
-                    // Failure to get image
-                    if let error = error {
-                        
-                        // Log Failure
-                        NSLog("Unable to get image data Error: \(error)")
-                        
+    // Set default image & load current user image in background
+    func loadCurrentUserProfileImage() {
+        if let cachedProfileImage = cachedProfileImage {
+            // Used cached image as profile picture
+            profilePictureImage.image = roundImage(cachedProfileImage)
+        }
+        else {
+            // Set Temp While Load
+            profilePictureImage.image = tempProfileImage
+            // Attempt to gather background data from current user
+            GaiaUserClient.sharedInstance.getImageInBackgroundForCurrentUser( { (success, image, error) -> () in
+                if let error = error {
+                    // Log Error from Downloading
+                    log.error("Failure to get current user profile image in background\nError: \(error.localizedDescription)")
+                }
+                else {
+                    if (success == true) {
+                        // Log
+                        log.info("Loaded & set current user profile image")
+                        // Set Loaded Image
+                        self.profilePictureImage.image = self.roundImage(image!)
+                        self.cachedProfileImage = image
                     }
-                        // Success getting image
                     else {
-                        
-                        // Get image and set to cell's content
-                        let image = UIImage(data: data!)
-                        
-                        self.profilePcture = image
-                        
-                        self.profilePictureImage.image = self.roundImage(self.profilePcture!)
+                        // Log Failure To Find PFFile on Current User
+                        log.error("Failure to find profile picture PFFile on current user")
                     }
-            
-
-
-            
-                })
-            } else {
-               print(error?.localizedDescription)
-            }
-            
-            
+                }
+            })
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

@@ -351,9 +351,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         capture.postCapturedImage(takenPicture.image, tag: self.savedTagMatch, tagsList: self.savedTagsList, points: points, location: self.myLocation, withCompletion:
             { (success: Bool, error: NSError?) -> Void in
                 
-                // Stop progressHUD after network task done
-                SVProgressHUD.dismiss()
-                
                 // Check if successful post of image to server
                 if let error = error {
                     
@@ -378,7 +375,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                     log.debug("Image capture successfully posted to parse server\n")
                     
                     // Update User Score
-                    self.updateScore()
+                    self.updateCurrentUserScore()
                     
                     //Call functions in ScoreViewController to reload User Scores
                     NSNotificationCenter.defaultCenter().postNotificationName(reloadCatalogue, object: nil)
@@ -387,6 +384,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                     self.turnOffCapturedImageControlSettings()
                     
                 }
+                
+                // Finally dismiss HUD regardless of sucesss or fail here after process is completed
+                SVProgressHUD.dismiss()
         })
     }
     
@@ -486,7 +486,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                 let points = self.myWildlife.pointsTag(match)
                
                 // Set return values
-                completion(success: success, match: match, tags: tags, points:points, error: nil)
+                completion(success: success, match: match, tags: tags, points: points, error: nil)
     
                 // Log status & match result
                 log.debug("Match successful: \(success)\n")
@@ -497,74 +497,43 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-    func updateScore() {
-        
-        let query = PFQuery(className: "_User").whereKey("username", equalTo: (PFUser.currentUser()?.username)!)
-        
-        // Query current posting user and update their score if successful
-        query.getFirstObjectInBackgroundWithBlock  {
-            (user: PFObject?, error: NSError?) -> Void in
-            // Failure
-            if error != nil {
-                
+    func updateCurrentUserScore() {
+        // Check if current user exists
+        let currentUser = PFUser.currentUser()
+        // Save temp score in case fail
+        let tempScore = currentUser!["score"] as! Int
+        // Increment Score
+        currentUser!["score"] = tempScore + points!
+        // Save current user
+        currentUser!.saveInBackgroundWithBlock({ (success, error) -> Void in
+            if let error = error {
+                // Revert Score
+                currentUser!["score"] = tempScore
                 // Log Error
-                log.error("Unable to retrieve current user to update score")
-                
+                log.error("Unable to save current user to update score\nError: \(error.localizedDescription)")
             }
-            // User retrieved, update score
             else {
-                
-                // Update user associated score to add captured image
-                user!["score"] = user!["score"] as! Int + self.points!
-            
                 // Log update & total
-                log.debug("Updated Score of user \(PFUser.currentUser()!.username!) to \(user!["score"])")
-                
-                // Save user object to Parse w/ completion to update leaderboard table
-                user!.saveInBackgroundWithBlock({ (success: Bool?, error: NSError?) -> Void in
-                    
-                    // If error exists
-                    if let error = error {
-                        
-                        // Log Error
-                        log.error("Unable to save user score in background\nError: \(error)")
-                        
-                    }
-                    // No error, update tables
-                    else {
-                    
-                        // Log success & send out notification
-                        log.debug("Saved user score in background")
-                        
-                        // Call functions in ScoreViewController to reload User Scores
-                        NSNotificationCenter.defaultCenter().postNotificationName(reloadScores, object: nil)
-                        
-                    }
-                })
-                
+                log.debug("Updated score of current user \(currentUser!.username!) to \(currentUser!["score"])")
+                // Log success & send out notification
+                log.debug("Saved user score in background")
+                // Call functions in ScoreViewController to reload User Scores
+                NSNotificationCenter.defaultCenter().postNotificationName(reloadScores, object: nil)
             }
-            
-        }
-        
-        
-    
+        })
     }
     
     
     // Cancel Button Pressed
     @IBAction func onCancelPhoto(sender: AnyObject) {
-        
         // Log action
         log.debug("Cancel button pressed\n")
-        
         // Turn off captured image controls
         turnOffCapturedImageControlSettings()
-        
         // Clear default values
         self.savedTagMatch = ""
         self.tagPreviewLabel.text = ""
         self.points = 0
-        
     }
     
     // Turn on controls & views for captured image
@@ -652,15 +621,5 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
             tagListButton.setImage(UIImage(named: "ic_loyalty_white_36pt"), forState: .Normal)
         }
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

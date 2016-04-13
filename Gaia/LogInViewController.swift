@@ -11,6 +11,7 @@ import Parse
 import ZFRippleButton
 import GoogleMaterialIconFont
 import ChameleonFramework
+import SVProgressHUD
 
 class LogInViewController: UIViewController {
     
@@ -26,20 +27,15 @@ class LogInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Grab Storyboard Instance && move to container view controller
         mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         containerViewController = mainStoryboard?.instantiateViewControllerWithIdentifier("Main") as? ContainerViewController
-        
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
-        
         // Handle Gradient With ThemeHandler
         ThemeHandler.sharedThemeHandler.setFrameGradientTheme(self)
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -59,42 +55,30 @@ class LogInViewController: UIViewController {
     }
     //If the user exists segue into the Container view
     @IBAction func onLogin(sender: AnyObject) {
-        
+        // Close keyboard
+        view.endEditing(true)
+        // Show Progress Wheel While Login
+        SVProgressHUD.show()
+        // Log user in
         PFUser.logInWithUsernameInBackground(userNameField.text!, password:passwordField.text!) { (user: PFUser?, error: NSError?) -> Void in
-            
-            if user != nil {
-                
-                log.info("User \(user!.username) has logged in")
-                
-                // Segue to ContainerViewController
-                self.presentViewController(self.containerViewController!, animated: true, completion: nil)
-                
-            }
-            else {
-            
+            if let error = error {
                 // Log failure
                 log.error("Unable to log in user in background!")
             }
-            
+            else {
+                // Log User Info
+                log.info("User \(user!.username) has logged in")
+                // Segue to ContainerViewController
+                self.presentViewController(self.containerViewController!, animated: true, completion: nil)
+            }
+            // Close wheel
+            SVProgressHUD.dismiss()
         }
-
     }
     
     
     @IBAction func onTap(sender: AnyObject) {
         view.endEditing(true)
     }
-    
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
