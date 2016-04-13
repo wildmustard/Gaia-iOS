@@ -39,6 +39,9 @@ class ScoreViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // Reload tableview on post of new capture
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "callServerForUserScore", name: reloadScores, object: nil)
         
+        //Reload tableview on post of new profile picture
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "callServerForUserScore", name: userUpdatedProfileImage, object: nil)
+        
     }
 
     override func didReceiveMemoryWarning() {

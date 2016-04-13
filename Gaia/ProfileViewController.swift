@@ -109,6 +109,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 log.info("Logout Success")
                 // Broadcast Logout Event to App
                 NSNotificationCenter.defaultCenter().postNotificationName(userDidLogoutNotification, object: nil)
+                
             }
         }
     }
@@ -160,6 +161,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                     self.cachedProfileImage = editedImage
                     // Set image regardless, will default back to old image if save was unsuccessful
                     self.profilePictureImage.image = self.roundImage(editedImage)
+                    // Broadcast that user updated profile picture
+                    NSNotificationCenter.defaultCenter().postNotificationName(userUpdatedProfileImage, object: nil)
                 }
             // Dismiss Progress Wheel
             SVProgressHUD.dismiss()
