@@ -16,12 +16,18 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Bg0-kp-itf">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Bg0-kp-itf">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
             </subviews>
             <color key="backgroundColor" red="0.83529411760000005" green="0.83529411760000005" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="Bg0-kp-itf" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="FcF-yp-9FI"/>
+                <constraint firstAttribute="trailing" secondItem="Bg0-kp-itf" secondAttribute="trailing" id="Ka8-kv-5oy"/>
+                <constraint firstItem="Bg0-kp-itf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="sPk-Y5-J6l"/>
+                <constraint firstAttribute="bottom" secondItem="Bg0-kp-itf" secondAttribute="bottom" id="xCQ-9w-GBo"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
             <point key="canvasLocation" x="328" y="404"/>

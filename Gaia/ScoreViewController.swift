@@ -11,7 +11,7 @@ import Parse
 
 
 
-class ScoreViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class ScoreViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -44,6 +44,12 @@ class ScoreViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        // Handle Gradient, Buttons, Label Attributes With ThemeHandler
+        ThemeHandler.sharedThemeHandler.setFrameGradientTheme(self)
     }
     
         

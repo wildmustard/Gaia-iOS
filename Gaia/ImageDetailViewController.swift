@@ -33,10 +33,8 @@ class ImageDetailViewController: UIViewController {
     
     // Pressing Close Button
     @IBAction func onPressClose(sender: AnyObject) {
-        
         // Close this view controller
         self.dismissViewControllerAnimated(true, completion: nil)
-        
     }
 
     /*

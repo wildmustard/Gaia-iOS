@@ -8,6 +8,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TabBarContainerViewController" customModule="Gaia" customModuleProvider="target">
             <connections>
                 <outlet property="contentView" destination="3PT-Lb-F3l" id="99u-iz-NuP"/>
+                <outlet property="leaderboardsButton" destination="fVy-Yt-HeM" id="pRM-rA-rxl"/>
+                <outlet property="profileButton" destination="Pao-fj-Rlh" id="3hl-un-Ten"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -16,28 +18,79 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pao-fj-Rlh">
-                    <rect key="frame" x="81" y="0.0" width="46" height="30"/>
-                    <state key="normal" title="First"/>
-                    <connections>
-                        <action selector="didTapFirstButton:" destination="-1" eventType="touchUpInside" id="pR4-oE-sGP"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fVy-Yt-HeM">
-                    <rect key="frame" x="206" y="0.0" width="59" height="30"/>
-                    <state key="normal" title="Second"/>
-                    <connections>
-                        <action selector="didTapSecondButton:" destination="-1" eventType="touchUpInside" id="c3g-Wr-ZlB"/>
-                    </connections>
-                </button>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3PT-Lb-F3l">
-                    <rect key="frame" x="0.0" y="43" width="320" height="525"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9ol-nO-xDE" userLabel="Tab Navigation View">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pao-fj-Rlh" customClass="ZFRippleButton" customModule="ZFRippleButton">
+                            <rect key="frame" x="8" y="21" width="130" height="30"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="20"/>
+                            <state key="normal" title="Profile">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="didTapFirstButton:" destination="-1" eventType="touchUpInside" id="pR4-oE-sGP"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fVy-Yt-HeM" customClass="ZFRippleButton" customModule="ZFRippleButton">
+                            <rect key="frame" x="182" y="21" width="130" height="30"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="130" id="3OZ-bR-e1r"/>
+                                <constraint firstAttribute="height" constant="30" id="MN6-e6-O5h"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="20"/>
+                            <state key="normal" title="Leaderboards">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="didTapSecondButton:" destination="-1" eventType="touchUpInside" id="c3g-Wr-ZlB"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.035294119268655777" green="0.28235295414924622" blue="0.77254903316497803" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="fVy-Yt-HeM" firstAttribute="centerY" secondItem="9ol-nO-xDE" secondAttribute="centerY" id="Biz-W5-qqV"/>
+                        <constraint firstItem="fVy-Yt-HeM" firstAttribute="top" secondItem="9ol-nO-xDE" secondAttribute="top" constant="21" id="DQQ-gO-81G"/>
+                        <constraint firstItem="fVy-Yt-HeM" firstAttribute="width" secondItem="Pao-fj-Rlh" secondAttribute="width" id="Iyb-lv-M7U"/>
+                        <constraint firstAttribute="bottom" secondItem="fVy-Yt-HeM" secondAttribute="bottom" id="JV3-Gw-c74"/>
+                        <constraint firstAttribute="bottom" secondItem="fVy-Yt-HeM" secondAttribute="bottom" id="PGk-J1-fnC"/>
+                        <constraint firstItem="fVy-Yt-HeM" firstAttribute="top" secondItem="9ol-nO-xDE" secondAttribute="top" constant="21" id="UzC-md-zTi"/>
+                        <constraint firstItem="fVy-Yt-HeM" firstAttribute="height" secondItem="Pao-fj-Rlh" secondAttribute="height" id="dkP-M4-sbm"/>
+                        <constraint firstItem="Pao-fj-Rlh" firstAttribute="top" secondItem="9ol-nO-xDE" secondAttribute="top" constant="21" id="fGo-hl-nZf"/>
+                        <constraint firstAttribute="bottom" secondItem="Pao-fj-Rlh" secondAttribute="bottom" id="hlK-eZ-Iwh"/>
+                        <constraint firstItem="fVy-Yt-HeM" firstAttribute="centerY" secondItem="Pao-fj-Rlh" secondAttribute="centerY" id="ixf-cW-kgt"/>
+                        <constraint firstItem="Pao-fj-Rlh" firstAttribute="leading" secondItem="9ol-nO-xDE" secondAttribute="leading" constant="8" id="oRh-wx-g7D"/>
+                        <constraint firstAttribute="trailing" secondItem="fVy-Yt-HeM" secondAttribute="trailing" constant="8" id="vor-pZ-SZJ"/>
+                        <constraint firstAttribute="height" constant="51" id="zef-sq-krx"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="hlK-eZ-Iwh"/>
+                            <exclude reference="Biz-W5-qqV"/>
+                            <exclude reference="JV3-Gw-c74"/>
+                            <exclude reference="PGk-J1-fnC"/>
+                            <exclude reference="UzC-md-zTi"/>
+                        </mask>
+                    </variation>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3PT-Lb-F3l">
+                    <rect key="frame" x="0.0" y="50" width="320" height="518"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="3PT-Lb-F3l" secondAttribute="bottom" id="Hxq-Y3-Xe3"/>
+                <constraint firstItem="9ol-nO-xDE" firstAttribute="leading" secondItem="3PT-Lb-F3l" secondAttribute="leading" id="JjB-dZ-g0i"/>
+                <constraint firstItem="9ol-nO-xDE" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="S5b-kB-2Pg"/>
+                <constraint firstItem="3PT-Lb-F3l" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="50" id="SGa-d8-WTI"/>
+                <constraint firstItem="9ol-nO-xDE" firstAttribute="trailing" secondItem="3PT-Lb-F3l" secondAttribute="trailing" id="Zgh-PY-Z3z"/>
+                <constraint firstItem="3PT-Lb-F3l" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="g5l-qW-RsW"/>
+                <constraint firstAttribute="trailing" secondItem="3PT-Lb-F3l" secondAttribute="trailing" id="xxA-AA-Uun"/>
+            </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <point key="canvasLocation" x="105" y="190"/>
+            <point key="canvasLocation" x="99" y="183"/>
         </view>
     </objects>
 </document>

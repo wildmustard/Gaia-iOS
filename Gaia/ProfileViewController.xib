@@ -22,64 +22,72 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IWW-uI-tkO">
-                    <rect key="frame" x="130" y="59" width="60" height="60"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IWW-uI-tkO">
+                    <rect key="frame" x="85" y="30" width="150" height="150"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="150" id="Fid-IZ-S4O"/>
+                        <constraint firstAttribute="height" constant="150" id="KuP-Qs-B8o"/>
+                    </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LEX-xo-sJ2">
-                    <rect key="frame" x="130" y="135" width="94" height="21"/>
+                    <rect key="frame" x="33" y="203" width="79" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uli-f8-ghK">
-                    <rect key="frame" x="130" y="164" width="81" height="21"/>
+                    <rect key="frame" x="33" y="298" width="45" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xHz-Yd-eIM">
-                    <rect key="frame" x="130" y="200" width="171" height="21"/>
+                    <rect key="frame" x="33" y="232" width="41" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WfD-yt-rY7">
-                    <rect key="frame" x="221" y="74" width="46" height="30"/>
+                    <rect key="frame" x="201" y="218" width="46" height="30"/>
                     <state key="normal" title="Add"/>
                     <connections>
                         <action selector="onAddImage:" destination="-1" eventType="touchUpInside" id="9AB-Kp-gFD"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Qb-iM-bXk">
-                    <rect key="frame" x="136" y="381" width="48" height="30"/>
-                    <state key="normal" title="Logout"/>
-                    <connections>
-                        <action selector="onLogout:" destination="-1" eventType="touchUpInside" id="JGD-5i-01n"/>
-                    </connections>
-                </button>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xk5-FS-5k0">
-                    <rect key="frame" x="0.0" y="419" width="320" height="149"/>
+                    <rect key="frame" x="0.0" y="469" width="320" height="99"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rvJ-NV-xaF">
-                            <rect key="frame" x="207" y="44" width="61" height="30"/>
-                            <state key="normal" title="Upload"/>
-                            <connections>
-                                <action selector="onUpload:" destination="-1" eventType="touchUpInside" id="q1i-JC-iPZ"/>
-                            </connections>
-                        </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="irK-JY-Vjg">
-                            <rect key="frame" x="62" y="44" width="92" height="30"/>
+                            <rect key="frame" x="37" y="35" width="92" height="30"/>
                             <state key="normal" title="Take Picture"/>
                             <connections>
                                 <action selector="onCaptureImage:" destination="-1" eventType="touchUpInside" id="MeR-2w-9Bs"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rvJ-NV-xaF">
+                            <rect key="frame" x="224" y="35" width="61" height="30"/>
+                            <state key="normal" title="Upload"/>
+                            <connections>
+                                <action selector="onUpload:" destination="-1" eventType="touchUpInside" id="q1i-JC-iPZ"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Qb-iM-bXk">
+                    <rect key="frame" x="136" y="431" width="48" height="30"/>
+                    <state key="normal" title="Logout"/>
+                    <connections>
+                        <action selector="onLogout:" destination="-1" eventType="touchUpInside" id="JGD-5i-01n"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <gestureRecognizers/>
+            <constraints>
+                <constraint firstItem="IWW-uI-tkO" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="cqG-iH-TGB"/>
+                <constraint firstItem="IWW-uI-tkO" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="30" id="op8-cq-Wkw"/>
+            </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
             <connections>
                 <outletCollection property="gestureRecognizers" destination="w4n-gn-K4h" appends="YES" id="9AX-dQ-3JY"/>

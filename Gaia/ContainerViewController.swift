@@ -17,7 +17,6 @@ class ContainerViewController: UIViewController, UIScrollViewDelegate {
     let TabVC = TabBarContainerViewController(nibName: "TabBarContainerViewController", bundle: nil)
     let CatalogueVC :ImageCatalogueViewController = ImageCatalogueViewController(nibName: "ImageCatalogueViewController", bundle: nil)
     let HomeVC :HomeViewController = HomeViewController(nibName: "HomeViewController", bundle: nil)
-    
     let ScoreVC = ScoreViewController(nibName: "ScoreViewController", bundle: nil)
     let ProfileVC = ProfileViewController(nibName: "ProfileViewController",bundle: nil)
     
@@ -28,10 +27,8 @@ class ContainerViewController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         //Links score viewController and profile VC to the tab bar ViewController
-        TabVC.firstViewController = ScoreVC
-        TabVC.secondViewController = ProfileVC
-
-        
+        TabVC.firstViewController = ProfileVC
+        TabVC.secondViewController = ScoreVC
         // Add Child Views to Container View Hierarchy
         self.addChildViewController(TabVC)
         self.scrollView!.addSubview(TabVC.view)
@@ -128,7 +125,6 @@ class ContainerViewController: UIViewController, UIScrollViewDelegate {
         var homeFrame :CGRect = HomeVC.view.frame
         homeFrame.origin.x = 2 * homeFrame.width
         TabVC.view.frame = homeFrame
-        
         // Set the origin of the frame to the current returning frame
         frame.origin.x = getCurrentReturnFrameOrigin()
         scrollView.scrollRectToVisible(frame, animated: false)

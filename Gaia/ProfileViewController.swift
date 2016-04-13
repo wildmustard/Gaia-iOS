@@ -12,7 +12,7 @@ import SVProgressHUD
 
 let userDidLogoutNotification = "User Logged Out\n"
 
-class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate  {
+class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
     
     internal var score: Int?
     internal var capturedScore = false
@@ -52,6 +52,13 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         // Listen for broadcast to update user score
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "refreshUserScore", name: reloadScores, object: nil)
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        // Handle Gradient, Buttons, Label Attributes With ThemeHandler
+        ThemeHandler.sharedThemeHandler.setFrameGradientTheme(self)
+        ThemeHandler.sharedThemeHandler.setLabelThemeAttributes(emailLabel)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -73,7 +80,6 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
     
     // Create rounded images for profile picture
     func roundImage (image:UIImage) -> UIImage {
-        
         let size = CGSizeMake(640, 640)
         UIGraphicsBeginImageContext(size)
         let ctx = UIGraphicsGetCurrentContext()
@@ -85,10 +91,8 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         CGContextDrawImage(ctx, CGRectMake(0, 0, 640, 640), image.CGImage)
         CGContextRestoreGState(ctx)
         let finalImage = UIGraphicsGetImageFromCurrentImageContext()
-        
         UIGraphicsEndImageContext()
         return finalImage
-        
     }
 
     @IBAction func onLogout(sender: AnyObject) {
