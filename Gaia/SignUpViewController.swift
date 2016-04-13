@@ -9,9 +9,7 @@
 import UIKit
 import Parse
 import ZFRippleButton
-
-
-let profileImage = UIImage(named: "Profile_Picture")
+import SVProgressHUD
 
 class SignUpViewController: UIViewController {
     
@@ -27,23 +25,17 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var cancelButton: ZFRippleButton!
     
     var mainStoryboard: UIStoryboard?
-    let profile = ProfilePicture()
-
-
     var containerViewController: ContainerViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Grab Storyboard Instance && move to container view controller
         mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         containerViewController = mainStoryboard?.instantiateViewControllerWithIdentifier("Main") as? ContainerViewController
-    
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
         // Handle Gradient, Buttons, Label Attributes With ThemeHandler
         ThemeHandler.sharedThemeHandler.setFrameGradientTheme(self)
         ThemeHandler.sharedThemeHandler.setZFRippleButtonThemeAttributes(submitButton)
@@ -54,10 +46,7 @@ class SignUpViewController: UIViewController {
         ThemeHandler.sharedThemeHandler.setTextFieldThemeAttributes(userNameField)
         ThemeHandler.sharedThemeHandler.setTextFieldThemeAttributes(emailField)
         ThemeHandler.sharedThemeHandler.setTextFieldThemeAttributes(passwordField)
-        
     }
-
-
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -65,92 +54,50 @@ class SignUpViewController: UIViewController {
     
     // Submission Action
     @IBAction func onSubmit(sender: AnyObject) {
-
+        // Close keyboard
+        view.endEditing(true)
         // Setup new Parse User
         let newUser = PFUser()
-        
-        // Set new user from form post details
+        // Set new user from form post details & client defaults
         newUser.username = userNameField.text
         newUser.password = passwordField.text
         newUser.email = emailField.text
         newUser["score"] = 0
-        
-        
-        
-        //Try to sign new user up
+        GaiaUserClient.sharedInstance.setDefaultProfileImageForUser(newUser)
+        // Start SVProgressHUD
+        SVProgressHUD.show()
+        // Sign up new user
         newUser.signUpInBackgroundWithBlock { (success:Bool,error: NSError?) -> Void in
-            
             // Failure
             if let error = error {
-                
                 // Log failure to create user
-                NSLog("Unable to create Parse User\nError: \(error)\n")
-                
+                log.error("Unable to create Parse User\nError: \(error)\n")
+                // Alert user to post failure
+                let alert = UIAlertController(title: "Error Creating Your User", message: "Please Try Again!", preferredStyle: .Alert)
+                let dismissAction = UIAlertAction(title: "OK", style: .Default) { (action) in }
+                alert.addAction(dismissAction)
+                self.presentViewController(alert, animated: true) {}
             }
-                // Creation Successful
             else {
-
                 // Log success
-                NSLog("Successfully created new user for Parse\nUser: \(newUser)")
-                self.postProfilePicture()
+                log.info("Successfully created new Gaia User for Parse\nUser: \(newUser)")
                 // Segue to Home
                 self.presentViewController(self.containerViewController!, animated: true, completion: nil)
-                
             }
+            // Close progress wheel when done with success / fail attempt
+            SVProgressHUD.dismiss()
         }
-        
     }
    
     // Cancel User Signup Action
     @IBAction func onCancel(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: {
-        })
+        self.dismissViewControllerAnimated(true, completion: {})
     }
     
     
+    // Tap gesture for handling editing end
     @IBAction func onTap(sender: AnyObject) {
         view.endEditing(true)
     }
     
-    func postProfilePicture() {
-        profile.postCapturedImage(profileImage, withCompletion:
-            { (success: Bool, error: NSError?) -> Void in
-                
-                // Stop progressHUD after network task done
-                
-                // Check if successful post of image to server
-                if let error = error {
-                    
-                    // Log error
-                    NSLog("Error posting capture image content: \(error.localizedDescription)\n")
-                    
-                    
-                    // Alert user to post failure
-                    let alert = UIAlertController(title: "Error Uploading Image", message: "", preferredStyle: .Alert)
-                    let dismissAction = UIAlertAction(title: "OK", style: .Default) { (action) in }
-                    alert.addAction(dismissAction)
-                    self.presentViewController(alert, animated: true) {}
-                    
-                }
-                else {
-                    // Log success post
-                    NSLog("Image capture successfully posted to parse server\n")
-                    
-
-                    
-                    
-                }
-        })
-    }
-
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    */
 }

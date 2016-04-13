@@ -29,14 +29,12 @@ class ScoreViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         //Associate cell with CollectionViewController
         self.tableView.registerNib(nibName, forCellReuseIdentifier: "MyScoreCell")
         
+        // Set tableview delegation & datasource
         tableView.delegate = self
-        
         tableView.dataSource = self
         
+        // Get all users for table
         callServerForUserScore()
-
-        
-        
         
         // Reload tableview on post of new capture
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "callServerForUserScore", name: reloadScores, object: nil)
@@ -51,45 +49,32 @@ class ScoreViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         
     
     func callServerForUserScore() {
-        
-        // Setup a PFQuery object to handle collection of the user's scores
-        let query = PFQuery(className: "_User")//.whereKey("username", notEqualTo: (PFUser.currentUser()?.username)!)
-        
-        //Caches images from parse
-        
+        // Setup a PFQuery object to handle collection of all user scores
+        let query = PFQuery(className: "_User")
+        // Order by highest score
         query.orderByDescending("score")
-        
-        query.cachePolicy = .CacheThenNetwork
-        
+        // Always attempt to check network else pull cached data
+        query.cachePolicy = .NetworkElseCache
         query.findObjectsInBackgroundWithBlock { (content: [PFObject]?, error: NSError?) ->
             Void in
             // If we are able to get new user profiles, then set out new media as the new userMedia object
-            if let content = content {
-                
+            if let error = error {
+                // Log error
+                log.error("Error: Unable to query new user media objects\n\(error.localizedDescription)")
+            }
+            else {
                 // Reset user media object for the tableview data, reload table to display it
-                NSLog("Queried data successfully")
-                
-                for each in content {
-                    print("\(each["username"]) w/ score \(each["score"])")
+                log.debug("Score table data successfully")
+                for each in content! {
+                    log.debug("\(each["username"]) w/ score \(each["score"])")
                 }
-                
-                
+                // Set content
                 self.content = content
+                // Reload user cache & table data
                 self.userCache.removeAll()
                 self.tableView.reloadData()
-                
-            }
-                // Unable to get new user media
-            else {
-                if let error = error {
-                    // Log error
-                    NSLog("Error: Unable to query new user media objects\n\(error)")
-                }
-                
             }
         }
-        
-        
     }
 
     
@@ -134,27 +119,14 @@ class ScoreViewController: UIViewController,UITableViewDelegate,UITableViewDataS
             
         }
         
-       
-        
         // Return cell header
         return cell
     }
     
     
-    
-        override func prefersStatusBarHidden() -> Bool {
+    // Hide Status Bar
+    override func prefersStatusBarHidden() -> Bool {
         return true
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

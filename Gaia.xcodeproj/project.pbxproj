@@ -15,7 +15,6 @@
 		017E3A651CAB4CDB000821D1 /* SignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017E3A631CAB4CDB000821D1 /* SignUpViewController.xib */; };
 		01A4003D1C96016200424F69 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A4003B1C96016200424F69 /* MapViewController.swift */; };
 		01A4003E1C96016200424F69 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A4003C1C96016200424F69 /* MapViewController.xib */; };
-		01D713D31CBA9F34006EEB3B /* ProfilePicture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D713D21CBA9F34006EEB3B /* ProfilePicture.swift */; };
 		B02E21901CAF5F75006646A8 /* ScoreViewTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02E218F1CAF5F75006646A8 /* ScoreViewTableCell.swift */; };
 		B02E21921CAF5F92006646A8 /* ScoreViewTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B02E21911CAF5F92006646A8 /* ScoreViewTableCell.xib */; };
 		B07DF8671C62E20500DEA760 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07DF8661C62E20500DEA760 /* AppDelegate.swift */; };
@@ -31,6 +30,7 @@
 		B0FE4E771CA3715D00033258 /* Wildlife.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FE4E761CA3715D00033258 /* Wildlife.swift */; };
 		BAB377A35FEE6106789F9B6B /* Pods_Gaia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E6A5E7AB7382F82E8EEB1C9 /* Pods_Gaia.framework */; };
 		FA1672421C9A810B00453432 /* CaptureMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1672411C9A810B00453432 /* CaptureMedia.swift */; };
+		FA1B5F521CBDB1DE00E6E4FB /* GaiaUserClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1B5F511CBDB1DE00E6E4FB /* GaiaUserClient.swift */; };
 		FA3A8A9E1CAF6DFB001852C9 /* ImageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3A8A9C1CAF6DFB001852C9 /* ImageDetailViewController.swift */; };
 		FA3A8A9F1CAF6DFB001852C9 /* ImageDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA3A8A9D1CAF6DFB001852C9 /* ImageDetailViewController.xib */; };
 		FA5539391C8F9A88005591A0 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5539381C8F9A88005591A0 /* ContainerViewController.swift */; };
@@ -53,7 +53,6 @@
 		017E3A631CAB4CDB000821D1 /* SignUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignUpViewController.xib; sourceTree = "<group>"; };
 		01A4003B1C96016200424F69 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		01A4003C1C96016200424F69 /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
-		01D713D21CBA9F34006EEB3B /* ProfilePicture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePicture.swift; sourceTree = "<group>"; };
 		1AA8BCE1E8E6648420495AAF /* Pods-Gaia.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gaia.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Gaia/Pods-Gaia.debug.xcconfig"; sourceTree = "<group>"; };
 		1E6A5E7AB7382F82E8EEB1C9 /* Pods_Gaia.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gaia.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B01A03741CB48DEF0099316B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -72,6 +71,7 @@
 		B0D25A251CB4C09700CE0A0C /* PhotoAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoAnnotation.swift; sourceTree = "<group>"; };
 		B0FE4E761CA3715D00033258 /* Wildlife.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wildlife.swift; sourceTree = "<group>"; };
 		FA1672411C9A810B00453432 /* CaptureMedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureMedia.swift; sourceTree = "<group>"; };
+		FA1B5F511CBDB1DE00E6E4FB /* GaiaUserClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GaiaUserClient.swift; sourceTree = "<group>"; };
 		FA3A8A9C1CAF6DFB001852C9 /* ImageDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDetailViewController.swift; sourceTree = "<group>"; };
 		FA3A8A9D1CAF6DFB001852C9 /* ImageDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageDetailViewController.xib; sourceTree = "<group>"; };
 		FA5539381C8F9A88005591A0 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
@@ -198,7 +198,7 @@
 				B0FE4E761CA3715D00033258 /* Wildlife.swift */,
 				B0D25A251CB4C09700CE0A0C /* PhotoAnnotation.swift */,
 				FA6C6CAD1CB74DDC00AEF0F3 /* ThemeHandler.swift */,
-				01D713D21CBA9F34006EEB3B /* ProfilePicture.swift */,
+				FA1B5F511CBDB1DE00E6E4FB /* GaiaUserClient.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -418,12 +418,12 @@
 				FA5539471C8F9D1A005591A0 /* ScoreViewController.swift in Sources */,
 				FAB86A211CA2047C009347C8 /* ClarifaiClient.m in Sources */,
 				B0C5495B1CBA09F40086133C /* ProfileViewController.swift in Sources */,
-				01D713D31CBA9F34006EEB3B /* ProfilePicture.swift in Sources */,
 				017E3A641CAB4CDB000821D1 /* SignUpViewController.swift in Sources */,
 				B07DF8671C62E20500DEA760 /* AppDelegate.swift in Sources */,
 				B0C5495D1CBA09F40086133C /* TabBarContainerViewController.swift in Sources */,
 				0158D1EF1C952A6200CC3B88 /* CustomCellCollectionViewCell.swift in Sources */,
 				B0FE4E771CA3715D00033258 /* Wildlife.swift in Sources */,
+				FA1B5F521CBDB1DE00E6E4FB /* GaiaUserClient.swift in Sources */,
 				FA55393C1C8F9B00005591A0 /* HomeViewController.swift in Sources */,
 				B0D25A261CB4C09700CE0A0C /* PhotoAnnotation.swift in Sources */,
 				01A4003D1C96016200424F69 /* MapViewController.swift in Sources */,
