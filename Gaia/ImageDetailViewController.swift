@@ -8,24 +8,57 @@
 
 import UIKit
 import Parse
+import WebKit
+import SVProgressHUD
 
-class ImageDetailViewController: UIViewController {
+class ImageDetailViewController: UIViewController, UIWebViewDelegate {
     
     weak var content: PFObject?
     weak var image: UIImage?
+    var wiki: NSURLRequest?
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var closeButton: UIButton!
+    
+    @IBOutlet weak var arrowImageView: UIImageView!
+    @IBOutlet weak var webView: UIWebView!
+    @IBOutlet weak var trayView: UIView!
+    @IBOutlet weak var buttonView: UIView!
+    
+    var trayOriginalCenter: CGPoint!
+    var trayCenterWhenOpen: CGPoint!
+    var trayCenterWhenClosed: CGPoint!
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-        // Set image to the passed image from presenting ImageCatalgoueController
-        imageView.image = self.image
+        webView.delegate = self
         
-    }
+        trayCenterWhenOpen = trayView.center
+        trayCenterWhenClosed = trayView.center
+        trayCenterWhenClosed.y = trayCenterWhenClosed.y + view.frame.size.height - 50
+        
 
+        
+        // Set image to the passed image from presenting ImageCatalgoueController
+        
+        imageView.image = self.image
+        let url = NSURL(string: (self.content!["wiki"] as? String)!)
+        self.wiki = NSURLRequest(URL: url!, cachePolicy: NSURLRequestCachePolicy.ReturnCacheDataElseLoad, timeoutInterval: 20)
+        webView.loadRequest(self.wiki!)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        trayView.center = trayCenterWhenClosed
+        print("trayView viewlayoutsubviews: \n \(trayView.center) \n \(trayCenterWhenClosed)")
+    }
+    
+    
+    override func viewDidAppear(animated: Bool) {
+        print("trayView viewdidappear: \n \(trayView.center) \n \(trayCenterWhenClosed)")
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -39,6 +72,79 @@ class ImageDetailViewController: UIViewController {
         
     }
 
+    @IBAction func onTrayPanGesture(panGestureRecognizer: UIPanGestureRecognizer) {
+        
+        print(self.trayView.center)
+        // Absolute (x,y) coordinates in parent view's coordinate system
+        let point = panGestureRecognizer.locationInView(trayView)
+        
+        // Total translation (x,y) over time in parent view's coordinate system
+        
+        if panGestureRecognizer.state ==
+            UIGestureRecognizerState.Began {
+            
+            print("Gesture began at: \(point)")
+            self.trayOriginalCenter = trayView.center
+            
+            
+        } else if panGestureRecognizer.state == UIGestureRecognizerState.Changed {
+            
+            print("Gesture changed at: \(point)")
+            if panGestureRecognizer.velocityInView(self.trayView).y > 0 {
+                UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0.2, options: .AllowUserInteraction, animations: { () -> Void in
+                    self.trayView.center = self.trayCenterWhenClosed
+                    self.arrowImageView.highlighted = false
+                    }, completion: { (Bool) -> Void in
+                        //print("yay")
+                })
+                
+                
+            } else if panGestureRecognizer.velocityInView(self.trayView).y < 0 {
+                UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0.2, options: .AllowUserInteraction, animations: { () -> Void in
+                    self.trayView.center = self.trayCenterWhenOpen
+                    self.arrowImageView.highlighted = true
+                    if self.webView.loading {
+                        SVProgressHUD.show()
+                    }
+                    }, completion: { (Bool) -> Void in
+                        //print("yay")
+                })
+                
+            }
+            
+        } else if panGestureRecognizer.state == UIGestureRecognizerState.Ended {
+            
+            print("Gesture ended at: \(point)")
+            
+        }
+
+    }
+    @IBAction func onTrayTapGesture(sender: UITapGestureRecognizer) {
+        if self.trayView.center == trayCenterWhenClosed {
+            UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0.1, options: .AllowUserInteraction, animations: { () -> Void in
+                self.trayView.center = self.trayCenterWhenOpen
+                self.arrowImageView.highlighted = true
+                
+                if self.webView.loading {
+                    SVProgressHUD.show()
+                }
+                }, completion: { (Bool) -> Void in
+                    //print("yay")
+            })
+        }
+        else if self.trayView.center == trayCenterWhenOpen {
+            UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0.1, options: .AllowUserInteraction, animations: { () -> Void in
+                self.trayView.center = self.trayCenterWhenClosed
+                self.arrowImageView.highlighted = false
+                }, completion: { (Bool) -> Void in
+                    //print("yay")
+            })
+        }
+    }
+    
+    func webViewDidFinishLoad(webView: UIWebView) {
+        SVProgressHUD.dismiss()
+    }
     /*
     // MARK: - Navigation
 
