@@ -15,6 +15,7 @@
 		017E3A651CAB4CDB000821D1 /* SignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017E3A631CAB4CDB000821D1 /* SignUpViewController.xib */; };
 		01A4003D1C96016200424F69 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A4003B1C96016200424F69 /* MapViewController.swift */; };
 		01A4003E1C96016200424F69 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A4003C1C96016200424F69 /* MapViewController.xib */; };
+		B000D0471CBEF34E00C29C5D /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B000D0461CBEF34E00C29C5D /* WebKit.framework */; };
 		B02E21901CAF5F75006646A8 /* ScoreViewTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02E218F1CAF5F75006646A8 /* ScoreViewTableCell.swift */; };
 		B02E21921CAF5F92006646A8 /* ScoreViewTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B02E21911CAF5F92006646A8 /* ScoreViewTableCell.xib */; };
 		B07DF8671C62E20500DEA760 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07DF8661C62E20500DEA760 /* AppDelegate.swift */; };
@@ -50,6 +51,7 @@
 		01A4003C1C96016200424F69 /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
 		1AA8BCE1E8E6648420495AAF /* Pods-Gaia.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gaia.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Gaia/Pods-Gaia.debug.xcconfig"; sourceTree = "<group>"; };
 		1E6A5E7AB7382F82E8EEB1C9 /* Pods_Gaia.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gaia.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B000D0461CBEF34E00C29C5D /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		B01A03741CB48DEF0099316B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		B02E218F1CAF5F75006646A8 /* ScoreViewTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreViewTableCell.swift; sourceTree = "<group>"; };
 		B02E21911CAF5F92006646A8 /* ScoreViewTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScoreViewTableCell.xib; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B000D0471CBEF34E00C29C5D /* WebKit.framework in Frameworks */,
 				B0D25A241CB4B49500CE0A0C /* MapKit.framework in Frameworks */,
 				BAB377A35FEE6106789F9B6B /* Pods_Gaia.framework in Frameworks */,
 			);
@@ -148,6 +151,7 @@
 		B23DE294FC8DD40C5271856E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B000D0461CBEF34E00C29C5D /* WebKit.framework */,
 				B01A03741CB48DEF0099316B /* MapKit.framework */,
 				1E6A5E7AB7382F82E8EEB1C9 /* Pods_Gaia.framework */,
 			);

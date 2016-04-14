@@ -7,24 +7,43 @@
 //
 
 import UIKit
+import Parse
 
 class Wildlife: NSObject {
     
+    
     let wildlife: [String] = ["lion","tiger","alligator","squirrel", "tarantula", "snail","beetle","butterfly","duck","crow","horse","deer","gorilla","monkey","elephant","giraffe","swan","eagle","rose","dandelion","marijuana","spider","sunflower","mushroom","wolf","beagle","retriever","dog","zebra"]
+
+    
+    
+    internal func serverPost() {
+        for wild in wildlife {
+            let wildlifeParse = PFObject(className: "Wildlife")
+            //print("test")
+            wildlifeParse["name"] = wild
+            wildlifeParse["score"] = pointsTag(wild)
+            wildlifeParse["wiki"] = "https://en.m.wikipedia.org/wiki/" + wild
+            wildlifeParse.saveInBackground()
+        }
+    }
+    
     
     internal func getWildlife() -> [String] {
         return wildlife
     }
     
-    internal func matchWildlife(tags: [String]) -> (Bool, String) {
+    internal func matchWildlife(tags: [String], wildlife: [PFObject]) -> (Bool, PFObject) {
+        let emptyObject = PFObject(className: "Wildlife")
+        emptyObject["name"] = ""
+        
         for wild in wildlife {
             for tag in tags {
-                if (tag == wild) {
-                    return (true,tag)
+                if (tag == (wild["name"] as? String)!) {
+                    return (true,wild)
                 }
             }
         }
-        return (false,"")
+        return (false,emptyObject)
     }
     
     internal func pointsTag(tag: String) -> (Int){

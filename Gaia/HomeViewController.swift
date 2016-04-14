@@ -40,6 +40,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     var videoPreviewLayer : AVCaptureVideoPreviewLayer!
     var savedTagMatch: String!
     var userScore: PFObject?
+    var wildlife: [PFObject]?
+    var savedWildlifeURL: String?
     
     var saved = false
     
@@ -61,6 +63,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        queryWildlife()
+        
         
         // Setup Camera Button Size, Position, Label Font-Size, Turn off Animation of Press
         cameraButton.frame = CGRectMake(160, 100, 75, 75)
@@ -210,7 +215,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                     self.locationManager.requestLocation()
                     
                     // Send capture to AI server for identification
-                    self.recognizeImage(image, completion: { (success, match, points, error) -> () in
+                    self.recognizeImage(image, completion: { (success, match, points, url, error) -> () in
                         
                         if let error = error {
                             
@@ -225,7 +230,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                                 self.wildLifeTagHomeView.text = match
                                 self.savedTagMatch = match
                                 self.points = points
-                                
+                                self.savedWildlifeURL = url
                                 
 
                             }
@@ -258,6 +263,40 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
             
         }
 
+    }
+    
+    func queryWildlife(){
+        let query = PFQuery(className: "Wildlife")
+        
+        query.orderByDescending("name")
+        
+        query.cachePolicy = .CacheThenNetwork
+        
+        query.findObjectsInBackgroundWithBlock { (content: [PFObject]?, error: NSError?) ->
+            Void in
+            // If we are able to get new userMedia, then set out new media as the new userMedia object
+            if let content = content {
+                
+                // Reset user media object for the tableview data, reload table to display it
+                NSLog("Queried data successfully")
+                
+                //                for each in content {
+                //                    print("\(each["tag"])")
+                //                }
+                
+                self.wildlife = content
+                
+            }
+                // Unable to get new user media
+            else {
+                if let error = error {
+                    // Log error
+                    NSLog("Error: Unable to query new user media objects\n\(error)")
+                }
+                
+            }
+        }
+        
     }
     
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
@@ -296,7 +335,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     
     
     func postImage() {
-        capture.postCapturedImage(takenPicture.image, tag: self.savedTagMatch, points: points, location: self.myLocation, withCompletion:
+        capture.postCapturedImage(takenPicture.image, tag: self.savedTagMatch, points: points, location: self.myLocation, url: self.savedWildlifeURL, withCompletion:
             { (success: Bool, error: NSError?) -> Void in
                 
                 // Stop progressHUD after network task done
@@ -361,7 +400,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     // Function to send the taken image to the AI for tag recognition
-    private func recognizeImage(image: UIImage!, completion: (success: Bool!, match: String!,points:Int?, error: NSError?) -> ()) {
+    private func recognizeImage(image: UIImage!, completion: (success: Bool!, match: String!,points:Int?, url: String!, error: NSError?) -> ()) {
         // Scale down the image. This step is optional. However, sending large images over the
         // network is slow and does not significantly improve recognition performance.
         let size = CGSizeMake(320, 320 * image.size.height / image.size.width)
@@ -380,7 +419,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                 
                 // Log failure to connect
                 NSLog("Unable to send Clarifai client jpeg image\nError: \(error)\n")
-                completion(success: false, match: nil, points: nil,error: error)
+                completion(success: false, match: nil, points: nil, url: nil, error: error)
 
             }
             else {
@@ -394,12 +433,14 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                 NSLog("Tag content: \(results![0].tags.joinWithSeparator(", "))")
                 
                 // Collect the matched tag if it exists from wildlife dictionary
-                let (success , match) = self.myWildlife.matchWildlife(tags)
-                let points = self.myWildlife.pointsTag(match)
-               
+                let (success , match) = self.myWildlife.matchWildlife(tags,wildlife: self.wildlife!)
+                let name = (match["name"] as? String)!
+                let points = (match["score"] as? Int)!
+                let url = (match["wiki"] as? String)!
+                
                 // Set return values
-                completion(success: success, match: match,points:points, error: nil)
-    
+                completion(success: success, match: name, points:points, url: url, error: nil)
+                
                 // Log status & match result
                 NSLog("Match successful: \(success)\n")
                 NSLog("Matched wildlife: \(match)\n")

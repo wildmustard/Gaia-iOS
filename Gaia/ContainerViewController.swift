@@ -24,6 +24,14 @@ class ContainerViewController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //uncomment when database is reset
+        
+        /*let wildlife = Wildlife()
+        
+        wildlife.serverPost()
+         
+        */
+        
         // Add Child Views to Container View Hierarchy
         self.addChildViewController(ScoreVC)
         self.scrollView!.addSubview(ScoreVC.view)
@@ -36,6 +44,7 @@ class ContainerViewController: UIViewController, UIScrollViewDelegate {
         self.addChildViewController(HomeVC)
         self.scrollView!.addSubview(HomeVC.view)
         HomeVC.didMoveToParentViewController(self)
+        
         
         // Delegate control of the scrollview
         scrollView.delegate = self
