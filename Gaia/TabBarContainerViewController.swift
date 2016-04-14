@@ -33,7 +33,7 @@ class TabBarContainerViewController: UIViewController {
         // Handle Gradient, Buttons, Label Attributes With ThemeHandler
         ThemeHandler.sharedThemeHandler.setTabZFRippleButtonThemeAttributes(profileButton)
         ThemeHandler.sharedThemeHandler.setTabZFRippleButtonThemeAttributes(leaderboardsButton)
-        setTabButtonActivity()
+        ThemeHandler.sharedThemeHandler.switchTabZFRippleButtonActivity(profileButton, on: true)
     }
 
     private var activeViewController: UIViewController? {
@@ -66,24 +66,24 @@ class TabBarContainerViewController: UIViewController {
     
     //Switch to first (Profile) ViewController
     @IBAction func didTapFirstButton(sender: AnyObject) {
+        activeTab = 0
         setTabButtonActivity()
         activeViewController = firstViewController
     }
     
     //Switch to first (Score) ViewController
     @IBAction func didTapSecondButton(sender: AnyObject) {
+        activeTab = 1
         setTabButtonActivity()
         activeViewController = secondViewController
     }
     
     private func setTabButtonActivity() {
         if (activeTab == 0) {
-            activeTab = 1
             ThemeHandler.sharedThemeHandler.switchTabZFRippleButtonActivity(profileButton, on: true)
             ThemeHandler.sharedThemeHandler.switchTabZFRippleButtonActivity(leaderboardsButton, on: false)
         }
         else {
-            activeTab = 0
             ThemeHandler.sharedThemeHandler.switchTabZFRippleButtonActivity(profileButton, on: false)
             ThemeHandler.sharedThemeHandler.switchTabZFRippleButtonActivity(leaderboardsButton, on: true)
         }

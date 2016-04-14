@@ -139,6 +139,7 @@ class ContainerViewController: UIViewController, UIScrollViewDelegate {
         // Set the origin of the frame to the current returning frame
         frame.origin.x = getCurrentReturnFrameOrigin()
         scrollView.scrollRectToVisible(frame, animated: false)
+        scrollView.backgroundColor = ThemeHandler.sharedThemeHandler.ComplementaryColor5
         
     }
 

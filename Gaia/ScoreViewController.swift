@@ -111,7 +111,7 @@ class ScoreViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         else {
             
-            cell.profilePictureView.image = UIImage(named: "Apple_Swift_Logo")
+            cell.profilePictureView.image = UIImage(named: "Gaia iOS App")
         
         if let imageFile = self.content?[indexPath.section]["profilePicture"] as? PFFile {
             imageFile.getDataInBackgroundWithBlock({ (data: NSData?, error: NSError?) ->

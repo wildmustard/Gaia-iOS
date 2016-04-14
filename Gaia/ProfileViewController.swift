@@ -32,7 +32,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     let ivc = UIImagePickerController()
     var cachedProfileImage: UIImage?
-    let tempProfileImage = UIImage(named: "Profile_Picture")
+    let tempProfileImage = UIImage(named: "Gaia iOS App")
 
 
     override func viewDidLoad() {
@@ -180,6 +180,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         })
         // Dismiss controller
         dismissViewControllerAnimated(true, completion: nil)
+        // Hide image options
+        hideOptions()
     }
     
     func hideOptions() {
