@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 import SVProgressHUD
+import ZFRippleButton
 
 let userDidLogoutNotification = "User Logged Out\n"
 let userUpdatedProfileImage = "User changed Profile Image"
@@ -25,6 +26,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var profileUsernameLabel: UILabel!
     @IBOutlet weak var profilePictureImage: UIImageView!
+    @IBOutlet weak var logoutButton: ZFRippleButton!
     
     let ivc = UIImagePickerController()
     var cachedProfileImage: UIImage?
@@ -60,6 +62,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         ThemeHandler.sharedThemeHandler.setFrameGradientTheme(self)
         ThemeHandler.sharedThemeHandler.setLargeLabelThemeAttributes(profileUsernameLabel)
         ThemeHandler.sharedThemeHandler.setLargeLabelThemeAttributes(emailLabel)
+        ThemeHandler.sharedThemeHandler.setZFRippleButtonThemeAttributes(logoutButton)
     }
 
     override func didReceiveMemoryWarning() {

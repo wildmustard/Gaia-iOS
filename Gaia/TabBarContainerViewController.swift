@@ -16,6 +16,7 @@ class TabBarContainerViewController: UIViewController {
     var secondViewController: UIViewController?
 
     @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var tabNavigationView: UIView!
     @IBOutlet weak var profileButton: ZFRippleButton!
     @IBOutlet weak var leaderboardsButton: ZFRippleButton!
     
@@ -31,8 +32,8 @@ class TabBarContainerViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         // Handle Gradient, Buttons, Label Attributes With ThemeHandler
-        ThemeHandler.sharedThemeHandler.setZFRippleButtonThemeAttributes(profileButton)
-        ThemeHandler.sharedThemeHandler.setZFRippleButtonThemeAttributes(leaderboardsButton)
+        ThemeHandler.sharedThemeHandler.setTabZFRippleButtonThemeAttributes(profileButton)
+        ThemeHandler.sharedThemeHandler.setTabZFRippleButtonThemeAttributes(leaderboardsButton)
     }
 
     private var activeViewController: UIViewController? {

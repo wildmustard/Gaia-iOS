@@ -10,6 +10,7 @@
                 <outlet property="captureImageButton" destination="irK-JY-Vjg" id="FRi-B9-1fN"/>
                 <outlet property="emailLabel" destination="xHz-Yd-eIM" id="kI5-se-Hm3"/>
                 <outlet property="imageOptionsView" destination="Xk5-FS-5k0" id="nMV-EG-Z3I"/>
+                <outlet property="logoutButton" destination="2Qb-iM-bXk" id="vr3-zB-Sch"/>
                 <outlet property="profilePictureImage" destination="IWW-uI-tkO" id="Gid-vn-FjZ"/>
                 <outlet property="profileUsernameLabel" destination="LEX-xo-sJ2" id="trA-pO-KI2"/>
                 <outlet property="scoreLabel" destination="Uli-f8-ghK" id="b0q-bO-cbc"/>
@@ -30,18 +31,18 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LEX-xo-sJ2">
-                    <rect key="frame" x="33" y="203" width="150" height="36"/>
+                    <rect key="frame" x="33" y="203" width="256" height="36"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xHz-Yd-eIM">
-                    <rect key="frame" x="33" y="254" width="150" height="36"/>
+                    <rect key="frame" x="33" y="254" width="256" height="36"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xk5-FS-5k0">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xk5-FS-5k0">
                     <rect key="frame" x="0.0" y="469" width="320" height="99"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="irK-JY-Vjg">
@@ -60,12 +61,30 @@
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="99" id="CLK-rw-AU3"/>
+                    </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Qb-iM-bXk">
-                    <rect key="frame" x="136" y="431" width="48" height="30"/>
-                    <state key="normal" title="Logout"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Qb-iM-bXk" customClass="ZFRippleButton" customModule="ZFRippleButton">
+                    <rect key="frame" x="85" y="431" width="150" height="30"/>
+                    <color key="backgroundColor" red="0.035294119268655777" green="0.28235295414924622" blue="0.77254903316497803" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="3TW-ls-14M"/>
+                        <constraint firstAttribute="width" constant="150" id="exC-FB-IoH"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="20"/>
+                    <state key="normal" title="Logout">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
                     <connections>
                         <action selector="onLogout:" destination="-1" eventType="touchUpInside" id="JGD-5i-01n"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WfD-yt-rY7">
+                    <rect key="frame" x="243" y="150" width="46" height="30"/>
+                    <state key="normal" title="Add"/>
+                    <connections>
+                        <action selector="onAddImage:" destination="-1" eventType="touchUpInside" id="9AB-Kp-gFD"/>
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uli-f8-ghK">
@@ -74,25 +93,31 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WfD-yt-rY7">
-                    <rect key="frame" x="243" y="150" width="46" height="30"/>
-                    <state key="normal" title="Add"/>
-                    <connections>
-                        <action selector="onAddImage:" destination="-1" eventType="touchUpInside" id="9AB-Kp-gFD"/>
-                    </connections>
-                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <gestureRecognizers/>
             <constraints>
+                <constraint firstItem="Xk5-FS-5k0" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="7X7-mD-2jn"/>
                 <constraint firstItem="2Qb-iM-bXk" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="8jJ-0e-Yiy"/>
+                <constraint firstItem="Xk5-FS-5k0" firstAttribute="top" secondItem="2Qb-iM-bXk" secondAttribute="bottom" constant="8" id="NXh-XZ-mkV"/>
+                <constraint firstAttribute="trailing" secondItem="Xk5-FS-5k0" secondAttribute="trailing" id="PVr-Rx-G0e"/>
+                <constraint firstItem="Xk5-FS-5k0" firstAttribute="top" secondItem="2Qb-iM-bXk" secondAttribute="bottom" constant="8" id="QVi-5b-F5N"/>
                 <constraint firstItem="IWW-uI-tkO" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="cqG-iH-TGB"/>
+                <constraint firstAttribute="bottom" secondItem="Xk5-FS-5k0" secondAttribute="bottom" id="hpt-QW-bBw"/>
                 <constraint firstItem="IWW-uI-tkO" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="30" id="op8-cq-Wkw"/>
+                <constraint firstAttribute="bottom" secondItem="2Qb-iM-bXk" secondAttribute="bottom" constant="107" id="uAV-Kf-PBi"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="NXh-XZ-mkV"/>
+                    <exclude reference="QVi-5b-F5N"/>
+                </mask>
+            </variation>
             <connections>
                 <outletCollection property="gestureRecognizers" destination="w4n-gn-K4h" appends="YES" id="9AX-dQ-3JY"/>
             </connections>
+            <point key="canvasLocation" x="316" y="324"/>
         </view>
         <tapGestureRecognizer id="w4n-gn-K4h">
             <connections>

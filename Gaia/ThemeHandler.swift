@@ -84,6 +84,29 @@ class ThemeHandler: NSObject {
         
     }
     
+    func setDangerZFRippleButtonThemeAttributes(btn: ZFRippleButton?) {
+        
+        // Set passed button properties
+        if let btn = btn {
+            
+            btn.shadowRippleEnable = true
+            btn.shadowRippleRadius = 1
+            btn.rippleOverBounds = false
+            btn.trackTouchLocation = false
+            btn.buttonCornerRadius = 5
+            btn.rippleColor = FlatRed()
+            btn.rippleBackgroundColor = FlatRedDark()
+            
+        }
+        else {
+            
+            // Log
+            log.error("Button passed does not exist!")
+            
+        }
+        
+    }
+    
     func setToggleZFRippleButtonThemeAttributes(btn: ZFRippleButton?) {
         
         // Set passed button properties
@@ -128,6 +151,29 @@ class ThemeHandler: NSObject {
 
         }
     
+    }
+    
+    func setTabZFRippleButtonThemeAttributes(btn: ZFRippleButton?) {
+        
+        // Set passed button properties
+        if let btn = btn {
+            
+            btn.shadowRippleEnable = true
+            btn.shadowRippleRadius = 1
+            btn.rippleOverBounds = false
+            btn.trackTouchLocation = false
+            btn.buttonCornerRadius = 5
+            btn.rippleColor = FlatGreen()
+            btn.rippleBackgroundColor = FlatGreenDark()
+            
+        }
+        else {
+            
+            // Log
+            log.error("Button passed does not exist!")
+            
+        }
+        
     }
     
     func setLabelThemeAttributes(label: UILabel?) {
