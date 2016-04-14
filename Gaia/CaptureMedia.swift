@@ -14,8 +14,7 @@ class CaptureMedia: NSObject {
     var totalPoints:Int = 0
     
     // Function to post the captured image to Parse Server
-    func postCapturedImage(image: UIImage?, tag: String?, tagsList: String?, points: Int?, location: CLLocation?, withCompletion completion: PFBooleanResultBlock?) {
-        
+    func postCapturedImage(image: UIImage?, tag: String?, tagsList: String?, points: Int?, location: CLLocation?, url: String?, withCompletion completion: PFBooleanResultBlock?) {
         // Setup Parse Object
         let capture = PFObject(className: "CaptureMedia")
         
@@ -26,7 +25,7 @@ class CaptureMedia: NSObject {
         capture["tagsList"] = tagsList
         capture["points"] = points
         capture["location"] = PFGeoPoint(location: location)
-        
+        capture["wiki"] = url
         // Save capture media to server
         capture.saveInBackgroundWithBlock(completion)
     }

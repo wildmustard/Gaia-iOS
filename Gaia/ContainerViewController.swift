@@ -29,6 +29,14 @@ class ContainerViewController: UIViewController, UIScrollViewDelegate {
         //Links score viewController and profile VC to the tab bar ViewController
         TabVC.firstViewController = ProfileVC
         TabVC.secondViewController = ScoreVC
+        //uncomment when database is reset
+        
+        /*let wildlife = Wildlife()
+        
+        wildlife.serverPost()
+         
+        */
+        
         // Add Child Views to Container View Hierarchy
         self.addChildViewController(TabVC)
         self.scrollView!.addSubview(TabVC.view)
@@ -41,6 +49,7 @@ class ContainerViewController: UIViewController, UIScrollViewDelegate {
         self.addChildViewController(HomeVC)
         self.scrollView!.addSubview(HomeVC.view)
         HomeVC.didMoveToParentViewController(self)
+        
         
         // Delegate control of the scrollview
         scrollView.delegate = self
