@@ -1,32 +1,27 @@
 //
-//  CaptureMedia.swift
+//  UserProfile.swift
 //  Gaia
 //
-//  Created by Alex Clark on 3/17/16.
+//  Created by Carlos Avogadro on 4/9/16.
 //  Copyright © 2016 John Henning. All rights reserved.
 //
 
 import UIKit
 import Parse
 
-// Class for the content of the captured image
-class CaptureMedia: NSObject {
-    var totalPoints:Int = 0
-    
+class UserProfile: NSObject {
+
     // Function to post the captured image to Parse Server
-    func postCapturedImage(image: UIImage?, tag: String?, points: Int?, location: CLLocation?, url: String?, withCompletion completion: PFBooleanResultBlock?) {
+    func postProfileImage(image: UIImage?, withCompletion completion: PFBooleanResultBlock?) {
         
         // Setup Parse Object
-        let capture = PFObject(className: "CaptureMedia")
+        let capture = PFObject(className: "ProfileImage")
+        
         
         // Encode image using Parse into 64-bit text
         capture["image"] = getPFFileUsingImage(image)
         capture["username"] = PFUser.currentUser()?.username
-        capture["tag"] = tag
-        capture["tagsList"] = tagsList
-        capture["points"] = points
-        capture["location"] = PFGeoPoint(location: location)
-        capture["wiki"] = url
+        
         // Save capture media to server
         capture.saveInBackgroundWithBlock(completion)
     }
@@ -36,11 +31,11 @@ class CaptureMedia: NSObject {
         
         // If image content exists
         if let image = image {
-        
+            
             // Attempt to get text rep of image
             if let data = UIImagePNGRepresentation(image) {
                 // Success, able to encode and create PFFile
-                return PFFile(name: "capture.png", data: data)
+                return PFFile(name: "profile.png", data: data)
             }
             else {
                 
@@ -59,8 +54,5 @@ class CaptureMedia: NSObject {
         return nil
     }
     
-            
-        
-        
     
 }

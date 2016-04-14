@@ -14,15 +14,23 @@ class ContainerViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     
     // Setup Views for Scroll View Container Swipe
-    let ScoreVC :ScoreViewController = ScoreViewController(nibName: "ScoreViewController", bundle: nil)
+    let TabVC = TabBarContainerViewController(nibName: "TabBarContainerViewController", bundle: nil)
     let CatalogueVC :ImageCatalogueViewController = ImageCatalogueViewController(nibName: "ImageCatalogueViewController", bundle: nil)
     let HomeVC :HomeViewController = HomeViewController(nibName: "HomeViewController", bundle: nil)
+    
+    let ScoreVC = ScoreViewController(nibName: "ScoreViewController", bundle: nil)
+    let ProfileVC = ProfileViewController(nibName: "ProfileViewController",bundle: nil)
+    
     
     // Variables
     var sessionRunning = false // Flag test for the session running
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        //Links score viewController and profile VC to the tab bar ViewController
+        TabVC.firstViewController = ScoreVC
+        TabVC.secondViewController = ProfileVC
+
         
         //uncomment when database is reset
         
@@ -33,9 +41,9 @@ class ContainerViewController: UIViewController, UIScrollViewDelegate {
         */
         
         // Add Child Views to Container View Hierarchy
-        self.addChildViewController(ScoreVC)
-        self.scrollView!.addSubview(ScoreVC.view)
-        ScoreVC.didMoveToParentViewController(self)
+        self.addChildViewController(TabVC)
+        self.scrollView!.addSubview(TabVC.view)
+        TabVC.didMoveToParentViewController(self)
         
         self.addChildViewController(CatalogueVC)
         self.scrollView!.addSubview(CatalogueVC.view)
@@ -109,6 +117,7 @@ class ContainerViewController: UIViewController, UIScrollViewDelegate {
     }
     
     override func viewWillAppear(animated: Bool) {
+
         
         // Setup origin for container view to appear on the Home View
         var frame :CGRect = self.view.frame
@@ -127,7 +136,7 @@ class ContainerViewController: UIViewController, UIScrollViewDelegate {
         HomeVC.view.frame = catalogueFrame
         var homeFrame :CGRect = HomeVC.view.frame
         homeFrame.origin.x = 2 * homeFrame.width
-        ScoreVC.view.frame = homeFrame
+        TabVC.view.frame = homeFrame
         
         // Set the origin of the frame to the current returning frame
         frame.origin.x = getCurrentReturnFrameOrigin()

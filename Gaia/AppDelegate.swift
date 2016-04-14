@@ -25,8 +25,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+       
+        application.statusBarHidden = true
+
         // Override point for customization after application launch.
         
+        // Initialize Parse
         Parse.initializeWithConfiguration(
             ParseClientConfiguration(block: { (configuration:ParseMutableClientConfiguration) -> Void in
                 configuration.applicationId = "Gaia-iOS"
@@ -40,7 +44,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Add SwiftyBeaver
         log.addDestination(console)
-        
         
         //Check if there is a user logged in
         if (PFUser.currentUser() != nil) {
@@ -63,7 +66,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window!.rootViewController = LoginVC;
             
         }
-        
         return true
     }
     

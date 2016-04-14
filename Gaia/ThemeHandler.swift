@@ -9,6 +9,7 @@
 import UIKit
 import ChameleonFramework
 import ZFRippleButton
+import SVProgressHUD
 
 class ThemeHandler: NSObject {
     
@@ -44,9 +45,26 @@ class ThemeHandler: NSObject {
     
     // Fonts
     let ThemeFont = UIFont(name: "HelveticaNeue-CondensedBold", size: 20)
+    let SmallThemeFont = UIFont(name: "HelveticaNeue-CondensedBold", size: 12)
     let LargeThemeFont = UIFont(name: "HelveticaNeue-CondensedBold", size: 36)
     
     // Functions
+    override init() {
+        
+        super.init()
+        setupThemeProgressHUDDefaults()
+    
+    }
+    
+    func setupThemeProgressHUDDefaults() {
+        SVProgressHUD.setDefaultStyle(.Custom)
+        SVProgressHUD.setBackgroundColor(ComplementaryColor3)
+        SVProgressHUD.setDefaultAnimationType(.Native)
+        SVProgressHUD.setCornerRadius(50)
+        SVProgressHUD.setFont(LargeThemeFont)
+        SVProgressHUD.setForegroundColor(UIColor.whiteColor())
+        SVProgressHUD.setDefaultMaskType(.Black)
+    }
     
     func setFrameGradientTheme(vc: UIViewController?) {
     
@@ -61,6 +79,29 @@ class ThemeHandler: NSObject {
             
             // Log Error
             log.error("Passed UIViewController \(vc?.nibName) does not exist!")
+            
+        }
+        
+    }
+    
+    func setToggleZFRippleButtonThemeAttributes(btn: ZFRippleButton?) {
+        
+        // Set passed button properties
+        if let btn = btn {
+            
+            btn.shadowRippleEnable = true
+            btn.shadowRippleRadius = 30
+            btn.rippleOverBounds = true
+            btn.trackTouchLocation = false
+            btn.buttonCornerRadius = 0
+            btn.rippleColor = ComplementaryColor1
+            btn.rippleBackgroundColor = UIColor.clearColor()
+            
+        }
+        else {
+            
+            // Log
+            log.error("Button passed does not exist!")
             
         }
         
@@ -107,6 +148,42 @@ class ThemeHandler: NSObject {
         
     }
     
+    func setSmallLabelThemeAttributes(label: UILabel?) {
+        
+        // Set passed button properties
+        if let label = label {
+            
+            label.font = SmallThemeFont
+            label.textColor = UIColor.whiteColor()
+            
+        }
+        else {
+            
+            // Log
+            log.error("Label passed does not exist!")
+            
+        }
+        
+    }
+    
+    func setLargeSmallLabelThemeAttributes(label: UILabel?) {
+        
+        // Set passed button properties
+        if let label = label {
+            
+            label.font = LargeThemeFont
+            label.textColor = UIColor.whiteColor()
+            
+        }
+        else {
+            
+            // Log
+            log.error("Label passed does not exist!")
+            
+        }
+        
+    }
+    
     func setTextFieldThemeAttributes(field: UITextField?) {
         
         // Set passed button properties
@@ -125,5 +202,4 @@ class ThemeHandler: NSObject {
         }
         
     }
-
 }
