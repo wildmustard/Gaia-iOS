@@ -37,9 +37,7 @@ class ImageDetailViewController: UIViewController, UIWebViewDelegate {
         initialLoad = true
         webView.delegate = self
         
-        trayCenterWhenOpen = trayView.center
-        trayCenterWhenClosed = trayView.center
-        trayCenterWhenClosed.y = trayCenterWhenClosed.y + view.frame.size.height - 50
+        print(view.frame.size.height)
         
 
         
@@ -55,6 +53,9 @@ class ImageDetailViewController: UIViewController, UIWebViewDelegate {
     
     override func viewDidLayoutSubviews() {
         if initialLoad! {
+            trayCenterWhenOpen = trayView.center
+            trayCenterWhenClosed = trayView.center
+            trayCenterWhenClosed.y = trayCenterWhenClosed.y + view.frame.size.height - 50
             trayView.center = trayCenterWhenClosed
             print("trayView viewlayoutsubviews: \n \(trayView.center) \n \(trayCenterWhenClosed)")
         }
@@ -82,7 +83,7 @@ class ImageDetailViewController: UIViewController, UIWebViewDelegate {
 
     @IBAction func onTrayPanGesture(panGestureRecognizer: UIPanGestureRecognizer) {
         
-        print(self.trayView.center)
+        //print(self.trayView.center)
         // Absolute (x,y) coordinates in parent view's coordinate system
         let point = panGestureRecognizer.locationInView(trayView)
         
@@ -91,13 +92,13 @@ class ImageDetailViewController: UIViewController, UIWebViewDelegate {
         if panGestureRecognizer.state ==
             UIGestureRecognizerState.Began {
             
-            print("Gesture began at: \(point)")
+            //print("Gesture began at: \(point)")
             self.trayOriginalCenter = trayView.center
             
             
         } else if panGestureRecognizer.state == UIGestureRecognizerState.Changed {
             
-            print("Gesture changed at: \(point)")
+            //print("Gesture changed at: \(point)")
             if panGestureRecognizer.velocityInView(self.trayView).y > 0 {
                 UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0.2, options: .AllowUserInteraction, animations: { () -> Void in
                     self.trayView.center = self.trayCenterWhenClosed
@@ -122,7 +123,7 @@ class ImageDetailViewController: UIViewController, UIWebViewDelegate {
             
         } else if panGestureRecognizer.state == UIGestureRecognizerState.Ended {
             
-            print("Gesture ended at: \(point)")
+            //print("Gesture ended at: \(point)")
             
         }
 
