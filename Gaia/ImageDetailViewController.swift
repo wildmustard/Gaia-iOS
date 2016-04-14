@@ -28,11 +28,13 @@ class ImageDetailViewController: UIViewController, UIWebViewDelegate {
     var trayOriginalCenter: CGPoint!
     var trayCenterWhenOpen: CGPoint!
     var trayCenterWhenClosed: CGPoint!
+    var initialLoad : Bool?
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
+        initialLoad = true
         webView.delegate = self
         
         trayCenterWhenOpen = trayView.center
@@ -49,13 +51,19 @@ class ImageDetailViewController: UIViewController, UIWebViewDelegate {
         webView.loadRequest(self.wiki!)
     }
     
+    //gets called when subviews have been set with autolayout
+    
     override func viewDidLayoutSubviews() {
-        trayView.center = trayCenterWhenClosed
-        print("trayView viewlayoutsubviews: \n \(trayView.center) \n \(trayCenterWhenClosed)")
+        if initialLoad! {
+            trayView.center = trayCenterWhenClosed
+            print("trayView viewlayoutsubviews: \n \(trayView.center) \n \(trayCenterWhenClosed)")
+        }
+        
     }
     
     
     override func viewDidAppear(animated: Bool) {
+        initialLoad = false
         print("trayView viewdidappear: \n \(trayView.center) \n \(trayCenterWhenClosed)")
     }
     
