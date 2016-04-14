@@ -107,7 +107,7 @@ class ScoreViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let cell = tableView.dequeueReusableCellWithIdentifier("MyScoreCell", forIndexPath: indexPath) as! ScoreViewTableCell
         // If the media content for this cell exists, set it
         
-        if let img = userCache[indexPath.row] {
+        if let img = userCache[indexPath.section] {
             cell.profilePictureView.image = img
         }
         else {
