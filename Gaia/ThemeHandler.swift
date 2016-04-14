@@ -176,6 +176,35 @@ class ThemeHandler: NSObject {
         
     }
     
+    func switchTabZFRippleButtonActivity(btn: ZFRippleButton?, on: Bool!) {
+        
+        // Set passed button properties
+        if let btn = btn {
+            
+            if !(on) {
+                // Button turn off
+                btn.backgroundColor = PrimaryColor4
+                btn.rippleColor = PrimaryColor3
+                btn.rippleBackgroundColor = PrimaryColor4
+            }
+            else {
+                // Button turn on
+                btn.backgroundColor = SecondaryColor1
+                btn.rippleColor = SecondaryColor2
+                btn.rippleBackgroundColor = SecondaryColor3
+            }
+            
+        }
+        else {
+            
+            // Log
+            log.error("Button passed does not exist!")
+            
+        }
+        
+    }
+    
+    
     func setLabelThemeAttributes(label: UILabel?) {
         
         // Set passed button properties

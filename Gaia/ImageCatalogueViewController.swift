@@ -76,6 +76,12 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
         
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        // Handle Gradient, Buttons, Label Attributes With ThemeHandler
+        ThemeHandler.sharedThemeHandler.setFrameGradientTheme(self)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

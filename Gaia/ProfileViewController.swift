@@ -27,6 +27,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var profileUsernameLabel: UILabel!
     @IBOutlet weak var profilePictureImage: UIImageView!
     @IBOutlet weak var logoutButton: ZFRippleButton!
+    @IBOutlet weak var profileDetailsView: UIView!
+    @IBOutlet weak var updateProfileButton: ZFRippleButton!
     
     let ivc = UIImagePickerController()
     var cachedProfileImage: UIImage?
@@ -60,9 +62,11 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         super.viewWillAppear(animated)
         // Handle Gradient, Buttons, Label Attributes With ThemeHandler
         ThemeHandler.sharedThemeHandler.setFrameGradientTheme(self)
-        ThemeHandler.sharedThemeHandler.setLargeLabelThemeAttributes(profileUsernameLabel)
-        ThemeHandler.sharedThemeHandler.setLargeLabelThemeAttributes(emailLabel)
         ThemeHandler.sharedThemeHandler.setZFRippleButtonThemeAttributes(logoutButton)
+        ThemeHandler.sharedThemeHandler.setZFRippleButtonThemeAttributes(updateProfileButton)
+        profileDetailsView.layer.cornerRadius = 10
+        profileDetailsView.layer.borderWidth = 5.0
+        profileDetailsView.layer.borderColor = ThemeHandler.sharedThemeHandler.ComplementaryColor3.CGColor
         // Fix frame size on initial load
         let pvc =  self.parentViewController as! TabBarContainerViewController
         self.view.frame.size = pvc.contentView.frame.size
