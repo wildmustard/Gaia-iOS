@@ -315,7 +315,7 @@
 				TargetAttributes = {
 					B07DF8621C62E20500DEA760 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 73E8XBAH3Q;
+						DevelopmentTeam = 3R735PE73A;
 					};
 				};
 			};
@@ -551,7 +551,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Gaia/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jlh.Gaia1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Alex.Gaia;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Gaia/Gaia-Bridging-Header.h";
@@ -569,7 +569,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Gaia/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jlh.Gaia1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Alex.Gaia;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Gaia/Gaia-Bridging-Header.h";

@@ -20,7 +20,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t5r-2Q-QNa">
-                    <rect key="frame" x="121" y="281" width="78" height="24"/>
+                    <rect key="frame" x="121" y="219" width="78" height="24"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="78" id="L0m-k8-VsJ"/>
                         <constraint firstAttribute="height" constant="24" id="ZNH-jp-WTU"/>
@@ -30,7 +30,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D58-Xs-51V">
-                    <rect key="frame" x="120" y="202" width="80" height="24"/>
+                    <rect key="frame" x="120" y="140" width="80" height="24"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="24" id="aDn-ZT-I6x"/>
                         <constraint firstAttribute="width" constant="80" id="k1q-gZ-Xbx"/>
@@ -40,7 +40,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Mky-Zg-dtJ">
-                    <rect key="frame" x="67" y="234" width="185" height="30"/>
+                    <rect key="frame" x="67" y="172" width="185" height="30"/>
                     <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="GHM-Hv-b6j"/>
@@ -50,7 +50,7 @@
                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Cg8-nv-ylm">
-                    <rect key="frame" x="68" y="315" width="185" height="30"/>
+                    <rect key="frame" x="68" y="253" width="185" height="30"/>
                     <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="aUa-eu-6u3"/>
@@ -60,7 +60,7 @@
                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ui-2m-iXS" customClass="ZFRippleButton" customModule="ZFRippleButton">
-                    <rect key="frame" x="95" y="455" width="130" height="30"/>
+                    <rect key="frame" x="95" y="393" width="130" height="30"/>
                     <color key="backgroundColor" red="0.035294117647058823" green="0.28235294117647058" blue="0.77254901960784317" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="PH1-Ql-gc5"/>
@@ -96,7 +96,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J7L-Ym-ryM" customClass="ZFRippleButton" customModule="ZFRippleButton">
-                    <rect key="frame" x="95" y="385" width="130" height="30"/>
+                    <rect key="frame" x="95" y="323" width="130" height="30"/>
                     <color key="backgroundColor" red="0.035294117647058823" green="0.28235294117647058" blue="0.77254901960784317" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="7na-az-ffd"/>
@@ -140,10 +140,12 @@
                 <constraint firstItem="J7L-Ym-ryM" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="AH2-NI-xla"/>
                 <constraint firstItem="Mky-Zg-dtJ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="OEZ-LP-Gl4"/>
                 <constraint firstItem="7ui-2m-iXS" firstAttribute="top" secondItem="J7L-Ym-ryM" secondAttribute="bottom" constant="40" id="ScL-zz-o3q"/>
+                <constraint firstItem="D58-Xs-51V" firstAttribute="top" relation="greaterThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="80" id="Vup-XR-4hO"/>
+                <constraint firstAttribute="bottom" secondItem="7ui-2m-iXS" secondAttribute="bottom" priority="998" constant="145" id="YUn-Xx-eeX"/>
                 <constraint firstItem="t5r-2Q-QNa" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="b41-ik-RAC"/>
                 <constraint firstItem="Cg8-nv-ylm" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="ddd-C1-Hrb"/>
                 <constraint firstItem="D58-Xs-51V" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="drh-vs-746"/>
-                <constraint firstItem="D58-Xs-51V" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="202" id="epB-X1-bj4"/>
+                <constraint firstItem="D58-Xs-51V" firstAttribute="top" relation="lessThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="top" priority="999" constant="140" id="epB-X1-bj4"/>
                 <constraint firstItem="t5r-2Q-QNa" firstAttribute="top" secondItem="Mky-Zg-dtJ" secondAttribute="bottom" constant="17" id="mNN-jw-oo7"/>
                 <constraint firstItem="7ui-2m-iXS" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" constant="0.5" id="vgM-F3-KIn"/>
                 <constraint firstItem="J7L-Ym-ryM" firstAttribute="top" secondItem="Cg8-nv-ylm" secondAttribute="bottom" constant="40" id="yDf-lK-5Kq"/>
