@@ -48,18 +48,15 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
         // Do any additional setup after loading the view.
         
         // Create the navigation bar
-        let navigationBar = UINavigationBar(frame: CGRectMake(0, 0, (parentViewController?.view.frame.size.width)!, 50)) // Offset by 20 pixels vertically to take the status bar into account
-        
-        navigationBar.backgroundColor = UIColor.whiteColor()
-        //navigationBar.delegate = self;
-        navigationBar.translucent = true
-        
+        let navigationBar = UINavigationBar(frame: CGRectMake(0, 0, (parentViewController?.view.frame.size.width)!, 55)) // Offset by 20 pixels vertically to take the status bar into account
+        navigationBar.barTintColor = ThemeHandler.sharedThemeHandler.ComplementaryColor3
+        navigationBar.titleTextAttributes = [NSFontAttributeName: ThemeHandler.sharedThemeHandler.ThemeFont!, NSForegroundColorAttributeName: UIColor.whiteColor()]
         // Create a navigation item with a title
         let navigationItem = UINavigationItem()
         navigationItem.title = "Collected Wildlife"
-        
         // Create left and right button for navigation item
         let leftButton =  UIBarButtonItem(title: "Map", style:   UIBarButtonItemStyle.Plain, target: self, action: "btn_clicked:")
+        leftButton.setTitleTextAttributes([NSFontAttributeName: ThemeHandler.sharedThemeHandler.ThemeFont!, NSForegroundColorAttributeName: UIColor.whiteColor()], forState: .Normal)
         
         // Create two buttons for the navigation item
         navigationItem.leftBarButtonItem = leftButton
@@ -74,6 +71,12 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "callServerForUserMedia", name: reloadCatalogue, object: nil)
         
         
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        // Handle Gradient, Buttons, Label Attributes With ThemeHandler
+        ThemeHandler.sharedThemeHandler.setFrameGradientTheme(self)
     }
     
     override func didReceiveMemoryWarning() {
@@ -147,7 +150,7 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
         }
         else {
             
-            cell.cellImageView.image = UIImage(named: "Apple_Swift_Logo")
+            cell.cellImageView.image = UIImage(named: "Gaia iOS App")
             
             if let imageFile = self.content?[indexPath.row]["image"] as? PFFile {
                 imageFile.getDataInBackgroundWithBlock({ (data: NSData?, error: NSError?) ->

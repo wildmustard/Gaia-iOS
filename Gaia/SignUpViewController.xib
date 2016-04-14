@@ -126,7 +126,8 @@
             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
             <gestureRecognizers/>
             <constraints>
-                <constraint firstItem="ABX-lN-NQC" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="138" id="5cW-3v-MRj"/>
+                <constraint firstItem="ABX-lN-NQC" firstAttribute="top" relation="lessThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="top" priority="999" constant="140" id="5cW-3v-MRj"/>
+                <constraint firstAttribute="bottom" secondItem="JkY-bM-kiC" secondAttribute="bottom" priority="998" constant="70" id="AaV-Ql-hiX"/>
                 <constraint firstItem="jwU-rY-lsX" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="CCf-9f-wUi"/>
                 <constraint firstItem="WcK-Ph-7fY" firstAttribute="top" secondItem="ABX-lN-NQC" secondAttribute="bottom" constant="8" id="ERc-tF-53d"/>
                 <constraint firstItem="JkY-bM-kiC" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="H8V-UG-o4O"/>
@@ -140,6 +141,7 @@
                 <constraint firstItem="1vF-UB-a1g" firstAttribute="top" secondItem="UFe-4p-i93" secondAttribute="bottom" constant="8" id="jFt-ul-Pip"/>
                 <constraint firstItem="1vF-UB-a1g" firstAttribute="top" secondItem="UFe-4p-i93" secondAttribute="bottom" constant="8" id="kqY-hg-3sk"/>
                 <constraint firstItem="jwU-rY-lsX" firstAttribute="top" secondItem="WcK-Ph-7fY" secondAttribute="bottom" constant="17" id="mBY-92-loL"/>
+                <constraint firstItem="ABX-lN-NQC" firstAttribute="top" relation="greaterThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="80" id="mWP-0C-xzy"/>
                 <constraint firstItem="WcK-Ph-7fY" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="oUK-9B-5bJ"/>
                 <constraint firstItem="UFe-4p-i93" firstAttribute="top" secondItem="ZeG-mS-gtu" secondAttribute="bottom" constant="17" id="qh2-Sn-myp"/>
                 <constraint firstItem="UFe-4p-i93" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="r9G-pj-GcV"/>

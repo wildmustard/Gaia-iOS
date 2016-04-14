@@ -7,21 +7,33 @@
 //
 
 import UIKit
+import ChameleonFramework
+import ZFRippleButton
 
 class TabBarContainerViewController: UIViewController {
 
     var firstViewController: UIViewController?
     var secondViewController: UIViewController?
+    var activeTab = 0
 
     @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var tabNavigationView: UIView!
+    @IBOutlet weak var profileButton: ZFRippleButton!
+    @IBOutlet weak var leaderboardsButton: ZFRippleButton!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //Load first (Score) Viewcontroller by default 
+        //Load first view (Profile Viewcontroller) by default
         activeViewController = firstViewController
-
-
-        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        // Handle Gradient, Buttons, Label Attributes With ThemeHandler
+        ThemeHandler.sharedThemeHandler.setTabZFRippleButtonThemeAttributes(profileButton)
+        ThemeHandler.sharedThemeHandler.setTabZFRippleButtonThemeAttributes(leaderboardsButton)
+        ThemeHandler.sharedThemeHandler.switchTabZFRippleButtonActivity(profileButton, on: true)
     }
 
     private var activeViewController: UIViewController? {
@@ -35,9 +47,7 @@ class TabBarContainerViewController: UIViewController {
         if let inActiveVC = inactiveViewController {
             // call before removing child view controller's view from hierarchy
             inActiveVC.willMoveToParentViewController(nil)
-            
             inActiveVC.view.removeFromSuperview()
-            
             // call after removing child view controller's view from hierarchy
             inActiveVC.removeFromParentViewController()
         }
@@ -47,35 +57,35 @@ class TabBarContainerViewController: UIViewController {
         if let activeVC = activeViewController {
             // call before adding child view controller's view as subview
             addChildViewController(activeVC)
-            
             activeVC.view.frame = contentView.bounds
             contentView.addSubview(activeVC.view)
-            
             // call before adding child view controller's view as subview
             activeVC.didMoveToParentViewController(self)
         }
     }
     
-    //Switch to first (Score) ViewController
-
+    //Switch to first (Profile) ViewController
     @IBAction func didTapFirstButton(sender: AnyObject) {
-        
+        activeTab = 0
+        setTabButtonActivity()
         activeViewController = firstViewController
     }
-    //Switch to first (Profile) ViewController
-
+    
+    //Switch to first (Score) ViewController
     @IBAction func didTapSecondButton(sender: AnyObject) {
-        
+        activeTab = 1
+        setTabButtonActivity()
         activeViewController = secondViewController
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    private func setTabButtonActivity() {
+        if (activeTab == 0) {
+            ThemeHandler.sharedThemeHandler.switchTabZFRippleButtonActivity(profileButton, on: true)
+            ThemeHandler.sharedThemeHandler.switchTabZFRippleButtonActivity(leaderboardsButton, on: false)
+        }
+        else {
+            ThemeHandler.sharedThemeHandler.switchTabZFRippleButtonActivity(profileButton, on: false)
+            ThemeHandler.sharedThemeHandler.switchTabZFRippleButtonActivity(leaderboardsButton, on: true)
+        }
     }
-    */
-
 }

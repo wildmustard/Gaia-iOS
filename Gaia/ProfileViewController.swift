@@ -9,10 +9,12 @@
 import UIKit
 import Parse
 import SVProgressHUD
+import ZFRippleButton
 
 let userDidLogoutNotification = "User Logged Out\n"
+let userUpdatedProfileImage = "User changed Profile Image"
 
-class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate  {
+class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
     
     internal var score: Int?
     internal var capturedScore = false
@@ -24,10 +26,13 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var profileUsernameLabel: UILabel!
     @IBOutlet weak var profilePictureImage: UIImageView!
+    @IBOutlet weak var logoutButton: ZFRippleButton!
+    @IBOutlet weak var profileDetailsView: UIView!
+    @IBOutlet weak var updateProfileButton: ZFRippleButton!
     
     let ivc = UIImagePickerController()
     var cachedProfileImage: UIImage?
-    let tempProfileImage = UIImage(named: "Profile_Picture")
+    let tempProfileImage = UIImage(named: "Gaia iOS App")
 
 
     override func viewDidLoad() {
@@ -52,6 +57,20 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         // Listen for broadcast to update user score
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "refreshUserScore", name: reloadScores, object: nil)
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        // Handle Gradient, Buttons, Label Attributes With ThemeHandler
+        ThemeHandler.sharedThemeHandler.setFrameGradientTheme(self)
+        ThemeHandler.sharedThemeHandler.setZFRippleButtonThemeAttributes(logoutButton)
+        ThemeHandler.sharedThemeHandler.setZFRippleButtonThemeAttributes(updateProfileButton)
+        profileDetailsView.layer.cornerRadius = 10
+        profileDetailsView.layer.borderWidth = 5.0
+        profileDetailsView.layer.borderColor = ThemeHandler.sharedThemeHandler.ComplementaryColor3.CGColor
+        // Fix frame size on initial load
+        let pvc =  self.parentViewController as! TabBarContainerViewController
+        self.view.frame.size = pvc.contentView.frame.size
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -73,7 +92,6 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
     
     // Create rounded images for profile picture
     func roundImage (image:UIImage) -> UIImage {
-        
         let size = CGSizeMake(640, 640)
         UIGraphicsBeginImageContext(size)
         let ctx = UIGraphicsGetCurrentContext()
@@ -85,10 +103,8 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
         CGContextDrawImage(ctx, CGRectMake(0, 0, 640, 640), image.CGImage)
         CGContextRestoreGState(ctx)
         let finalImage = UIGraphicsGetImageFromCurrentImageContext()
-        
         UIGraphicsEndImageContext()
         return finalImage
-        
     }
 
     @IBAction func onLogout(sender: AnyObject) {
@@ -104,6 +120,7 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
                 log.info("Logout Success")
                 // Broadcast Logout Event to App
                 NSNotificationCenter.defaultCenter().postNotificationName(userDidLogoutNotification, object: nil)
+                
             }
         }
     }
@@ -155,12 +172,16 @@ class ProfileViewController: UIViewController,UIImagePickerControllerDelegate,UI
                     self.cachedProfileImage = editedImage
                     // Set image regardless, will default back to old image if save was unsuccessful
                     self.profilePictureImage.image = self.roundImage(editedImage)
+                    // Broadcast that user updated profile picture
+                    NSNotificationCenter.defaultCenter().postNotificationName(userUpdatedProfileImage, object: nil)
                 }
             // Dismiss Progress Wheel
             SVProgressHUD.dismiss()
         })
         // Dismiss controller
         dismissViewControllerAnimated(true, completion: nil)
+        // Hide image options
+        hideOptions()
     }
     
     func hideOptions() {

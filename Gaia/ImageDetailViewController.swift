@@ -75,10 +75,8 @@ class ImageDetailViewController: UIViewController, UIWebViewDelegate {
     
     // Pressing Close Button
     @IBAction func onPressClose(sender: AnyObject) {
-        
         // Close this view controller
         self.dismissViewControllerAnimated(true, completion: nil)
-        
     }
 
     @IBAction func onTrayPanGesture(panGestureRecognizer: UIPanGestureRecognizer) {
