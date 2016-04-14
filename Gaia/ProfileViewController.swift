@@ -63,6 +63,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         ThemeHandler.sharedThemeHandler.setLargeLabelThemeAttributes(profileUsernameLabel)
         ThemeHandler.sharedThemeHandler.setLargeLabelThemeAttributes(emailLabel)
         ThemeHandler.sharedThemeHandler.setZFRippleButtonThemeAttributes(logoutButton)
+        // Fix frame size on initial load
+        let pvc =  self.parentViewController as! TabBarContainerViewController
+        self.view.frame.size = pvc.contentView.frame.size
     }
 
     override func didReceiveMemoryWarning() {

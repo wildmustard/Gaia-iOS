@@ -25,8 +25,6 @@ class TabBarContainerViewController: UIViewController {
         super.viewDidLoad()
         //Load first view (Profile Viewcontroller) by default
         activeViewController = firstViewController
-        firstViewController!.view.frame.size = contentView.frame.size
-        secondViewController!.view.frame.size = contentView.frame.size
     }
     
     override func viewWillAppear(animated: Bool) {

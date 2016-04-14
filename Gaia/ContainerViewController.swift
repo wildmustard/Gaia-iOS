@@ -125,6 +125,8 @@ class ContainerViewController: UIViewController, UIScrollViewDelegate {
         var homeFrame :CGRect = HomeVC.view.frame
         homeFrame.origin.x = 2 * homeFrame.width
         TabVC.view.frame = homeFrame
+        ProfileVC.view.frame.size = homeFrame.size
+        ScoreVC.view.frame.size = homeFrame.size
         // Set the origin of the frame to the current returning frame
         frame.origin.x = getCurrentReturnFrameOrigin()
         scrollView.scrollRectToVisible(frame, animated: false)

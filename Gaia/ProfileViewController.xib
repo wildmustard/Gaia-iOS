@@ -66,7 +66,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Qb-iM-bXk" customClass="ZFRippleButton" customModule="ZFRippleButton">
-                    <rect key="frame" x="85" y="431" width="150" height="30"/>
+                    <rect key="frame" x="85" y="508" width="150" height="30"/>
                     <color key="backgroundColor" red="0.035294119268655777" green="0.28235295414924622" blue="0.77254903316497803" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="3TW-ls-14M"/>
@@ -105,7 +105,7 @@
                 <constraint firstItem="IWW-uI-tkO" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="cqG-iH-TGB"/>
                 <constraint firstAttribute="bottom" secondItem="Xk5-FS-5k0" secondAttribute="bottom" id="hpt-QW-bBw"/>
                 <constraint firstItem="IWW-uI-tkO" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="30" id="op8-cq-Wkw"/>
-                <constraint firstAttribute="bottom" secondItem="2Qb-iM-bXk" secondAttribute="bottom" constant="107" id="uAV-Kf-PBi"/>
+                <constraint firstAttribute="bottom" secondItem="2Qb-iM-bXk" secondAttribute="bottom" constant="30" id="uAV-Kf-PBi"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
             <variation key="default">
