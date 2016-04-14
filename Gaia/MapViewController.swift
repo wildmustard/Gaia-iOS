@@ -175,7 +175,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         if let photoAnnotation = annotation as? PhotoAnnotation {
             let imageView = annotationView?.leftCalloutAccessoryView as! UIImageView
             imageView.contentMode = UIViewContentMode.ScaleAspectFill
-            imageView.image = photoAnnotation.photo!
+            imageView.image = photoAnnotation.photo
         }
         
         
