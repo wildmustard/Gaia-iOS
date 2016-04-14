@@ -34,7 +34,7 @@ class Wildlife: NSObject {
     
     internal func matchWildlife(tags: [String], wildlife: [PFObject]) -> (Bool, PFObject) {
         let emptyObject = PFObject(className: "Wildlife")
-        emptyObject["name"] = ""
+
         
         for wild in wildlife {
             for tag in tags {

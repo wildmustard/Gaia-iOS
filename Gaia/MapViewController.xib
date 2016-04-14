@@ -21,9 +21,9 @@
                 </mapView>
                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KtT-12-1Pc">
                     <rect key="frame" x="17" y="15" width="37" height="30"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="15"/>
                     <state key="normal" title="Back">
-                        <color key="titleColor" red="0.0" green="0.70588235290000001" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleColor" red="0.2784313725" green="0.46666666670000001" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
                         <action selector="onBack:" destination="-1" eventType="touchUpInside" id="1NI-jT-5fQ"/>

@@ -3,40 +3,55 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyScoreCell" rowHeight="59" id="0OW-4k-tI0" customClass="ScoreViewTableCell" customModule="Gaia" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyScoreCell" rowHeight="70" id="0OW-4k-tI0" customClass="ScoreViewTableCell" customModule="Gaia" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0OW-4k-tI0" id="55C-8a-KpW">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="58.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="68.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Score" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Bs-9T-5YB">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Score" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Bs-9T-5YB">
                         <rect key="frame" x="267" y="8" width="45" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O8W-Ap-B9S">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O8W-Ap-B9S">
                         <rect key="frame" x="56" y="8" width="138" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="znV-A5-cbc">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="znV-A5-cbc">
                         <rect key="frame" x="8" y="8" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="ZFl-Q7-GMH"/>
+                            <constraint firstAttribute="width" constant="40" id="ga1-27-O4u"/>
+                        </constraints>
                     </imageView>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="O8W-Ap-B9S" firstAttribute="top" secondItem="55C-8a-KpW" secondAttribute="top" constant="8" id="ND1-rS-06m"/>
+                    <constraint firstItem="znV-A5-cbc" firstAttribute="leading" secondItem="55C-8a-KpW" secondAttribute="leadingMargin" id="RuA-eW-Bh5"/>
+                    <constraint firstAttribute="trailing" secondItem="9Bs-9T-5YB" secondAttribute="trailing" constant="8" id="Tz7-Oq-KpN"/>
+                    <constraint firstItem="9Bs-9T-5YB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="O8W-Ap-B9S" secondAttribute="trailing" constant="73" id="ZSF-xy-vyo"/>
+                    <constraint firstItem="O8W-Ap-B9S" firstAttribute="leading" secondItem="znV-A5-cbc" secondAttribute="trailing" constant="8" id="iib-jo-eh0"/>
+                    <constraint firstItem="9Bs-9T-5YB" firstAttribute="top" secondItem="55C-8a-KpW" secondAttribute="top" constant="8" id="mte-Nx-3ld"/>
+                    <constraint firstItem="znV-A5-cbc" firstAttribute="top" secondItem="55C-8a-KpW" secondAttribute="topMargin" id="t1r-wt-4ZQ"/>
+                    <constraint firstAttribute="bottom" secondItem="znV-A5-cbc" secondAttribute="bottom" constant="20.5" id="vLF-i2-da8"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="profilePictureView" destination="znV-A5-cbc" id="Qf4-gK-tME"/>
                 <outlet property="scoreLabel" destination="9Bs-9T-5YB" id="VaK-Y1-0jq"/>
                 <outlet property="usernameLabel" destination="O8W-Ap-B9S" id="Xmc-ah-hjz"/>
             </connections>
-            <point key="canvasLocation" x="407" y="293.5"/>
+            <point key="canvasLocation" x="407" y="298.5"/>
         </tableViewCell>
     </objects>
 </document>

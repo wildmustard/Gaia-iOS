@@ -33,6 +33,7 @@ class ScoreViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tableView.delegate = self
         tableView.dataSource = self
         
+        tableView.estimatedRowHeight = 70
         // Get all users for table
         callServerForUserScore()
         
