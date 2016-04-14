@@ -8,6 +8,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ImageDetailViewController" customModule="Gaia" customModuleProvider="target">
             <connections>
+                <outlet property="arrowImageView" destination="CNR-XT-ROb" id="pvg-1g-sWo"/>
                 <outlet property="buttonView" destination="ys7-dv-Xix" id="DsX-QE-sBB"/>
                 <outlet property="closeButton" destination="6XZ-8g-Fkh" id="ABs-7p-jhl"/>
                 <outlet property="imageView" destination="8fp-F6-lvf" id="4S5-wo-Tpc"/>
@@ -44,12 +45,9 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ojl-8x-ZOx">
                                     <rect key="frame" x="119" y="8" width="83" height="35"/>
                                     <subviews>
-                                        <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noun_16957_cc" translatesAutoresizingMaskIntoConstraints="NO" id="CNR-XT-ROb">
+                                        <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uparrow" highlightedImage="downarrow" translatesAutoresizingMaskIntoConstraints="NO" id="CNR-XT-ROb">
                                             <rect key="frame" x="23" y="7" width="36" height="20"/>
                                             <gestureRecognizers/>
-                                            <connections>
-                                                <outletCollection property="gestureRecognizers" destination="n9B-es-O2a" appends="YES" id="nH1-uj-3Gw"/>
-                                            </connections>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -59,6 +57,9 @@
                                         <constraint firstItem="CNR-XT-ROb" firstAttribute="bottom" secondItem="Ojl-8x-ZOx" secondAttribute="bottomMargin" id="Z88-et-RFY"/>
                                         <constraint firstItem="CNR-XT-ROb" firstAttribute="leading" secondItem="Ojl-8x-ZOx" secondAttribute="leading" constant="23" id="le2-R7-oIG"/>
                                     </constraints>
+                                    <connections>
+                                        <outletCollection property="gestureRecognizers" destination="n9B-es-O2a" appends="YES" id="xuK-RG-Jxp"/>
+                                    </connections>
                                 </view>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -123,6 +124,7 @@
         </panGestureRecognizer>
     </objects>
     <resources>
-        <image name="noun_16957_cc" width="434" height="206"/>
+        <image name="downarrow" width="434" height="206"/>
+        <image name="uparrow" width="434" height="206"/>
     </resources>
 </document>

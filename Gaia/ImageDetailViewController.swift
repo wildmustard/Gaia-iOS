@@ -19,6 +19,7 @@ class ImageDetailViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var closeButton: UIButton!
     
+    @IBOutlet weak var arrowImageView: UIImageView!
     @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var trayView: UIView!
     @IBOutlet weak var buttonView: UIView!
@@ -35,7 +36,6 @@ class ImageDetailViewController: UIViewController {
         trayCenterWhenClosed = trayView.center
         trayCenterWhenClosed.y = trayCenterWhenClosed.y + view.frame.size.height - 50
         
-        trayView.center = trayCenterWhenClosed
 
         
         // Set image to the passed image from presenting ImageCatalgoueController
@@ -44,7 +44,17 @@ class ImageDetailViewController: UIViewController {
         self.wiki = NSURLRequest(URL: url!, cachePolicy: NSURLRequestCachePolicy.ReturnCacheDataElseLoad, timeoutInterval: 20)
         webView.loadRequest(self.wiki!)
     }
-
+    
+    override func viewDidLayoutSubviews() {
+        trayView.center = trayCenterWhenClosed
+        print("trayView viewlayoutsubviews: \n \(trayView.center) \n \(trayCenterWhenClosed)")
+    }
+    
+    
+    override func viewDidAppear(animated: Bool) {
+        print("trayView viewdidappear: \n \(trayView.center) \n \(trayCenterWhenClosed)")
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -60,6 +70,7 @@ class ImageDetailViewController: UIViewController {
 
     @IBAction func onTrayPanGesture(panGestureRecognizer: UIPanGestureRecognizer) {
         
+        print(self.trayView.center)
         // Absolute (x,y) coordinates in parent view's coordinate system
         let point = panGestureRecognizer.locationInView(trayView)
         
@@ -78,6 +89,7 @@ class ImageDetailViewController: UIViewController {
             if panGestureRecognizer.velocityInView(self.trayView).y > 0 {
                 UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0.2, options: .AllowUserInteraction, animations: { () -> Void in
                     self.trayView.center = self.trayCenterWhenClosed
+                    self.arrowImageView.highlighted = false
                     }, completion: { (Bool) -> Void in
                         //print("yay")
                 })
@@ -86,6 +98,7 @@ class ImageDetailViewController: UIViewController {
             } else if panGestureRecognizer.velocityInView(self.trayView).y < 0 {
                 UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0.2, options: .AllowUserInteraction, animations: { () -> Void in
                     self.trayView.center = self.trayCenterWhenOpen
+                    self.arrowImageView.highlighted = true
                     }, completion: { (Bool) -> Void in
                         //print("yay")
                 })
@@ -101,15 +114,17 @@ class ImageDetailViewController: UIViewController {
     }
     @IBAction func onTrayTapGesture(sender: UITapGestureRecognizer) {
         if self.trayView.center == trayCenterWhenClosed {
-            UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0.2, options: .AllowUserInteraction, animations: { () -> Void in
+            UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0.1, options: .AllowUserInteraction, animations: { () -> Void in
                 self.trayView.center = self.trayCenterWhenOpen
+                self.arrowImageView.highlighted = true
                 }, completion: { (Bool) -> Void in
                     //print("yay")
             })
         }
         else if self.trayView.center == trayCenterWhenOpen {
-            UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0.2, options: .AllowUserInteraction, animations: { () -> Void in
+            UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0.1, options: .AllowUserInteraction, animations: { () -> Void in
                 self.trayView.center = self.trayCenterWhenClosed
+                self.arrowImageView.highlighted = false
                 }, completion: { (Bool) -> Void in
                     //print("yay")
             })

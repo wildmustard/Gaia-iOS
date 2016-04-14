@@ -227,7 +227,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                     self.cameraButton.userInteractionEnabled = false
                     
                     // Send capture to AI server for identification
-                    self.recognizeImage(image, completion: { (success, match, points, url, error) -> () in
+                    self.recognizeImage(image, completion: { (success, match, tags, points, url, error) -> () in
                         
                         if let error = error {
                             
@@ -248,8 +248,11 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                                 self.locationManager.requestLocation()
                                 
                                 //Set the tag retrieved
-                                self.wildLifeTagHomeView.text = match
-                                self.savedTagMatch = match
+                                self.savedTagMatch = match.capitalizedString
+                                self.tagPreviewLabel.text = self.savedTagMatch
+                                self.savedTagsList = tags.joinWithSeparator(", ").capitalizedString
+                                self.tagListLabel.text = self.savedTagsList
+                                
                                 self.points = points
                                 self.savedWildlifeURL = url
                                 
@@ -289,6 +292,26 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
 
     }
     
+    
+    // Display the error message for being unable to find a tag
+    func showDelayedErrorMessage() {
+        
+        // Show Error Message Label
+        
+        errorMessageLabel.hidden = false
+        
+        // Hide Error Message Label After Delay
+        dispatch_after(
+            dispatch_time(
+                DISPATCH_TIME_NOW,
+                Int64(2 * Double(NSEC_PER_SEC))
+            ),
+            dispatch_get_main_queue(), {
+                self.errorMessageLabel.hidden = true
+        })
+        
+    }
+    
     func queryWildlife(){
         let query = PFQuery(className: "Wildlife")
         
@@ -323,6 +346,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         
     }
     
+    
+    // Location Manager for recording position of capture from image
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         if status == CLAuthorizationStatus.AuthorizedWhenInUse {
             
@@ -365,7 +390,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     
     // Post image to server
     func postImage() {
-        capture.postCapturedImage(takenPicture.image, tag: self.savedTagMatch, points: points, location: self.myLocation, url: self.savedWildlifeURL, withCompletion:
+        capture.postCapturedImage(takenPicture.image, tag: self.savedTagMatch, tagsList: self.savedTagsList, points: points, location: self.myLocation, url: self.savedWildlifeURL, withCompletion:
             { (success: Bool, error: NSError?) -> Void in
                 
                 // Check if successful post of image to server
@@ -466,7 +491,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     
     
     // Function to send the taken image to the AI for tag recognition
-    private func recognizeImage(image: UIImage!, completion: (success: Bool!, match: String!,points:Int?, url: String!, error: NSError?) -> ()) {
+    private func recognizeImage(image: UIImage!, completion: (success: Bool!, match: String!, tags: [String]!, points:Int?, url: String!, error: NSError?) -> ()) {
         // Scale down the image. This step is optional. However, sending large images over the
         // network is slow and does not significantly improve recognition performance.
         let size = CGSizeMake(320, 320 * image.size.height / image.size.width)
@@ -485,7 +510,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                 
                 // Log failure to connect
                 NSLog("Unable to send Clarifai client jpeg image\nError: \(error)\n")
-                completion(success: false, match: nil, points: nil, url: nil, error: error)
+                completion(success: false, match: nil, tags: [], points: nil, url: nil, error: error)
 
             }
             else {
@@ -505,7 +530,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                 let url = (match["wiki"] as? String)!
                 
                 // Set return values
-                completion(success: success, match: name, points:points, url: url, error: nil)
+                completion(success: success, match: name, tags: tags, points:points, url: url, error: nil)
                 
                 // Log status & match result
                 log.debug("Match successful: \(success)\n")
