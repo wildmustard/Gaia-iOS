@@ -30,24 +30,17 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LEX-xo-sJ2">
-                    <rect key="frame" x="33" y="203" width="79" height="21"/>
+                    <rect key="frame" x="33" y="203" width="150" height="36"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xHz-Yd-eIM">
-                    <rect key="frame" x="33" y="232" width="41" height="21"/>
+                    <rect key="frame" x="33" y="254" width="150" height="36"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WfD-yt-rY7">
-                    <rect key="frame" x="201" y="218" width="46" height="30"/>
-                    <state key="normal" title="Add"/>
-                    <connections>
-                        <action selector="onAddImage:" destination="-1" eventType="touchUpInside" id="9AB-Kp-gFD"/>
-                    </connections>
-                </button>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xk5-FS-5k0">
                     <rect key="frame" x="0.0" y="469" width="320" height="99"/>
                     <subviews>
@@ -68,7 +61,7 @@
                     </subviews>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Qb-iM-bXk">
+                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Qb-iM-bXk">
                     <rect key="frame" x="136" y="431" width="48" height="30"/>
                     <state key="normal" title="Logout"/>
                     <connections>
@@ -76,15 +69,23 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uli-f8-ghK">
-                    <rect key="frame" x="33" y="298" width="45" height="21"/>
+                    <rect key="frame" x="33" y="298" width="150" height="36"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WfD-yt-rY7">
+                    <rect key="frame" x="243" y="150" width="46" height="30"/>
+                    <state key="normal" title="Add"/>
+                    <connections>
+                        <action selector="onAddImage:" destination="-1" eventType="touchUpInside" id="9AB-Kp-gFD"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <gestureRecognizers/>
             <constraints>
+                <constraint firstItem="2Qb-iM-bXk" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="8jJ-0e-Yiy"/>
                 <constraint firstItem="IWW-uI-tkO" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="cqG-iH-TGB"/>
                 <constraint firstItem="IWW-uI-tkO" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="30" id="op8-cq-Wkw"/>
             </constraints>

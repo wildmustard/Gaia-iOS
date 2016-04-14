@@ -58,7 +58,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         super.viewWillAppear(animated)
         // Handle Gradient, Buttons, Label Attributes With ThemeHandler
         ThemeHandler.sharedThemeHandler.setFrameGradientTheme(self)
-        ThemeHandler.sharedThemeHandler.setLabelThemeAttributes(emailLabel)
+        ThemeHandler.sharedThemeHandler.setLargeLabelThemeAttributes(profileUsernameLabel)
+        ThemeHandler.sharedThemeHandler.setLargeLabelThemeAttributes(emailLabel)
     }
 
     override func didReceiveMemoryWarning() {

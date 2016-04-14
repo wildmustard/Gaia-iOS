@@ -166,7 +166,7 @@ class ThemeHandler: NSObject {
         
     }
     
-    func setLargeSmallLabelThemeAttributes(label: UILabel?) {
+    func setLargeLabelThemeAttributes(label: UILabel?) {
         
         // Set passed button properties
         if let label = label {
