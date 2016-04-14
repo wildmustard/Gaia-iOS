@@ -28,7 +28,7 @@
                 <view alpha="0.84999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iTd-Iv-KpX">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ys7-dv-Xix">
+                        <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ys7-dv-Xix">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6XZ-8g-Fkh">
@@ -76,7 +76,7 @@
                                 <outletCollection property="gestureRecognizers" destination="JOA-oS-ifj" appends="YES" id="FWg-hn-YDs"/>
                             </connections>
                         </view>
-                        <webView contentMode="scaleToFill" mediaPlaybackRequiresUserAction="NO" mediaPlaybackAllowsAirPlay="NO" keyboardDisplayRequiresUserAction="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K0Z-ca-ZyY">
+                        <webView contentMode="scaleToFill" ambiguous="YES" misplaced="YES" mediaPlaybackRequiresUserAction="NO" mediaPlaybackAllowsAirPlay="NO" keyboardDisplayRequiresUserAction="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K0Z-ca-ZyY">
                             <rect key="frame" x="0.0" y="50" width="320" height="518"/>
                             <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
                             <dataDetectorType key="dataDetectorTypes"/>
@@ -87,7 +87,7 @@
                         <constraint firstAttribute="trailing" secondItem="K0Z-ca-ZyY" secondAttribute="trailing" id="1aA-Zi-if7"/>
                         <constraint firstItem="ys7-dv-Xix" firstAttribute="top" secondItem="iTd-Iv-KpX" secondAttribute="top" id="4Xf-uj-Ksm"/>
                         <constraint firstAttribute="bottom" secondItem="K0Z-ca-ZyY" secondAttribute="bottom" id="7ca-Yd-UCD"/>
-                        <constraint firstAttribute="bottom" secondItem="ys7-dv-Xix" secondAttribute="bottom" constant="518" id="ERp-y7-Zi4"/>
+                        <constraint firstItem="K0Z-ca-ZyY" firstAttribute="top" secondItem="ys7-dv-Xix" secondAttribute="bottom" id="EBI-3R-8TT"/>
                         <constraint firstItem="K0Z-ca-ZyY" firstAttribute="leading" secondItem="iTd-Iv-KpX" secondAttribute="leading" id="Uja-oQ-j6m"/>
                         <constraint firstItem="K0Z-ca-ZyY" firstAttribute="trailing" secondItem="ys7-dv-Xix" secondAttribute="trailing" id="a5m-dM-XRz"/>
                         <constraint firstItem="K0Z-ca-ZyY" firstAttribute="top" secondItem="ys7-dv-Xix" secondAttribute="bottom" id="fFx-fF-hUz"/>
