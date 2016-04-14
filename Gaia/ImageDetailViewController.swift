@@ -9,8 +9,9 @@
 import UIKit
 import Parse
 import WebKit
+import SVProgressHUD
 
-class ImageDetailViewController: UIViewController {
+class ImageDetailViewController: UIViewController, UIWebViewDelegate {
     
     weak var content: PFObject?
     weak var image: UIImage?
@@ -32,6 +33,8 @@ class ImageDetailViewController: UIViewController {
         
         super.viewDidLoad()
         
+        webView.delegate = self
+        
         trayCenterWhenOpen = trayView.center
         trayCenterWhenClosed = trayView.center
         trayCenterWhenClosed.y = trayCenterWhenClosed.y + view.frame.size.height - 50
@@ -39,6 +42,7 @@ class ImageDetailViewController: UIViewController {
 
         
         // Set image to the passed image from presenting ImageCatalgoueController
+        
         imageView.image = self.image
         let url = NSURL(string: (self.content!["wiki"] as? String)!)
         self.wiki = NSURLRequest(URL: url!, cachePolicy: NSURLRequestCachePolicy.ReturnCacheDataElseLoad, timeoutInterval: 20)
@@ -99,6 +103,9 @@ class ImageDetailViewController: UIViewController {
                 UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0.2, options: .AllowUserInteraction, animations: { () -> Void in
                     self.trayView.center = self.trayCenterWhenOpen
                     self.arrowImageView.highlighted = true
+                    if self.webView.loading {
+                        SVProgressHUD.show()
+                    }
                     }, completion: { (Bool) -> Void in
                         //print("yay")
                 })
@@ -117,6 +124,10 @@ class ImageDetailViewController: UIViewController {
             UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0.1, options: .AllowUserInteraction, animations: { () -> Void in
                 self.trayView.center = self.trayCenterWhenOpen
                 self.arrowImageView.highlighted = true
+                
+                if self.webView.loading {
+                    SVProgressHUD.show()
+                }
                 }, completion: { (Bool) -> Void in
                     //print("yay")
             })
@@ -129,6 +140,10 @@ class ImageDetailViewController: UIViewController {
                     //print("yay")
             })
         }
+    }
+    
+    func webViewDidFinishLoad(webView: UIWebView) {
+        SVProgressHUD.dismiss()
     }
     /*
     // MARK: - Navigation

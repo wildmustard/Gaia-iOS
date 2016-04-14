@@ -25,7 +25,7 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8fp-F6-lvf">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
                 </imageView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iTd-Iv-KpX">
+                <view alpha="0.84999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iTd-Iv-KpX">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ys7-dv-Xix">
@@ -76,9 +76,10 @@
                                 <outletCollection property="gestureRecognizers" destination="JOA-oS-ifj" appends="YES" id="FWg-hn-YDs"/>
                             </connections>
                         </view>
-                        <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K0Z-ca-ZyY">
+                        <webView contentMode="scaleToFill" mediaPlaybackRequiresUserAction="NO" mediaPlaybackAllowsAirPlay="NO" keyboardDisplayRequiresUserAction="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K0Z-ca-ZyY">
                             <rect key="frame" x="0.0" y="50" width="320" height="518"/>
                             <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                            <dataDetectorType key="dataDetectorTypes"/>
                         </webView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
