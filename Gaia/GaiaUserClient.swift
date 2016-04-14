@@ -17,7 +17,7 @@ class GaiaUserClient: NSObject {
     func setDefaultProfileImageForUser(user: PFUser?) {
         if let user = user {
             // Default Gaia Image
-            let defaultImage = UIImage(named: "Profile_Picture")
+            let defaultImage = UIImage(named: "Gaia iOS App")
             // Encode image using Parse into 64-bit text
             user["profilePicture"] = getPFFileUsingImage(defaultImage)
         }

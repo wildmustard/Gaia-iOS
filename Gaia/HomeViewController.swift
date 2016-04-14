@@ -524,7 +524,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                 log.debug("Tag content: \(results![0].tags.joinWithSeparator(", "))")
                 
                 // Collect the matched tag if it exists from wildlife dictionary
-                let (success , match) = self.myWildlife.matchWildlife(tags,wildlife: self.wildlife!)
+                let (success , match) = self.myWildlife.matchWildlife(tags, wildlife: self.wildlife!)
                 let name = match["name"] as? String
                 let points = match["score"] as? Int
                 let url = match["wiki"] as? String
