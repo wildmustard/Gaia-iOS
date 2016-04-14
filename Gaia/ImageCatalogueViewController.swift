@@ -13,7 +13,7 @@ import SVProgressHUD
 class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
     
     // Set insets for collection cell, size of cell inset separation
-    let sectionInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
+    let sectionInsets = UIEdgeInsets(top: 15.0, left: 17.5, bottom: 15.0, right: 17.5)
     
     // Parse media object
     var content: [PFObject]?
@@ -143,7 +143,6 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         // 3
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MyCell", forIndexPath: indexPath) as! CustomCellCollectionViewCell
-        
         // If the media content for this cell exists, set it
         if let img = imageCache[indexPath.row] {
             cell.cellImageView.image = img
@@ -170,7 +169,7 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
                         let image = UIImage(data: data!)
                         
                         //let image = UIImage(CGImage: cgImageRef!,scale: 1.0,orientation: UIImageOrientation.Right)
-                        let portraitImage = UIImage(CGImage: (image?.CGImage)!,scale: 1.0,orientation: UIImageOrientation.Right)
+                        let portraitImage = UIImage(CGImage: (image?.CGImage)!, scale: 1.0, orientation: UIImageOrientation.Right)
                         
                         // Set image and tag for cell
                         if let updateCell = self.CatalogueCollectionView.cellForItemAtIndexPath(indexPath) as? CustomCellCollectionViewCell {
@@ -200,7 +199,7 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
                                sizeForItemAtIndexPath indexPath: NSIndexPath!) -> CGSize {
         
         // Return layout
-        return CGSize(width: 130, height: 229)
+        return CGSize(width: 130, height: 240)
         
     }
     
