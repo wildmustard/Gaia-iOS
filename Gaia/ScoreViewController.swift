@@ -51,6 +51,7 @@ class ScoreViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+
         // Handle Gradient, Buttons, Label Attributes With ThemeHandler
         ThemeHandler.sharedThemeHandler.setFrameGradientTheme(self)
     }
@@ -105,7 +106,7 @@ class ScoreViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("MyScoreCell", forIndexPath: indexPath) as! ScoreViewTableCell
         // If the media content for this cell exists, set it
-        
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
         if let img = userCache[indexPath.row] {
             cell.profilePictureView.image = img
         }

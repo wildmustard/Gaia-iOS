@@ -7,11 +7,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyScoreCell" rowHeight="59" id="0OW-4k-tI0" customClass="ScoreViewTableCell" customModule="Gaia" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyScoreCell" rowHeight="74" id="0OW-4k-tI0" customClass="ScoreViewTableCell" customModule="Gaia" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="74"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0OW-4k-tI0" id="55C-8a-KpW">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="58.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="73"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Score" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Bs-9T-5YB">
@@ -36,7 +36,7 @@
                 <outlet property="scoreLabel" destination="9Bs-9T-5YB" id="VaK-Y1-0jq"/>
                 <outlet property="usernameLabel" destination="O8W-Ap-B9S" id="Xmc-ah-hjz"/>
             </connections>
-            <point key="canvasLocation" x="407" y="293.5"/>
+            <point key="canvasLocation" x="407" y="301"/>
         </tableViewCell>
     </objects>
 </document>

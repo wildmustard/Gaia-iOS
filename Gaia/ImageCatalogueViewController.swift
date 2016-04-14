@@ -144,6 +144,8 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
         // 3
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MyCell", forIndexPath: indexPath) as! CustomCellCollectionViewCell
         
+        cell.layer.cornerRadius = 10
+
         // If the media content for this cell exists, set it
         if let img = imageCache[indexPath.row] {
             cell.cellImageView.image = img
@@ -200,7 +202,7 @@ class ImageCatalogueViewController: UIViewController,UICollectionViewDelegate,UI
                                sizeForItemAtIndexPath indexPath: NSIndexPath!) -> CGSize {
         
         // Return layout
-        return CGSize(width: 130, height: 229)
+        return CGSize(width: 130, height: 203)
         
     }
     
